@@ -1,26 +1,26 @@
 import React from "react";
 import Planet from "../Planet";
 
-function Venus(props) {
+function Saturn(props) {
   return (
     <Planet
       {...props}
-      textureUrl="/venus_texture.jpg"
-      size={.949}
+      textureUrl="/saturn_texture.jpg"
+      size={9.449}
       rotationSpeed={0.0005}
       color={"orange"}
       orbitSpeed={0.002}
       tilt={3}
       orbitRadius={5}
       atmosphereColor={"orange"}
-      A = {108.21 * 1e6}
-      EC = {.0068}
-      i = {3.395}
-      omega = {54.884}
-      Omega = {76.680}
+      A = {1432.041 * 1e6}
+      EC = {.0565}
+      i = {2.485}
+      omega = {92.431}
+      Omega = {113.665}
     />
     
   );
 }
 
-export default Venus;
+export default Saturn;

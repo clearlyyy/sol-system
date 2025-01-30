@@ -13,6 +13,11 @@ function Earth(props) {
       tilt={23.5}
       orbitRadius={10}
       atmosphereColor={"blue"}
+      A = {149.598 * 1e6}
+      EC = {.0167}
+      i = {0}
+      omega = {102.937}
+      Omega = {0}
     />
     
   );
