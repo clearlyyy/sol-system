@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
 function Pluto(props) {
-  return (
+  const { delay = 0 } = props; // Default delay is 0 if not provided
+    const [loaded, setLoaded] = useState(false);
+  
+    // Use useEffect to trigger the delay
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoaded(true);
+      }, delay);
+  
+      return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+    }, [delay]);
+  
+    // Render the Planet component only after the delay
+    return loaded ? (
     <Planet
       {...props}
       textureUrl="/pluto_texture.jpg"
@@ -18,9 +31,10 @@ function Pluto(props) {
       i = {17.141}
       omega = {224.066}
       Omega = {110.303}
+      targetId="999"
     />
     
-  );
+  ) : null;
 }
 
 export default Pluto;

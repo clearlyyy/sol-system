@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as THREE from 'three';
-
+import getPlanetPosition from "./FetchPlanetPosition"
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
@@ -116,8 +116,14 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
 };
 
 
+
+
+
 const scalingFactor = 1.495239195637494e7;  // Conversion from km to A
 
+var currentPosition;
+
+var date;
 
 
 function Planet({
@@ -134,9 +140,32 @@ function Planet({
     EC,
     i,
     omega,
-    Omega
+    Omega,
+    targetId
 }) {
 
+  
+    var [trueAnomaly, setTrueAnomaly] = useState(null);
+  
+
+    useEffect(() => {
+      const fetchPositionData = async () => {
+        const positionaldata = await getPlanetPosition(targetId, "2023-10-15", "2023-10-16", "1d");
+        console.log(targetId + JSON.stringify(positionaldata, 2));
+        if (!positionaldata || positionaldata.length === 0) {
+          console.error("No data returned for targetId:", targetId);
+        }
+        currentPosition = positionaldata[0];
+        const { date: positionDate, trueAnomaly: positionTrueAnomaly } = currentPosition;
+        date = positionDate;
+        setTrueAnomaly(positionTrueAnomaly);
+      }
+      
+      fetchPositionData();
+    }, []);
+    
+    
+    console.log(targetId, ": ", trueAnomaly)
     console.log(A / scalingFactor, EC, i, omega, Omega);
     const planetRef = useRef();
     const orbitRef = useRef();
@@ -148,9 +177,7 @@ function Planet({
     // Generate orbital path points (Keplerian orbit)
     const orbitalPathPoints = generateOrbitalPath(orbitRadius, 0.1); // Example values for A and EC
 
-    useEffect(() => {
-        console.log("Loaded texture: ", texture);
-    }, [texture]);
+    
 
     useEffect(() => {
         if (planetRef.current) {
@@ -165,38 +192,49 @@ function Planet({
     const planetOrbitSpeed = 5;  // Slow down to smooth out movement
     const pathLength = orbitalPath.length;
       
-    useFrame(() => {
+    const calculatePositionFromTrueAnomaly = (A, EC, theta, i, omega, Omega) => {
+      // Convert angles from degrees to radians
+      const iRad = THREE.MathUtils.degToRad(i);
+      const omegaRad = THREE.MathUtils.degToRad(omega);
+      const OmegaRad = THREE.MathUtils.degToRad(Omega);
+    
+      // Calculate the radial distance using the orbital equation
+      const r = (A * (1 - EC * EC)) / (1 + EC * Math.cos(theta));
+    
+      // Convert to Cartesian coordinates in the orbital plane
+      const xOrbital = r * Math.cos(theta);
+      const yOrbital = r * Math.sin(theta);
+      const zOrbital = 0;
+    
+      // Apply the rotations for the orbital parameters (i, omega, Omega)
+      const x1 = xOrbital * Math.cos(omegaRad) - yOrbital * Math.sin(omegaRad);
+      const y1 = xOrbital * Math.sin(omegaRad) + yOrbital * Math.cos(omegaRad);
+    
+      const x2 = x1;
+      const y2 = y1 * Math.cos(iRad) - zOrbital * Math.sin(iRad);
+      const z2 = y1 * Math.sin(iRad) + zOrbital * Math.cos(iRad);
+    
+      const x3 = x2 * Math.cos(OmegaRad) - y2 * Math.sin(OmegaRad);
+      const y3 = x2 * Math.sin(OmegaRad) + y2 * Math.cos(OmegaRad);
+      const z3 = z2;
+    
+      // Rotate the orbit by 90 degrees around the X-axis (to make the orbit horizontal)
+      const xFinal = x3;
+      const yFinal = z3;  // Swap y and z to rotate 90 degrees around X-axis
+      const zFinal = -y3; // Negate the original y to complete the rotation
+    
+      return new THREE.Vector3(xFinal, yFinal, zFinal);
+    };
+
+    useEffect(() => {
       if (planetRef.current) {
-        // Rotate the planet around its own axis
-        planetRef.current.rotation.y += rotationSpeed || 0.01;
-      
-        // Update the orbit reference (but ensure it doesn't rotate the orbit path itself)
-        if (orbitRef.current) {
-          orbitRef.current.rotation.y = 0;  // No rotation on the orbit reference
-        }
-      
-        // Increase the timeElapsed to simulate continuous movement
-        timeElapsed += planetOrbitSpeed;
-      
-        // Normalize timeElapsed to determine the segment along the orbit
-        const pathProgress = timeElapsed % pathLength;
-      
-        // Use pathProgress to find the current point and next point
-        const currentPoint = orbitalPath[Math.floor(pathProgress)];
-        const nextPoint = orbitalPath[Math.floor(pathProgress) + 1] || orbitalPath[0];  // Wrap around if we reach the end
-      
-        // Calculate interpolation factor
-        const segmentProgress = pathProgress - Math.floor(pathProgress);
-      
-        // Interpolate position between current and next points
-        const x = THREE.MathUtils.lerp(currentPoint.x, nextPoint.x, segmentProgress);
-        const y = THREE.MathUtils.lerp(currentPoint.y, nextPoint.y, segmentProgress);
-        const z = THREE.MathUtils.lerp(currentPoint.z, nextPoint.z, segmentProgress);
-      
-        // Update planet's position
-        planetRef.current.position.set(x, y, z);
+        const trueAnomaly2 = degToRad(trueAnomaly); // Example true anomaly in degrees (convert to radians)
+        const position = calculatePositionFromTrueAnomaly(A / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
+        planetRef.current.position.copy(position);
       }
-    });
+    }, [trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
+
+    
 
 
 
@@ -216,7 +254,7 @@ function Planet({
     });
 
     
-
+    
 
 
     const points = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
@@ -252,3 +290,4 @@ function Planet({
 }
 
 export default Planet;
+

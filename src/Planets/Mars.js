@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
 function Mars(props) {
-  return (
+  const { delay = 0 } = props; // Default delay is 0 if not provided
+    const [loaded, setLoaded] = useState(false);
+  
+    // Use useEffect to trigger the delay
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoaded(true);
+      }, delay);
+  
+      return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+    }, [delay]);
+  
+    // Render the Planet component only after the delay
+    return loaded ? (
     <Planet
       {...props}
       textureUrl="/mars_texture.jpg"
@@ -18,9 +31,10 @@ function Mars(props) {
       i={1.850} // tilt
       omega={336.040}
       Omega={49.557}
+      targetId="499"
     />
     
-  );
+  ) : null;
 }
 
 export default Mars;

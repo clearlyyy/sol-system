@@ -28,15 +28,15 @@ function App() {
         
 
         {/* Planets */}
-        <Mercury position={[0, 0, 0]}/>
-        <Venus position={[0, 0, 0]}/>
-        <Earth position={[0, 0, 0]}/>
-        <Mars position={[0, 0, 0]}/>
-        <Jupiter position={[0, 0, 0]}/>
-        <Saturn position={[0, 0, 0]}/>
-        <Uranus position={[0, 0, 0]}/>
-        <Neptune position={[0, 0, 0]}/>
-        <Pluto position={[0, 0, 0]}/>
+        <Mercury delay={0} position={[0, 0, 0]}/>
+        <Venus delay={1000} position={[0, 0, 0]}/>
+        <Earth delay={2000} position={[0, 0, 0]}/>
+        <Mars delay={3000} position={[0, 0, 0]}/>
+        <Jupiter delay={4000} position={[0, 0, 0]}/>
+        <Saturn delay={5000} position={[0, 0, 0]}/>
+        <Uranus delay={6000} position={[0, 0, 0]}/>
+        <Neptune delay={7000} position={[0, 0, 0]}/>
+        <Pluto delay={8000} position={[0, 0, 0]}/>
         
 
 

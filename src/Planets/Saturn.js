@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
 function Saturn(props) {
-  return (
+  const { delay = 0 } = props; // Default delay is 0 if not provided
+    const [loaded, setLoaded] = useState(false);
+  
+    // Use useEffect to trigger the delay
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoaded(true);
+      }, delay);
+  
+      return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+    }, [delay]);
+  
+    // Render the Planet component only after the delay
+    return loaded ? (
     <Planet
       {...props}
       textureUrl="/saturn_texture.jpg"
@@ -18,9 +31,10 @@ function Saturn(props) {
       i = {2.485}
       omega = {92.431}
       Omega = {113.665}
+      targetId="699"
     />
     
-  );
+  ) : null;
 }
 
 export default Saturn;
