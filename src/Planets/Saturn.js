@@ -18,6 +18,7 @@ function Saturn(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Saturn"
       textureUrl="/saturn_texture.jpg"
       size={9.449}
       rotationSpeed={0.0005}
@@ -27,10 +28,12 @@ function Saturn(props) {
       orbitRadius={5}
       atmosphereColor={"orange"}
       A = {1432.041 * 1e6}
-      EC = {.0565}
-      i = {2.485}
-      omega = {92.431}
-      Omega = {113.665}
+      EC = {5.559928887285597E-02}
+      i = {2.484368779807340E+00}
+      omega = {3.359006492558044E+02}
+      Omega = {1.136930130794106E+02}
+      meanMotion={.03346}
+      j2000MeanAnomaly={3.203798737892262E+02}
       targetId="699"
     />
     

@@ -18,6 +18,7 @@ function Venus(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Venus"
       textureUrl="/venus_texture.jpg"
       size={.949}
       rotationSpeed={0.0005}
@@ -27,10 +28,12 @@ function Venus(props) {
       orbitRadius={5}
       atmosphereColor={"orange"}
       A = {108.21 * 1e6}
-      EC = {.0068}
-      i = {3.395}
-      omega = {54.884}
-      Omega = {76.680}
+      EC = {6.755697268576816E-03}
+      i = {3.394589632757466E+00}
+      omega = {5.518541504725159E+01}
+      Omega = {7.667837511094160E+01}
+      meanMotion={1.60213}
+      j2000MeanAnomaly={50.446}
       targetId="299"
     />
     

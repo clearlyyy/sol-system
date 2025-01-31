@@ -18,6 +18,7 @@ function Mercury(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Mercury"
       textureUrl="/mercury_texture.jpg"
       size={.383}
       rotationSpeed={0.012}
@@ -27,10 +28,12 @@ function Mercury(props) {
       orbitRadius={15}
       atmosphereColor={"red"}
       A = {57.909 * 1e6}  // Semi-major axis (AU)
-      EC = {0.2056}       // Eccentricity
-      i = {7.004}         // Inclination (degrees)
-      omega = {29.124}    // Argument of perihelion (degrees)
-      Omega = {48.331}    // Longitude of ascending node (degrees)
+      EC = {2.056302515978038E-01}       // Eccentricity
+      i = {7.005014362233553E+00}         // Inclination (degrees)
+      omega = {2.912427943500334E+01}    // Argument of perihelion (degrees)
+      Omega = {4.833053877672862E+01}    // Longitude of ascending node (degrees)
+      meanMotion={4.092345945966383E+00}
+      j2000MeanAnomaly={1.727497133441682E+02}
       targetId="199"
     />
     

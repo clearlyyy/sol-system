@@ -25,7 +25,6 @@ async function getOrbitalElements(target, startTime, stopTime, stepSize) {
         throw new Error(`API request failed: ${response.status}`);
     }
     const data = await response.text();
-    console.log(target + data);
     return data;
 }
 

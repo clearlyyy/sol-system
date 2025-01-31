@@ -18,6 +18,7 @@ function Mars(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Mars"
       textureUrl="/mars_texture.jpg"
       size={.532}
       rotationSpeed={0.012}
@@ -27,10 +28,12 @@ function Mars(props) {
       orbitRadius={15}
       atmosphereColor={"red"}
       A={227.956*1e6}
-      EC={.0934}
-      i={1.850} // tilt
-      omega={336.040}
-      Omega={49.557}
+      EC={9.345086660118830E-02}
+      i={1.847563958444007E+00} // tilt
+      omega={2.865373583154345E+02}
+      Omega={4.956199905920329E+01}
+      meanMotion={.52403}
+      j2000MeanAnomaly={19.09}
       targetId="499"
     />
     

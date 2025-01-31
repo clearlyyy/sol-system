@@ -18,6 +18,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
   return loaded ? (
     <Planet
       {...props}
+      name="Jupiter"
       textureUrl="/jupiter_texture.jpg"
       size={11.209}
       color={"brown"}
@@ -27,10 +28,12 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       orbitRadius={30}
       atmosphereColor={"red"}
       A={778.479*1e6}
-      EC={.0489}
-      i={0} // tilt
-      omega={14.713}
-      Omega={100.464}
+      EC={4.892305962953223E-02}
+      i={1.304655711046047E+00} // tilt
+      omega={2.751197059498091E+02}
+      Omega={1.004888615724618E+02}
+      meanMotion={.08309}
+      j2000MeanAnomaly={1.872492361720237E+01}
       targetId="599"
     />
     

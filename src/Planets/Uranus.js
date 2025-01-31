@@ -18,6 +18,7 @@ function Uranus(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Uranus"
       textureUrl="/uranus_texture.jpg"
       size={4.007}
       rotationSpeed={0.0005}
@@ -27,10 +28,12 @@ function Uranus(props) {
       orbitRadius={5}
       atmosphereColor={"blue"}
       A = {	2867.043 * 1e6}
-      EC = {.0463}
-      i = {0.773}
-      omega = {170.954}
-      Omega = {74.006}
+      EC = {4.439367187710320E-02}
+      i = {7.723813829207361E-01}
+      omega = {9.660797275005378E+01}
+      Omega = {7.396291773291530E+01}
+      meanMotion={.01190}
+      j2000MeanAnomaly={1.429079296754021E+02}
       targetId="799"
     />
     

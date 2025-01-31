@@ -18,19 +18,22 @@ function Earth(props) {
   return loaded ? (
     <Planet
       {...props}
+      name="Earth"
       textureUrl="/earth_texture.jpg"
       size={1}
       color={"cyan"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}
-      orbitRadius={10}
+      orbitRadius={44}
       atmosphereColor={"blue"}
       A={149.598 * 1e6}
-      EC={0.0167}
-      i={0}
-      omega={102.937}
-      Omega={0}
+      EC={0.01704}
+      i={	0.000266881}
+      omega={297.7671795	}
+      Omega={163.9748712}
+      meanMotion={.98561}
+      j2000MeanAnomaly={358.19}
       targetId="399"
     />
   ) : null; // Don't render anything before the delay

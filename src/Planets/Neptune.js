@@ -17,6 +17,7 @@ function Neptune(props) {
     return loaded ? (
     <Planet
       {...props}
+      name="Neptune"
       textureUrl="/neptune_texture.jpg"
       size={3.883}
       rotationSpeed={0.0005}
@@ -26,10 +27,12 @@ function Neptune(props) {
       orbitRadius={5}
       atmosphereColor={"blue"}
       A = {	4514.953 * 1e6}
-      EC = {.0097}
-      i = {1.769}
-      omega = {44.971}
-      Omega = {131.784}
+      EC = {1.114797945577682E-02}
+      i = {1.773472322935706E+00}
+      omega = {2.668221317471495E+02}
+      Omega = {1.317693429431158E+02}
+      meanMotion={.00601}
+      j2000MeanAnomaly={2.666047613305240E+02}
       targetId="899"
     />
     

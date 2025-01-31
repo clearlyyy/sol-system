@@ -127,6 +127,7 @@ var date;
 
 
 function Planet({
+    name,
     textureUrl,
     size,
     rotationSpeed,
@@ -141,32 +142,65 @@ function Planet({
     i,
     omega,
     Omega,
+    meanMotion,
+    j2000MeanAnomaly,
     targetId
 }) {
 
   
-    var [trueAnomaly, setTrueAnomaly] = useState(null);
-  
+    function getDaysSinceJ2000() {
+      // Define the J2000 epoch (January 1, 2000, 12:00 UTC)
+      const j2000 = new Date(Date.UTC(2000, 0, 1, 12, 0, 0));
 
-    useEffect(() => {
-      const fetchPositionData = async () => {
-        const positionaldata = await getPlanetPosition(targetId, "2023-10-15", "2023-10-16", "1d");
-        console.log(targetId + JSON.stringify(positionaldata, 2));
-        if (!positionaldata || positionaldata.length === 0) {
-          console.error("No data returned for targetId:", targetId);
-        }
-        currentPosition = positionaldata[0];
-        const { date: positionDate, trueAnomaly: positionTrueAnomaly } = currentPosition;
-        date = positionDate;
-        setTrueAnomaly(positionTrueAnomaly);
+      // Get the current date and time in UTC
+      const currentDate = new Date();
+
+      // Calculate the difference in milliseconds
+      const diffInMs = currentDate - j2000;
+
+      // Convert milliseconds to days
+      const msInDay = 1000 * 60 * 60 * 24;
+      const diffInDays = diffInMs / msInDay;
+
+      // Return the number of days since J2000
+      return diffInDays;
+    }
+
+    // Example usage
+    const daysSinceJ2000 = getDaysSinceJ2000();
+    console.log(`Days since J2000: ${daysSinceJ2000.toFixed(2)}`);
+
+
+    function calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, eccentricity) {
+      //First find the Mean Anomaly of the planet.
+      var meanAnomaly = (j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360;
+      console.log("Mean Anomaly: ", name, ": ", meanAnomaly)
+
+      //Now we use the Mean Anomaly and Eccentricity of the planet and its orbit to get a true anomaly.
+
+      let M = meanAnomaly * (Math.PI / 180);
+      let E = M;
+      let delta = 1;
+      const tolerance = 1e-6;
+
+      while (Math.abs(delta) > tolerance) {
+          delta = (E - eccentricity * Math.sin(E) - M) / (1 - eccentricity * Math.cos(E));
+          E -= delta;
       }
-      
-      fetchPositionData();
-    }, []);
-    
-    
-    console.log(targetId, ": ", trueAnomaly)
-    console.log(A / scalingFactor, EC, i, omega, Omega);
+
+      const nu = 2 * Math.atan2(
+          Math.sqrt(1 + eccentricity) * Math.sin(E / 2),
+          Math.sqrt(1 - eccentricity) * Math.cos(E / 2)
+      );
+
+      return nu * (180 / Math.PI);
+    }
+
+
+    let trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
+
+    console.log("True Anomaly: ", name, ": ", trueAnomaly)
+    //console.log(A / scalingFactor, EC, i, omega, Omega);
     const planetRef = useRef();
     const orbitRef = useRef();
     const atmosphereRef = useRef();
