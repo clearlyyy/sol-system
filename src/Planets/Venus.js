@@ -20,7 +20,7 @@ function Venus(props) {
       {...props}
       name="Venus"
       textureUrl="/venus_texture.jpg"
-      size={.949}
+      size={0.285}
       rotationSpeed={0.0005}
       color={"orange"}
       orbitSpeed={0.002}

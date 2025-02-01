@@ -8,6 +8,8 @@ import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
 import { scalingFactor } from "./App"
+
+
 const degToRad = (deg) => deg * (Math.PI / 180);
 
 // Custom Shader for the Atmosphere
@@ -119,7 +121,17 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
 };
 
 
-function Planet({
+
+
+
+  // Conversion from km to A
+
+var currentPosition;
+
+var date;
+
+
+function Moon({
     name,
     textureUrl,
     size,
@@ -137,11 +149,9 @@ function Planet({
     Omega,
     meanMotion,
     j2000MeanAnomaly,
-    targetId,
-    children
+    targetId
 }) {
 
-    console.log("ScalingFactor: ", scalingFactor);
   
     function getDaysSinceJ2000(date) {
       // Define the J2000 epoch (January 1, 2000, 12:00 UTC)
@@ -195,6 +205,7 @@ function Planet({
     let trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
 
     console.log("True Anomaly: ", name, ": ", trueAnomaly)
+    //console.log(A / scalingFactor, EC, i, omega, Omega);
     const planetRef = useRef();
     const orbitRef = useRef();
     const atmosphereRef = useRef();
@@ -284,18 +295,6 @@ function Planet({
 
     const points = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
 
-    useEffect(() => {
-      if (planetRef.current) {
-        console.log("PlanetRef.current Exists")
-        planetRef.current.userData = {
-          name,
-          size,
-          type: "Planet", // Example of more data
-        };
-      }
-    }, [size, name]);
-
-
     return (
         <group>
           {/* Orbit Path */}
@@ -312,12 +311,9 @@ function Planet({
         </lineLoop>
 
           {/* Planet and atmosphere */}
-          <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
-            <sphereGeometry args={[size, 32, 32]} scale={size} />
-
+          <mesh ref={planetRef} position={[orbitRadius, 0, 0]}>
+            <sphereGeometry args={[size, 32, 32]} />
             <meshBasicMaterial map={texture} />
-
-            {children}
 
             {/* Atmospheric Glow Effect */}
             <mesh ref={atmosphereRef} position={[0, 0, 0]}>
@@ -329,5 +325,5 @@ function Planet({
     );
 }
 
-export default Planet;
+export default Moon;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
-function Pluto(props) {
+function Pluto(props, scalingFactor) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,7 +20,7 @@ function Pluto(props) {
       {...props}
       name="Pluto"
       textureUrl="/pluto_texture.jpg"
-      size={3}
+      size={0.56}
       rotationSpeed={0.0005}
       color={"brown"}
       orbitSpeed={0.002}
@@ -35,6 +35,7 @@ function Pluto(props) {
       meanMotion={.00396}
       j2000MeanAnomaly={1.409339255665693E+01}
       targetId="999"
+      scalingFactor={scalingFactor}
     />
     
   ) : null;

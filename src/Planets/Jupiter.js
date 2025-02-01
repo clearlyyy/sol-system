@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
-function Jupiter(props) {
+function Jupiter(props, scalingFactor) {
 const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -20,7 +20,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       {...props}
       name="Jupiter"
       textureUrl="/jupiter_texture.jpg"
-      size={11.209}
+      size={3.292}
       color={"brown"}
       rotationSpeed={0.001}
       orbitSpeed={0.0001}
@@ -35,6 +35,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       meanMotion={.08309}
       j2000MeanAnomaly={1.872492361720237E+01}
       targetId="599"
+      scalingFactor={scalingFactor}
     />
     
   ) : null;

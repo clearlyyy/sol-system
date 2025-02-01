@@ -20,13 +20,13 @@ function Mercury(props) {
       {...props}
       name="Mercury"
       textureUrl="/mercury_texture.jpg"
-      size={.383}
-      rotationSpeed={0.012}
+      size={0.115}
+      rotationSpeed={0.0012}
       color={"orange"}
       orbitSpeed={0.0007}
       tilt={25.2}
       orbitRadius={15}
-      atmosphereColor={"red"}
+      atmosphereColor={"black"}
       A = {57.909 * 1e6}  // Semi-major axis (AU)
       EC = {2.056302515978038E-01}       // Eccentricity
       i = {7.005014362233553E+00}         // Inclination (degrees)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
-function Saturn(props) {
+function Saturn(props, scalingFactor) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,7 +20,7 @@ function Saturn(props) {
       {...props}
       name="Saturn"
       textureUrl="/saturn_texture.jpg"
-      size={9.449}
+      size={2.742}
       rotationSpeed={0.0005}
       color={"orange"}
       orbitSpeed={0.002}
@@ -35,6 +35,7 @@ function Saturn(props) {
       meanMotion={.03346}
       j2000MeanAnomaly={3.203798737892262E+02}
       targetId="699"
+      scalingFactor={scalingFactor}
     />
     
   ) : null;

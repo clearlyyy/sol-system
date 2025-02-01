@@ -15,7 +15,7 @@ function Sun() {
 
       {/* Sun's glowing sphere */}
       <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[2, 32, 32]} />
+        <sphereGeometry args={[1, 32, 32]} />
         {/* Using meshStandardMaterial for better light interaction */}
         <meshStandardMaterial
           color="yellow"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
-function Mars(props) {
+function Mars(props, scalingFactor) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,7 +20,7 @@ function Mars(props) {
       {...props}
       name="Mars"
       textureUrl="/mars_texture.jpg"
-      size={.532}
+      size={0.160}
       rotationSpeed={0.012}
       color={"orange"}
       orbitSpeed={0.0007}
@@ -35,6 +35,7 @@ function Mars(props) {
       meanMotion={.52403}
       j2000MeanAnomaly={19.09}
       targetId="499"
+      scalingFactor={scalingFactor}
     />
     
   ) : null;

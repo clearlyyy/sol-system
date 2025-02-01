@@ -1,0 +1,181 @@
+import { useThree, useFrame } from "@react-three/fiber";
+import { useState, useEffect, useRef } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "@react-three/drei";
+
+// Ease-in-out function to create a bell curve effect
+const easeInOut = (t) => {
+  return 0.5 * (1 - Math.cos(Math.PI * t)); // This will ease in and out smoothly
+};
+
+const UserControls = () => {
+  const { camera, scene, mouse } = useThree();
+  const [targetPosition, setTargetPosition] = useState(null);
+  const [planetPosition, setPlanetPosition] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationTime, setAnimationTime] = useState(0); // To track animation progress
+  const [currentPlanetSize, setPlanetSize] = useState(null);
+
+  // Adjust this value to control the speed
+  const animationSpeed = 0.0005 // Control the animation speed (higher = faster)
+
+  const raycaster = new THREE.Raycaster();
+
+  // Create a ref for OrbitControls
+  const orbitControlsRef = useRef();
+
+  // Function to handle mouse down event
+  const onMouseDown = () => {
+    // Update raycaster with mouse position and camera
+    raycaster.setFromCamera(mouse, camera);
+
+    // Get intersected objects
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    if (intersects.length > 0) {
+      // Get the first intersected object
+      const object = intersects[0].object;
+      const worldPos = new THREE.Vector3();
+      const boundingBox = object.geometry.boundingBox;
+      
+      const customData = object.parent.userData || {};
+      console.log("Clicked object data:", customData);
+      setPlanetSize(object.parent.userData.size);
+      console.log("Clicked Object Size: ", object.parent.userData.size)
+      object.getWorldPosition(worldPos); // Get world position of the clicked object
+      setTargetPosition(worldPos); // Set target position to the object’s world position
+      setPlanetPosition(worldPos); // Store the planet position for orbitControls
+      setIsAnimating(true); // Start the animation
+      setAnimationTime(0); // Reset animation time to 0
+
+      // Temporarily disable orbit controls while animating
+      if (orbitControlsRef.current) {
+        orbitControlsRef.current.enabled = false;
+      }
+    }
+  };
+
+  // Add event listener for mouse down
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDown);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener("mousedown", onMouseDown);
+    };
+  }, [mouse]);
+
+  useFrame((state, delta) => {
+    if (isAnimating && targetPosition) {
+        // Calculate the offset position so the camera doesn't go inside the planet
+        const offset = new THREE.Vector3(0, 0, currentPlanetSize * 4); // Adjust the offset as needed
+        const cameraTargetPosition = targetPosition.clone().add(offset); // Offset from the planet
+
+        // Define the animation duration (in seconds)
+        const animationDuration = 20; // Adjust this value to control the total animation time
+
+        // Calculate the animation progress (t) based on elapsed time
+        const t = Math.min(animationTime / animationDuration, 1); // Ensure t doesn't exceed 1
+        const rotationT = Math.min(animationTime / (animationDuration / 2), 1); // Rotation completes earlier (half the time)
+
+        // Linear interpolation for position (straight line)
+        const lerpedPosition = new THREE.Vector3().lerpVectors(
+            camera.position,
+            cameraTargetPosition,
+            t
+        );
+
+        // Update the camera position
+        camera.position.copy(lerpedPosition);
+
+        // Smoothly update the camera's rotation
+        const targetDirection = new THREE.Vector3().subVectors(targetPosition, camera.position).normalize();
+        const targetQuaternion = new THREE.Quaternion().setFromUnitVectors(
+            new THREE.Vector3(0, 0, -1), // Default forward vector in Three.js
+            targetDirection
+        );
+        camera.quaternion.slerp(targetQuaternion, rotationT); // Use faster t for rotation interpolation
+
+        // Increment animation time based on delta time
+        setAnimationTime((prevTime) => prevTime + delta); // Use delta for frame rate independence
+
+        // Stop animation when the camera is close enough to the target
+        if (camera.position.distanceTo(cameraTargetPosition) < 0.05) {
+            setIsAnimating(false); // Stop the animation when complete
+
+            // Re-enable orbit controls after animation
+            if (orbitControlsRef.current) {
+                orbitControlsRef.current.enabled = true;
+
+                // Set the camera position and target manually
+                camera.lookAt(planetPosition); // Ensure the camera is looking at the planet
+                camera.position.copy(cameraTargetPosition); // Ensure the camera is offset from the target
+                orbitControlsRef.current.target.copy(planetPosition); // Set the target to the planet's position
+
+                // Update OrbitControls to apply the changes
+                orbitControlsRef.current.update();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Update orbit controls if they are enabled
+    if (orbitControlsRef.current && orbitControlsRef.current.enabled) {
+      orbitControlsRef.current.update(); // Manually update the controls while enabled
+    }
+  });
+
+  return (
+    <>
+      {/* Use OrbitControls directly in the scene */}
+      <OrbitControls ref={orbitControlsRef} />
+    </>
+  );
+};
+
+export default UserControls;
