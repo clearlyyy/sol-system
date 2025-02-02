@@ -7,7 +7,7 @@ import getPlanetPosition from "./FetchPlanetPosition"
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
-import { planetScaling, scalingFactor } from "./App"
+import { moonOrbitalPathScaling, planetScaling, scalingFactor } from "./App"
 import EarthCloud from './EarthClouds'
 import generateAtmosphereMaterial, { atmosphereMaterial } from "./AtmosphericShader"
 
@@ -228,7 +228,8 @@ function Planet({
 
 
     //Atmosphere.
-    var atmosphereMaterial = generateAtmosphereMaterial();
+    const atmosphereMaterial = useRef(generateAtmosphereMaterial()).current;
+
     useEffect(() => {
       // Access the material and update the uniform value
       if (atmosphereRef.current) {
@@ -248,7 +249,7 @@ function Planet({
         material.emmisive = "blue";
         material.emmisiveIntensity = 44.0;
     }
-    }, [planetScaling]); 
+    }, [planetScaling, moonOrbitalPathScaling]); 
 
     
 

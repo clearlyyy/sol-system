@@ -84,6 +84,7 @@ function App() {
       </Canvas>
       <div>
         <label>Planet Scaling: {planetScalingState}</label>
+        <br></br>
         <input
           type="range"
           min="100"
@@ -91,6 +92,17 @@ function App() {
           step="50"
           value={planetScalingState}
           onChange={handlePlanetScalingChange}
+        />
+        <br></br>
+        <label>Moon Semi-Major Axis Scaling: {moonOrbitalPathScaling}</label>
+        <br></br>
+        <input
+          type="range"
+          min="0"
+          max="40"
+          step="0.1"
+          value={moonOrbitalPathScaling}
+          onChange={handleMoonOrbitalPathScalingChange}
         />
       </div>
     </div>
