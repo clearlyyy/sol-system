@@ -20,11 +20,11 @@ function Mercury(props) {
       {...props}
       name="Mercury"
       textureUrl="/mercury_texture.jpg"
-      size={0.115}
-      rotationSpeed={0.0012}
+      size={2440}
+      rotationSpeed={0.012}
       color={"orange"}
       orbitSpeed={0.0007}
-      tilt={25.2}
+      tilt={0.034}
       orbitRadius={15}
       atmosphereColor={"black"}
       A = {57.909 * 1e6}  // Semi-major axis (AU)
@@ -35,6 +35,7 @@ function Mercury(props) {
       meanMotion={4.092345945966383E+00}
       j2000MeanAnomaly={1.727497133441682E+02}
       targetId="199"
+      hasClouds={false}
     />
     
   ) : null;

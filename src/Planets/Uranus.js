@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
 
-function Uranus(props, scalingFactor) {
+function Uranus(props) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,13 +20,13 @@ function Uranus(props, scalingFactor) {
       {...props}
       name="Uranus"
       textureUrl="/uranus_texture.jpg"
-      size={1.195}
+      size={25362}
       rotationSpeed={0.0005}
       color={"blue"}
       orbitSpeed={0.002}
-      tilt={3}
+      tilt={97.8}
       orbitRadius={5}
-      atmosphereColor={"blue"}
+      atmosphereColor={"#00B5E2"}
       A = {	2867.043 * 1e6}
       EC = {4.439367187710320E-02}
       i = {7.723813829207361E-01}
@@ -35,7 +35,7 @@ function Uranus(props, scalingFactor) {
       meanMotion={.01190}
       j2000MeanAnomaly={1.429079296754021E+02}
       targetId="799"
-      scalingFactor={scalingFactor}
+      hasClouds={false}
     />
     
   ) : null;

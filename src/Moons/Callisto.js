@@ -20,14 +20,14 @@ function Luna(props) {
       {...props}
       name="Luna"
       textureUrl="/luna_texture.jpg"
-      size={1737.4}
+      size={0.083}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={384400}
+      A={384400 * 30}
       EC={6.476694128611285E-02}
       i={5.240010829674768E+00}
       omega={3.081359034620368E+02}

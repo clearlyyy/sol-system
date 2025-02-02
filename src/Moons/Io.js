@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../Moon";
 
-function Luna(props) {
+function Io(props) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -18,25 +18,25 @@ function Luna(props) {
   return loaded ? (
     <Moon
       {...props}
-      name="Luna"
-      textureUrl="/luna_texture.jpg"
-      size={1737.4}
+      name="Io"
+      textureUrl="/io_texture.jpg"
+      size={1821.6}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={384400}
-      EC={6.476694128611285E-02}
-      i={5.240010829674768E+00}
-      omega={3.081359034620368E+02}
-      Omega={1.239837028145578E+02}
-      meanMotion={1.335975862137564E+01}
-      j2000MeanAnomaly={1.407402571142365E+02}
-      targetId="301"
+      A={4.220209233666365E+05}
+      EC={3.763526322651238E-03}
+      i={2.212685881373811E+00}
+      omega={6.295651616614995E+01}
+      Omega={3.368522291524058E+02}
+      meanMotion={2.352323766009687E-03}
+      j2000MeanAnomaly={2.366156991471576E+02}
+      targetId="501"
     />
   ) : null; // Don't render anything before the delay
 }
 
-export default Luna;
+export default Io;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
+import Io from "../Moons/Io"
 
-function Jupiter(props, scalingFactor) {
+function Jupiter(props) {
 const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -20,13 +21,13 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       {...props}
       name="Jupiter"
       textureUrl="/jupiter_texture.jpg"
-      size={3.292}
+      size={69911}
       color={"brown"}
       rotationSpeed={0.001}
       orbitSpeed={0.0001}
-      tilt={3}
+      tilt={3.1}
       orbitRadius={30}
-      atmosphereColor={"red"}
+      atmosphereColor={"#B88A5D"}
       A={778.479*1e6}
       EC={4.892305962953223E-02}
       i={1.304655711046047E+00} // tilt
@@ -35,8 +36,10 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       meanMotion={.08309}
       j2000MeanAnomaly={1.872492361720237E+01}
       targetId="599"
-      scalingFactor={scalingFactor}
-    />
+      hasClouds={false}
+    >
+      <Io/>
+      </Planet>
     
   ) : null;
 }

@@ -18,23 +18,23 @@ function Luna(props) {
   return loaded ? (
     <Moon
       {...props}
-      name="Luna"
-      textureUrl="/luna_texture.jpg"
-      size={1737.4}
+      name="Deimos"
+      textureUrl="/deimos_texture.jpg"
+      size={0.083}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={384400}
-      EC={6.476694128611285E-02}
-      i={5.240010829674768E+00}
-      omega={3.081359034620368E+02}
-      Omega={1.239837028145578E+02}
-      meanMotion={1.335975862137564E+01}
-      j2000MeanAnomaly={1.407402571142365E+02}
-      targetId="301"
+      A={23460}
+      EC={2.326887806077698E-02}
+      i={2.139216434505546E+00}
+      omega={1.857454990105412E+02}
+      Omega={4.083435101456297E+01}
+      meanMotion={7.116406098275849E-06}
+      j2000MeanAnomaly={1.305487789185887E+02}
+      targetId="402"
     />
   ) : null; // Don't render anything before the delay
 }

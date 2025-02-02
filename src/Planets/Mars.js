@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
+import Deimos from "../Moons/Deimos"
+import Phobos from "../Moons/Phobos"
 
-function Mars(props, scalingFactor) {
+function Mars(props) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,13 +22,13 @@ function Mars(props, scalingFactor) {
       {...props}
       name="Mars"
       textureUrl="/mars_texture.jpg"
-      size={0.160}
+      size={3396}
       rotationSpeed={0.012}
       color={"orange"}
       orbitSpeed={0.0007}
       tilt={25.2}
       orbitRadius={15}
-      atmosphereColor={"red"}
+      atmosphereColor={"#D14F2A"}
       A={227.956*1e6}
       EC={9.345086660118830E-02}
       i={1.847563958444007E+00} // tilt
@@ -35,8 +37,11 @@ function Mars(props, scalingFactor) {
       meanMotion={.52403}
       j2000MeanAnomaly={19.09}
       targetId="499"
-      scalingFactor={scalingFactor}
-    />
+      hasClouds={false}
+    >
+      <Phobos/>
+      <Deimos/>
+      </Planet>
     
   ) : null;
 }

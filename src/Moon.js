@@ -7,69 +7,11 @@ import getPlanetPosition from "./FetchPlanetPosition"
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
-import { scalingFactor } from "./App"
-
+import { scalingFactor, planetScaling, moonOrbitalPathScaling } from "./App"
+import generateAtmosphereMaterial, { atmosphereMaterial } from "./AtmosphericShader"
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 
-// Custom Shader for the Atmosphere
-const atmosphereShader = {
-    vertexShader: `
-      varying vec3 vNormal;
-      varying vec3 vPosition;
-      
-      void main() {
-        vNormal = normalize(normalMatrix * normal);
-        vPosition = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform vec3 atmosphereColor;
-      uniform float intensity;
-      uniform float scaleHeight;
-      uniform vec3 sunDirection; // Direction of sunlight for scattering
-      varying vec3 vNormal;
-      varying vec3 vPosition;
-      
-      // Constants for Rayleigh and Mie scattering
-      const float RayleighConstant = 1.0;
-      const float MieConstant = 0.003;
-  
-      // Function to calculate Rayleigh scattering
-      float rayleighScattering(float cosTheta) {
-        return RayleighConstant * pow(1.0 - cosTheta * cosTheta, 4.0);
-      }
-  
-      // Function to calculate Mie scattering
-      float mieScattering(float cosTheta) {
-        return MieConstant * (1.0 - cosTheta * cosTheta);
-      }
-  
-      void main() {
-        // Light direction and view direction for scattering
-        vec3 lightDir = normalize(sunDirection);
-        vec3 viewDir = normalize(vPosition);
-  
-        // Calculate the angle between the normal (view) and the light source
-        float cosTheta = dot(viewDir, lightDir);
-  
-        // Rayleigh and Mie scattering contributions
-        float rayleigh = rayleighScattering(cosTheta);
-        float mie = mieScattering(cosTheta);
-  
-        // Attenuation factor (based on the distance from the center)
-        float distance = length(vPosition);
-        float attenuation = exp(-distance / scaleHeight);
-        
-        // Final color calculation: combine the scattering contributions with attenuation
-        vec3 glow = atmosphereColor * intensity * (rayleigh + mie) * attenuation;
-  
-        // Apply the final glow color with transparency (alpha channel set to a value for transparency)
-        gl_FragColor = vec4(glow, glow.r + glow.g + glow.b); // Set alpha based on intensity of glow
-      }
-    `,
-};
 
 // Function to generate orbital path based on Keplerian elements
 const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
@@ -152,6 +94,10 @@ function Moon({
     targetId
 }) {
 
+
+    var scaledSize = size / scalingFactor;
+    console.log("Size of: ", name, ":", scaledSize * planetScaling);
+
   
     function getDaysSinceJ2000(date) {
       // Define the J2000 epoch (January 1, 2000, 12:00 UTC)
@@ -209,15 +155,11 @@ function Moon({
     const planetRef = useRef();
     const orbitRef = useRef();
     const atmosphereRef = useRef();
+    const atmosphereRef2 = useRef();
 
     // Load texture
     const texture = useLoader(TextureLoader, textureUrl);
-    
-    // Generate orbital path points (Keplerian orbit)
-    const orbitalPathPoints = generateOrbitalPath(orbitRadius, 0.1); // Example values for A and EC
-
-    
-
+  
     useEffect(() => {
         if (planetRef.current) {
             planetRef.current.rotation.z = degToRad(tilt || 0);
@@ -225,7 +167,7 @@ function Moon({
     }, [tilt]);
 
 
-    const orbitalPath = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega, 10000);
+    const orbitalPath = generateOrbitalPath(((A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, i, omega, Omega);
     let currentPointIndex = 0;
     let timeElapsed = 0;
     const planetOrbitSpeed = 5;  // Slow down to smooth out movement
@@ -268,32 +210,38 @@ function Moon({
     useEffect(() => {
       if (planetRef.current) {
         const trueAnomaly2 = degToRad(trueAnomaly); // Example true anomaly in degrees (convert to radians)
-        const position = calculatePositionFromTrueAnomaly(A / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
+        const position = calculatePositionFromTrueAnomaly(((A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
         planetRef.current.position.copy(position);
       }
     }, [trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
 
-    
+    var atmosphereMaterial = generateAtmosphereMaterial();
+    useEffect(() => {
 
+          // Access the material and update the uniform value
+          if (atmosphereRef.current) {
+              const material = atmosphereRef.current.material;
+              material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
+              material.uniforms.coeficient.value	= 0.8;
+              material.uniforms.power.value		= 2.0;
+              material.emmisive = "blue"
+              material.emmisiveIntensity = 44.0;
+              
+          }
+          if (atmosphereRef2.current) {
+            const material = atmosphereRef.current.material;
+            material.side = THREE.BackSide;
+            material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
+            material.uniforms.coeficient.value	= 0.5;
+            material.uniforms.power.value	= 4.0;
+            material.emmisive = "blue";
+            material.emmisiveIntensity = 44.0;
+            
+            
+        }
+        }, [planetScaling]); 
 
-
-    const atmosphereMaterial = new ShaderMaterial({
-        vertexShader: atmosphereShader.vertexShader,
-        fragmentShader: atmosphereShader.fragmentShader,
-        uniforms: {
-          atmosphereColor: { value: new THREE.Color(atmosphereColor) },
-          intensity: { value: atmosphereIntensity || 2.0 },
-          scaleHeight: { value: 5000 }, // Adjust scale height for atmospheric thickness
-          sunDirection: { value: new THREE.Vector3(1, 1, 0).normalize() }, // Direction of the sun (adjust as needed)
-        },
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        side: THREE.DoubleSide,
-    });
-
-
-    const points = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
+    const points = generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
 
     return (
         <group>
@@ -311,15 +259,13 @@ function Moon({
         </lineLoop>
 
           {/* Planet and atmosphere */}
-          <mesh ref={planetRef} position={[orbitRadius, 0, 0]}>
-            <sphereGeometry args={[size, 32, 32]} />
-            <meshBasicMaterial map={texture} />
+          <mesh ref={planetRef} position={[0, 0, 0]}>
+            <sphereGeometry args={[scaledSize * planetScaling, 32, 32]} />
+            <meshPhongMaterial map={texture} />
 
             {/* Atmospheric Glow Effect */}
-            <mesh ref={atmosphereRef} position={[0, 0, 0]}>
-              <sphereGeometry args={[size * 1.1, 32, 32]} />
-              <primitive object={atmosphereMaterial} attach="material" />
-            </mesh>
+            
+            
           </mesh>
         </group>
     );

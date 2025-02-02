@@ -20,13 +20,13 @@ function Venus(props) {
       {...props}
       name="Venus"
       textureUrl="/venus_texture.jpg"
-      size={0.285}
+      size={6052}
       rotationSpeed={0.0005}
       color={"orange"}
       orbitSpeed={0.002}
-      tilt={3}
+      tilt={177.4}
       orbitRadius={5}
-      atmosphereColor={"orange"}
+      atmosphereColor={"#C2B280"}
       A = {108.21 * 1e6}
       EC = {6.755697268576816E-03}
       i = {3.394589632757466E+00}
@@ -35,6 +35,7 @@ function Venus(props) {
       meanMotion={1.60213}
       j2000MeanAnomaly={50.446}
       targetId="299"
+      hasClouds={false}
     />
     
   ) : null;

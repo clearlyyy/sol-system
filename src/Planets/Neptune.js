@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../Planet";
-function Neptune(props, scalingFactor) {
+function Neptune(props) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -19,13 +19,13 @@ function Neptune(props, scalingFactor) {
       {...props}
       name="Neptune"
       textureUrl="/neptune_texture.jpg"
-      size={1.159}
+      size={24622}
       rotationSpeed={0.0005}
       color={"blue"}
       orbitSpeed={0.002}
-      tilt={3}
+      tilt={28.5}
       orbitRadius={5}
-      atmosphereColor={"blue"}
+      atmosphereColor={"#4B7F9A"}
       A = {	4514.953 * 1e6}
       EC = {1.114797945577682E-02}
       i = {1.773472322935706E+00}
@@ -34,7 +34,7 @@ function Neptune(props, scalingFactor) {
       meanMotion={.00601}
       j2000MeanAnomaly={2.666047613305240E+02}
       targetId="899"
-      scalingFactor={scalingFactor}
+      hasClouds={false}
     />
     
   ) : null;

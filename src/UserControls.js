@@ -2,6 +2,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
+import { scalingFactor, planetScaling } from "./App"
 
 // Ease-in-out function to create a bell curve effect
 const easeInOut = (t) => {
@@ -36,12 +37,12 @@ const UserControls = () => {
       // Get the first intersected object
       const object = intersects[0].object;
       const worldPos = new THREE.Vector3();
-      const boundingBox = object.geometry.boundingBox;
-      
-      const customData = object.parent.userData || {};
+    
+      const customData = object.children[1].parent.userData || {};
+      console.log("Clicked object Mesh", object.parent);
       console.log("Clicked object data:", customData);
-      setPlanetSize(object.parent.userData.size);
-      console.log("Clicked Object Size: ", object.parent.userData.size)
+      setPlanetSize(customData.size);
+      console.log("Clicked Object Size: ", customData.size)
       object.getWorldPosition(worldPos); // Get world position of the clicked object
       setTargetPosition(worldPos); // Set target position to the object’s world position
       setPlanetPosition(worldPos); // Store the planet position for orbitControls
@@ -68,7 +69,7 @@ const UserControls = () => {
   useFrame((state, delta) => {
     if (isAnimating && targetPosition) {
         // Calculate the offset position so the camera doesn't go inside the planet
-        const offset = new THREE.Vector3(0, 0, currentPlanetSize * 4); // Adjust the offset as needed
+        const offset = new THREE.Vector3(0, 0, ((currentPlanetSize / scalingFactor) * planetScaling) * 4); // Adjust the offset as needed
         const cameraTargetPosition = targetPosition.clone().add(offset); // Offset from the planet
 
         // Define the animation duration (in seconds)
