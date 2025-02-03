@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import * as THREE from "three";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 import Luna from "../Moons/Luna";
+import { CSS3DObject } from '@react-three/drei';
 
-function ding() {
-
-  console.log("Dinger")
-}
-
-
-function Earth(props) {
+function Earth({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
   
-  const objRef = useRef();
-  const positionRef = useRef(new THREE.Vector3());
   // Use useEffect to trigger the delay
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,8 +15,6 @@ function Earth(props) {
 
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, [delay]);
-
-  console.log("WOOOOO", (149.598 * 1e6) / 1.495239195637494e7)
 
   // Render the Planet component only after the delay
   return loaded ? (
@@ -48,8 +38,9 @@ function Earth(props) {
       j2000MeanAnomaly={358.19}
       targetId="399"
       hasClouds={true}
+      daysSinceJ2000={daysSinceJ2000}
     >
-      <Luna position={[0, 0, 0]} />
+      <Luna position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000} />
       </Planet>
       
   ) : null; // Don't render anything before the delay

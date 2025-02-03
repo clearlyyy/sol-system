@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 import Io from "../Moons/Io"
+import Europa from "../Moons/Europa"
+import Ganymede from "../Moons/Ganymede"
+import Callisto from "../Moons/Callisto"
 
-function Jupiter(props) {
+function Jupiter({daysSinceJ2000, ...props}) {
 const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -37,8 +40,12 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       j2000MeanAnomaly={1.872492361720237E+01}
       targetId="599"
       hasClouds={false}
+      daysSinceJ2000={daysSinceJ2000}
     >
-      <Io/>
+      <Io position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Europa position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Ganymede position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Callisto position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
       </Planet>
     
   ) : null;

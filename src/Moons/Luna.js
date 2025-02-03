@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Moon from "../Moon";
+import Moon from "../CelestialBodys/Moon";
 
-function Luna(props) {
+function Luna({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -13,7 +13,7 @@ function Luna(props) {
 
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, [delay]);
-  console.log("Dinger City222")
+  
   // Render the Planet component only after the delay
   return loaded ? (
     <Moon
@@ -35,6 +35,7 @@ function Luna(props) {
       meanMotion={1.335975862137564E+01}
       j2000MeanAnomaly={1.407402571142365E+02}
       targetId="301"
+      daysSinceJ2000={daysSinceJ2000}
     />
   ) : null; // Don't render anything before the delay
 }

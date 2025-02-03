@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 
-function Venus(props) {
+function Venus({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -36,6 +36,7 @@ function Venus(props) {
       j2000MeanAnomaly={50.446}
       targetId="299"
       hasClouds={false}
+      daysSinceJ2000={daysSinceJ2000}
     />
     
   ) : null;

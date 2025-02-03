@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 import Deimos from "../Moons/Deimos"
 import Phobos from "../Moons/Phobos"
 
-function Mars(props) {
+function Mars({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -38,9 +38,10 @@ function Mars(props) {
       j2000MeanAnomaly={19.09}
       targetId="499"
       hasClouds={false}
+      daysSinceJ2000={daysSinceJ2000}
     >
-      <Phobos/>
-      <Deimos/>
+      <Phobos daysSinceJ2000={daysSinceJ2000}/>
+      <Deimos daysSinceJ2000={daysSinceJ2000}/>
       </Planet>
     
   ) : null;

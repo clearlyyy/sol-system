@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Moon from "../Moon";
+import Moon from "../CelestialBodys/Moon";
 
-function Io(props) {
+function Io({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -13,7 +13,7 @@ function Io(props) {
 
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, [delay]);
-  console.log("Dinger City222")
+ 
   // Render the Planet component only after the delay
   return loaded ? (
     <Moon
@@ -32,9 +32,10 @@ function Io(props) {
       i={2.212685881373811E+00}
       omega={6.295651616614995E+01}
       Omega={3.368522291524058E+02}
-      meanMotion={2.352323766009687E-03}
-      j2000MeanAnomaly={2.366156991471576E+02}
+      meanMotion={3.2337}
+      j2000MeanAnomaly={2.373915791498890E+02}
       targetId="501"
+      daysSinceJ2000={daysSinceJ2000}
     />
   ) : null; // Don't render anything before the delay
 }

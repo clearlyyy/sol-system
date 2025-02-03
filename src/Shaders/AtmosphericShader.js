@@ -62,7 +62,7 @@ function generateAtmosphereMaterial() {
       },
       glowColor: {
         type: "c",
-        value: new THREE.Color('0x00b3ff'),
+        value: new THREE.Color("rgb(0,0,0)"),
       },
       edgeFadeStart: {
         type: "f",

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
-import FakeGlowMaterial from "./FakeGlowMaterial";
+import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
 function Sun() {
   const lightRef = useRef();
   const meshRef = useRef();

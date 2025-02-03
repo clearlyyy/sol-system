@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 
-function Mercury(props) {
+function Mercury({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -36,6 +36,7 @@ function Mercury(props) {
       j2000MeanAnomaly={1.727497133441682E+02}
       targetId="199"
       hasClouds={false}
+      daysSinceJ2000={daysSinceJ2000}
     />
     
   ) : null;

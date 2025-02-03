@@ -2,7 +2,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
-import { scalingFactor, planetScaling } from "./App"
+import { scalingFactor, planetScaling } from "../App"
 
 // Ease-in-out function to create a bell curve effect
 const easeInOut = (t) => {
@@ -37,9 +37,13 @@ const UserControls = () => {
       // Get the first intersected object
       const object = intersects[0].object;
       const worldPos = new THREE.Vector3();
-    
-      const customData = object.children[1].parent.userData || {};
-      console.log("Clicked object Mesh", object.parent);
+      var customData;
+      try {
+        customData = object.children[1].parent.userData || {};
+      } catch {
+        customData  = object.userData || {};
+      }
+      console.log("Clicked object Mesh", object);
       console.log("Clicked object data:", customData);
       setPlanetSize(customData.size);
       console.log("Clicked Object Size: ", customData.size)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Planet from "../Planet";
+import Planet from "../CelestialBodys/Planet";
 
-function Pluto(props) {
+function Pluto({daysSinceJ2000, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -36,6 +36,7 @@ function Pluto(props) {
       j2000MeanAnomaly={1.409339255665693E+01}
       targetId="999"
       hasClouds={false}
+      daysSinceJ2000={daysSinceJ2000}
     />
     
   ) : null;

@@ -1,0 +1,49 @@
+
+body {
+    font-family: "Nunito", serif;
+}
+
+.controls-container {
+    
+    position: absolute;
+    bottom: 20px;
+    align-self: center;
+    justify-self: center;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: #2e3440;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.time-speed-container {
+    color: #a7a9ad;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.multiplier-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.time-button {
+    font-weight: bold;
+    font-size: 1.4rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #4c566a;
+    color: white;
+    border: 2px solid #3b4252;
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}

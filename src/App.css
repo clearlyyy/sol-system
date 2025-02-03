@@ -1,1 +1,8 @@
-
+.canvas {
+    position: absolute;  /* Take it out of the document flow */
+    top: 0;
+    left: 0;
+    width: 100vw;  /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    z-index: -1;  /* Send it behind other elements */
+  }

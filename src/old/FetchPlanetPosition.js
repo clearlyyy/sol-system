@@ -104,7 +104,7 @@ async function getTrueAnomaly(target, startDate, endDate, stepSize) {
             // Convert mean anomaly from degrees to radians
             const M = (meanAnomaly * Math.PI) / 180;
             
-            console.log(target + "Mean: " + M + " Ecc: " + eccentricity);
+            
             // Calculate true anomaly
             const theta = meanAnomalyToTrueAnomaly(M, eccentricity);
 
