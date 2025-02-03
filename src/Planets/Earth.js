@@ -28,7 +28,7 @@ function Earth({daysSinceJ2000, ...props}) {
       orbitSpeed={0.001}
       tilt={23.5}
       orbitRadius={44}
-      atmosphereColor={'#0099dd'}
+      atmosphereColor={0x0099dd}
       A={149.598 * 1e6}
       EC={0.01704}
       i={	0.000266881}

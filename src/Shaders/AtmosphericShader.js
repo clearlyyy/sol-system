@@ -33,7 +33,7 @@ function generateAtmosphereMaterial() {
     '  viewCameraToVertex = normalize(viewCameraToVertex);',
     
     // Calculate the intensity of the glow based on the normal and view direction
-    '  float intensity = pow(coeficient + dot(vVertexNormal, viewCameraToVertex), power);',
+    '  float intensity = pow(coeficient + max(0.0, dot(vVertexNormal, viewCameraToVertex)), power);',
     
     // Calculate the distance of the fragment from the center of the object (radius-based fade)
     '  float distanceFromCenter = length(vVertexWorldPosition);',
@@ -64,19 +64,16 @@ function generateAtmosphereMaterial() {
         type: "c",
         value: new THREE.Color("rgb(0,0,0)"),
       },
-      edgeFadeStart: {
-        type: "f",
-        value: 1.0, // Start of the fade effect, closer to the center
-      },
-      edgeFadeEnd: {
-        type: "f",
-        value: 1.2, // End of the fade effect, further from the center
-      },
+      edgeFadeStart: { value: 0.7 }, // Soften the transition
+      edgeFadeEnd: { value: 1.7 },   // Ensure fade is visible at far distances
+ // Ensure it's larger than start
+
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     transparent: true,
     depthWrite: false,
+    blending: THREE.AdditiveBlending,
   });
 
   return material;

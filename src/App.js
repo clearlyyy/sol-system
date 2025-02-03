@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import './App.css';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO, FXAA } from '@react-three/postprocessing';
 import { ToneMappingMode, Resizer, KernelSize } from 'postprocessing';
 
 import Navbar from "./UI/Navbar.js"
@@ -32,9 +32,38 @@ function getDaysSinceJ2000(date) {
   return diffInMs / (1000 * 60 * 60 * 24);
 }
 
+function CameraControls() {
+  const { camera } = useThree();
+  const sunRef = React.useRef();
+
+  // Update the camera's near and far planes dynamically based on camera position
+  useEffect(() => {
+    const adjustCameraPlanes = () => {
+      if (sunRef.current) {
+        const distanceToSun = camera.position.length(); // Distance from camera to Sun
+        const minDistance = Math.max(10, distanceToSun - 500); // Avoid too small near values
+        const maxDistance = distanceToSun + 5000; // Distance to most distant objects
+        
+        // Smoothly adjust the near and far planes to avoid depth issues
+        camera.near = minDistance;
+        camera.far = maxDistance;
+        
+        camera.updateProjectionMatrix(); // Update projection matrix with new near/far values
+      }
+    };
+
+    adjustCameraPlanes();
+    // Run adjustCameraPlanes whenever the camera position changes
+    return () => adjustCameraPlanes();
+  }, [camera.position]);
+
+  return <Sun ref={sunRef} emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" />;
+}
+
 
 
 function App() {
+  
   const sunRef = useRef();
 
   const [planetScalingState, setPlanetScalingState] = useState(planetScaling);
@@ -89,9 +118,10 @@ function App() {
       <Canvas
         camera={{ position: [0, 50, 100], fov: 90, near: 0.0001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} // This will set the background to black
+        gl={{logarithmicDepthBuffer: true}}
       >
         {/* Post-Processing Effects */}
-        <EffectComposer multisampling={2}>
+        <EffectComposer multisampling={0}>
           <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
           
           <Vignette eskil={false} offset={0.1} darkness={0.1} />

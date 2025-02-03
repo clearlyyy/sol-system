@@ -13,6 +13,8 @@ import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line,
 import { moonOrbitalPathScaling, planetScaling, scalingFactor } from "../App"
 import EarthCloud from '../Shaders/EarthClouds'
 import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
+import { getFresnelMat } from "../Shaders/getFresnelMat";
+import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 
@@ -208,36 +210,13 @@ function Planet({
       }
     }, [size, name]);
 
+    const fresnelMat = getFresnelMat(atmosphereColor);
 
-
-    //Atmosphere.
-    const atmosphereMaterial = useRef(generateAtmosphereMaterial()).current;
-
-    useEffect(() => {
-      // Access the material and update the uniform value
-      if (atmosphereRef.current) {
-          const material = atmosphereRef.current.material;
-          material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
-          material.uniforms.coeficient.value	= 0.8;
-          material.uniforms.power.value		= 2.0;       
-          material.emmisive = "blue"
-          material.emmisiveIntensity = 44.0; 
-      }
-      if (atmosphereRef2.current) {
-        const material = atmosphereRef.current.material;
-        material.side = THREE.BackSide;
-        material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
-        material.uniforms.coeficient.value	= 0.5;
-        material.uniforms.power.value	= 4.0;
-        material.emmisive = "blue";
-        material.emmisiveIntensity = 44.0;
-    }
-    }, [planetScaling, moonOrbitalPathScaling]); 
-
-    
     
     return (
+      <>
           <group>
+      
             {/* Orbit Path */}
             <lineLoop raycast={() => {}} ref={orbitRef}>
               <bufferGeometry>
@@ -253,6 +232,7 @@ function Planet({
           </lineLoop>
 
           
+            
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
@@ -263,14 +243,16 @@ function Planet({
             {children}
 
             {/* Atmospheric Glow Effect */}
-            <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={atmosphereMaterial}>
-              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.03, 32, 32]}/>
+            <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={fresnelMat}>
+              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 64, 64]}/>
             </mesh>
+            {/* 
             <mesh ref={atmosphereRef2} position={[0, 0, 0]} raycast={() => {}} material={atmosphereMaterial}>
               <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.05, 32, 32]}/>
             </mesh>
+            */}
 
-            {hasClouds && <EarthCloud size={scaledSize * planetScaling * 1.03} />}
+            {hasClouds && <EarthCloud size={scaledSize * planetScaling * 1.02} />}
 
             {name == "Saturn" && <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
               {/* Outer Ring */}
@@ -279,9 +261,11 @@ function Planet({
             </mesh> }
 
           </mesh>
+          
 
           
         </group>
+        </>
     );
 }
 
