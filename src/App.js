@@ -9,6 +9,7 @@ import { Perf } from 'r3f-perf'
 
 import Navbar from "./UI/Navbar.js"
 import Controls from "./UI/Controls.js"
+import PlanetaryInfo from './UI/PlanetaryInfo.js';
 
 import Earth from "./Planets/Earth";
 import Mercury from "./Planets/Mercury";
@@ -107,6 +108,8 @@ function App() {
 
       {/* Navbar */}
       <Navbar/>
+
+      <PlanetaryInfo/>
       
 
       <div style={{ 

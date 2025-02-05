@@ -1,0 +1,45 @@
+
+.planetaryinfo-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin: 20px;
+    width: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70vh;
+    background-color: #2e3440;
+    border-radius: 30px;
+    border: 2px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.title-container {
+    margin: 10px;
+    margin-left: 20px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.title-container p {
+    color: #8d9fc4;
+    margin: 0px;
+}
+
+.title {
+    color: #8d9fc4;
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    margin: 10px 20px;
+    margin-top: 0px;
+}
+
+.content p {
+    width: 100%;
+    flex-grow: 1;
+    color: #8d9fc4;
+    margin: 0px;
+}

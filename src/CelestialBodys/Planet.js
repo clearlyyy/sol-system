@@ -21,6 +21,8 @@ import OrbitalLine from "./OrbitalLine";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 
+
+
 // Function to generate orbital path based on Keplerian elements
 const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 1000) => {
   const points = [];
@@ -94,7 +96,7 @@ function Planet({
     targetId,
     children,
     hasClouds,
-    daysSinceJ2000
+    daysSinceJ2000,
 }) {
 
     var scaledSize = size / scalingFactor;
@@ -255,9 +257,6 @@ function Planet({
             </mesh> }
 
           </mesh>
-          
-
-          
         </group>
         </>
     );

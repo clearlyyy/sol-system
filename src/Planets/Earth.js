@@ -17,6 +17,7 @@ function Earth({daysSinceJ2000, ...props}) {
   }, [delay]);
 
   // Render the Planet component only after the delay
+  
   return loaded ? (
     <Planet
       {...props}
