@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="56.245354mm"
+   height="15.47043mm"
+   viewBox="0 0 56.245354 15.47043"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch5">
+      <stop
+         style="stop-color:#93b54a;stop-opacity:1;"
+         offset="0"
+         id="stop5" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-86.914136,-127.96652)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:19.7556px;font-family:Trueno;-inkscape-font-specification:'Trueno Semi-Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#8d9fc4;fill-opacity:1;stroke-width:0.264583"
+       x="143.45581"
+       y="142.95604"
+       id="text1"><tspan
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Trueno;-inkscape-font-specification:'Trueno Bold';text-align:end;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:end;fill:#8d9fc4;fill-opacity:1;stroke-width:0.264583"
+         x="143.45581"
+         y="142.95604">SOL</tspan></text>
+    <circle
+       style="fill:#93b54a;fill-opacity:1;stroke-width:0.200811"
+       id="path1"
+       cx="94.583931"
+       cy="135.54382"
+       r="3.5429094" />
+    <circle
+       style="fill:#93b54a;fill-opacity:0;stroke:#93b54a;stroke-width:0.802;stroke-dasharray:none;stroke-opacity:1"
+       id="path3"
+       cx="94.649353"
+       cy="135.70174"
+       r="7.334218" />
+    <circle
+       style="fill:#2c95e0;fill-opacity:1;stroke:none;stroke-width:0.595231;stroke-dasharray:none;stroke-opacity:1"
+       id="path6"
+       cx="89.573303"
+       cy="130.39177"
+       r="2.0997076" />
+  </g>
+</svg>

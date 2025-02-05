@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Marquee from "react-fast-marquee";
+import { Html } from "@react-three/drei"
 
 import "../styles/controls.css"
+import "../styles/timeslider.css"
 
-function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier}) {
+function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, }) {
 
     function getDaySuffix(day) {
         if (day > 3 && day < 21) return 'th'; // for 11th, 12th, 13th
@@ -31,6 +32,13 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier}) {
       
         // Combine the date and time
         return `${dayWithSuffix}, ${formattedTime}`;
+      }
+
+      function convertMultiplierToRate(timeMultiplier) {
+        //Implement this. 1x = 1sec/sec, etc.
+
+        
+        return null;
       }
 
 

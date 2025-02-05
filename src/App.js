@@ -5,6 +5,7 @@ import { Canvas, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO, FXAA } from '@react-three/postprocessing';
 import { ToneMappingMode, Resizer, KernelSize } from 'postprocessing';
+import { Perf } from 'r3f-perf'
 
 import Navbar from "./UI/Navbar.js"
 import Controls from "./UI/Controls.js"
@@ -120,11 +121,13 @@ function App() {
         onCreated={state => state.gl.setClearColor("#2e3440")} // This will set the background to black
         gl={{logarithmicDepthBuffer: true}}
       >
+
         {/* Post-Processing Effects */}
         <EffectComposer multisampling={0}>
           <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
           
-          <Vignette eskil={false} offset={0.1} darkness={0.1} />
+          
+          <Vignette eskil={false} offset={0.1} darkness={0.5} />
           
           
         </EffectComposer>
@@ -132,6 +135,7 @@ function App() {
         {/* Lighting */}
         <ambientLight intensity={0.1} />
         
+        <Perf position='bottom-right' logsPerSecond={1}/>
 
         {/* Star Field */}
         <Stars radius={300} />

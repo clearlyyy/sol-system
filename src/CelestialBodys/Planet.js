@@ -3,6 +3,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from 'three';
+import { useTexture } from '@react-three/drei';
 import getPlanetPosition from "../old/FetchPlanetPosition"
 import { useLoader, useFrame } from "@react-three/fiber";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial";
@@ -15,6 +16,8 @@ import EarthCloud from '../Shaders/EarthClouds'
 import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
 import { getFresnelMat } from "../Shaders/getFresnelMat";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
+import OrbitalLine from "./OrbitalLine";
+
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 
@@ -71,6 +74,8 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 1000) => {
 function Planet({
     name,
     textureUrl,
+    bumpMapUrl,
+    specMapUrl,
     size,
     rotationSpeed,
     orbitSpeed,
@@ -132,7 +137,10 @@ function Planet({
 
     // Load texture
     const texture = useLoader(TextureLoader, textureUrl);
+    const bumpMap = useLoader(TextureLoader, "/earthbump1k.jpg");
+    const specMap = useTexture('/earthspec1k.jpg');
     const ring_texture = useLoader(TextureLoader, "/rings.png");
+
 
     useEffect(() => {
         if (planetRef.current) {
@@ -216,35 +224,21 @@ function Planet({
     return (
       <>
           <group>
-      
             {/* Orbit Path */}
-            <lineLoop raycast={() => {}} ref={orbitRef}>
-              <bufferGeometry>
-                  <bufferAttribute 
-                      attach="attributes-position" 
-                      array={new Float32Array(points.flatMap(p => [p.x, p.y, p.z]))} 
-                      count={points.length} 
-                      itemSize={3} 
-                  
-                  />
-              </bufferGeometry>
-              <lineBasicMaterial color={color}/>
-          </lineLoop>
-
+            <OrbitalLine points={points} color={color}/>
           
-            
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
             <sphereGeometry args={[scaledSize * planetScaling, 32, 32]} scale={scaledSize * planetScaling} />
 
-            <meshPhongMaterial map={texture} />
+            <meshStandardMaterial map={texture}/>
 
             {children}
 
             {/* Atmospheric Glow Effect */}
             <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={fresnelMat}>
-              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 64, 64]}/>
+              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 32, 32]}/>
             </mesh>
             {/* 
             <mesh ref={atmosphereRef2} position={[0, 0, 0]} raycast={() => {}} material={atmosphereMaterial}>

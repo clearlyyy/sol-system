@@ -36,10 +36,10 @@ function Navbar() {
             </div>
             <div className="nav-top-right">
                 <a href="https://github.com/clearlyyy/sol-system">
-                <i class="fa fa-github"></i>
+                <i className="fa fa-github"></i>
                 </a>
-                <div class="fact-message-style">
-                    <div class="scrollable-content">
+                <div className="fact-message-style">
+                    <div className="scrollable-content">
                         <Marquee>
                         <p>The Sun makes up more than 99% of the mass of our solar system.</p>
                         <p>Jupiter is the largest planet in the solar system and has a mass 318 times that of Earth.</p>
@@ -61,28 +61,28 @@ function Navbar() {
                     </div>
                 </div>
                 <a href="https://github.com/clearlyyy/sol-system">
-                <i class="fa fa-moon"></i>
+                <i className="fa fa-moon"></i>
                 </a>
             </div>
         </div>
 
         {/* Middle Portion of the Navbar */}
         <div className="nav-middle">
-            <img src={"/images/SOL-logo.png"}></img>
+            <img src={"/SOL-logo.svg"}></img>
             <nav className='mainmenu'>
             <div className="nav-middle-button-container">
                 <div className="nav-middle-button">
-                    <h3><i class="fa fa-earth"></i> Planets</h3>
+                    <h3><i className="fa fa-earth"></i> Planets</h3>
                 </div>
             </div>
             <div className="nav-middle-button-container">
                 <div className="nav-middle-button">
-                    <h3><i class="fa fa-moon"></i> Moons</h3>
+                    <h3><i className="fa fa-moon"></i> Moons</h3>
                 </div>
             </div>
             <div className="nav-middle-button-container">
                 <div className="nav-middle-button">
-                    <h3><i class="fa fa-wrench"></i> Tools</h3>
+                    <h3><i className="fa fa-wrench"></i> Tools</h3>
                 </div>
             </div>
             </nav>   
