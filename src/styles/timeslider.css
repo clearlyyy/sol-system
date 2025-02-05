@@ -1,15 +1,8 @@
-.arc-slider-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-}
 
-.arc-slider {
-  margin-bottom: 20px;
-}
 
-.slider-input {
-  width: 200px;
+
+.time-slider {
+  align-self: center;
+  justify-self: center;
+  width: 200%;
 }

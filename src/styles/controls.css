@@ -21,16 +21,29 @@ body {
     justify-content: center;
     margin: 10px;
     margin-bottom: 20px;
+    user-select: none; /* Prevents text selection */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
 }
 
+
+
 .multiplier-container {
+    user-select: none; /* Prevents text selection */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: absolute;
+    top: 40px;
 
 }
 
 .time-button {
+    flex-shrink: 0;
     font-weight: bold;
     font-size: 1.4rem;
     align-items: center;
@@ -42,4 +55,12 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 40px;
+}
+
+.time-display {
+    width: 180px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: elipsis;
 }

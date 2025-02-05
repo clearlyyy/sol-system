@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Html } from "@react-three/drei"
+import { timeMultipliers } from './timeMultipliers';
+
+import DraggablePath from './RangeSlider';
 
 import "../styles/controls.css"
 import "../styles/timeslider.css"
 
 function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, }) {
+
+
+    const [currentTimeMultiplier, setCurrentTimeMultiplierState] = useState("");
 
     function getDaySuffix(day) {
         if (day > 3 && day < 21) return 'th'; // for 11th, 12th, 13th
@@ -33,13 +39,21 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, }) {
         // Combine the date and time
         return `${dayWithSuffix}, ${formattedTime}`;
       }
+      
+      useEffect(() => {
+        if (timeMultiplier > 0) {
+          setCurrentTimeMultiplierState(timeMultipliers[timeMultiplier]);
+        }
+        else if (timeMultiplier == -1) {
+          setCurrentTimeMultiplierState("-1 SEC/S")
+        }
+        else if (timeMultiplier < 0) {
+          setCurrentTimeMultiplierState("-" + timeMultipliers[timeMultiplier * -1])
+        }
 
-      function convertMultiplierToRate(timeMultiplier) {
-        //Implement this. 1x = 1sec/sec, etc.
+        console.log(currentTimeMultiplier);
 
-        
-        return null;
-      }
+      }, [timeMultiplier])
 
 
   return (
@@ -48,9 +62,10 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, }) {
             <h3 className="current-date">{formatDateWithLocale(currentDate)}</h3>
             <div className="multiplier-container">
                 <button onClick={() => onChangeTimeMultiplier(timeMultiplier / 2)} className="time-button">-</button>
-                <h1>{timeMultiplier}x</h1>
+                <h1 className="time-display">{currentTimeMultiplier}</h1>
                 <button onClick={() => onChangeTimeMultiplier(timeMultiplier * 2)} id="plus-time" className="time-button">+</button>
             </div>
+            <DraggablePath setTimeMultiplier={onChangeTimeMultiplier}/>
         </div>
     </div>
   );

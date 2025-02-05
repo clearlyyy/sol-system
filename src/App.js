@@ -23,8 +23,8 @@ import Sun from "./CelestialBodys/Sun.js";
 import UserControls from "./UserControls/UserControls.js";
 
 export var scalingFactor = 1.495239195637494e7;
-export var planetScaling = 1000;
-export var moonOrbitalPathScaling = 5;
+export var planetScaling = 500;
+export var moonOrbitalPathScaling = 7;
 
 
 function getDaysSinceJ2000(date) {
@@ -121,16 +121,10 @@ function App() {
         onCreated={state => state.gl.setClearColor("#2e3440")} // This will set the background to black
         gl={{logarithmicDepthBuffer: true}}
       >
+        
 
         {/* Post-Processing Effects */}
-        <EffectComposer multisampling={0}>
-          <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-          
-          
-          <Vignette eskil={false} offset={0.1} darkness={0.5} />
-          
-          
-        </EffectComposer>
+        
 
         {/* Lighting */}
         <ambientLight intensity={0.1} />
@@ -158,39 +152,7 @@ function App() {
         <UserControls />
       </Canvas>
       </div>
-      <div>
-        <label>Planet Scaling: {planetScalingState}</label>
-        <br></br>
-        <input
-          type="range"
-          min="1"
-          max="5000"
-          step="50"
-          value={planetScalingState}
-          onChange={handlePlanetScalingChange}
-        />
-        <br></br>
-        <label>Moon Semi-Major Axis Scaling: {moonOrbitalPathScaling}</label>
-        <br></br>
-        <input
-          type="range"
-          min="0"
-          max="40"
-          step="1"
-          value={moonOrbitalPathScaling}
-          onChange={handleMoonOrbitalPathScalingChange}
-        />
-      </div>
-      <label>Time Speed: {timeMultiplier}x</label> <br/>
-        <input
-          type="range"
-          min="1"
-          max="500000"
-          step="0.1"
-          value={timeMultiplier}
-          onChange={(e) => setTimeMultiplier(parseFloat(e.target.value))}
-        /> <br/>
-        <label>Current Date: {currentDate.toLocaleString()}</label>
+      
 
 
         <Controls
