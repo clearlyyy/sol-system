@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Html } from "@react-three/drei"
 import { timeMultipliers } from './timeMultipliers';
+import DropList from "./DropList"
+import { DynamicTable } from './DynamicTable';
 
 import "../styles/planetaryinfo.css"
 
-function PlanetaryInfo() {
+function PlanetaryInfo({tableData}) {
+  
 
   return (
     <div className='planetaryinfo-container'>
@@ -19,6 +22,9 @@ function PlanetaryInfo() {
                 supports life. Its diverse ecosystems, rich atmosphere, and liquid water make 
                 it unique in the universe.
             </p>
+            <DropList>
+              <DynamicTable data={tableData}/>
+            </DropList>
             
         </div>
         

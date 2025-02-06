@@ -73,6 +73,8 @@ function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [daysSinceJ2000, setDaysSinceJ2000] = useState(getDaysSinceJ2000(currentDate));
   const [timeMultiplier, setTimeMultiplier] = useState(1);
+  //Table Data for PlanetaryInfo 
+  const [tableData, setTableData] = useState([]);
 
   
 
@@ -108,8 +110,8 @@ function App() {
 
       {/* Navbar */}
       <Navbar/>
-
-      <PlanetaryInfo/>
+      <PlanetaryInfo tableData={tableData}/>
+      
       
 
       <div style={{ 
@@ -152,7 +154,8 @@ function App() {
         <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
 
         {/* Camera Controls */}
-        <UserControls />
+        <UserControls setTableData={setTableData}/>
+        
       </Canvas>
       </div>
       

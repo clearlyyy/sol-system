@@ -33,7 +33,7 @@ function Earth({daysSinceJ2000, ...props}) {
       A={149.598 * 1e6}
       EC={0.01704}
       i={	0.000266881}
-      omega={297.7671795	}
+      omega={297.7671795}
       Omega={163.9748712}
       meanMotion={.98561}
       j2000MeanAnomaly={358.19}

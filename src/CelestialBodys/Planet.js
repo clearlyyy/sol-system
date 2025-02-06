@@ -215,7 +215,8 @@ function Planet({
           meanMotion,
           j2000MeanAnomaly,
           targetId,
-          hasClouds
+          hasClouds,
+          trueAnomaly,
         };
       }
     }, [size, name]);

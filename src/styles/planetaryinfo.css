@@ -42,4 +42,50 @@
     flex-grow: 1;
     color: #8d9fc4;
     margin: 0px;
+    margin-bottom: 10px;
+}
+
+.droplist-container {
+    color: #8d9fc4;
+}
+
+.droplist-container h4 {
+    margin-right: 20px;
+    margin: 0px;
+}
+
+.droplist-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to left, #2e3440, #414857);
+}
+
+.droplist-title:hover {
+    cursor: pointer;
+    color: #93b54a;
+}
+
+.dropdown-button {
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+.dropdown-button:hover {
+    margin-right: 20px;
+    color: #93b54a;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.droplist-title h4 {
+    padding-left: 10px;
+}
+
+
+.dropdown-button.fa-chevron-down {
+    transform: rotate(0deg); /* Downward arrow */
+}
+
+.dropdown-button.fa-chevron-right {
+    transform: rotate(0deg); /* Rightward arrow */
 }

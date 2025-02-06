@@ -9,7 +9,7 @@ const easeInOut = (t) => {
   return 0.5 * (1 - Math.cos(Math.PI * t)); // This will ease in and out smoothly
 };
 
-const UserControls = () => {
+const UserControls = ({setTableData}) => {
   const { camera, scene, mouse } = useThree();
   const [targetPosition, setTargetPosition] = useState(null);
   const [planetPosition, setPlanetPosition] = useState(null);
@@ -52,6 +52,19 @@ const UserControls = () => {
       setPlanetPosition(worldPos); // Store the planet position for orbitControls
       setIsAnimating(true); // Start the animation
       setAnimationTime(0); // Reset animation time to 0
+
+      //Update Table data for orbital information in PlanetaryInfo.js
+      setTableData([
+        { label: "Semi Major Axis", value: customData.A.toLocaleString() + " km" },
+        { label: "Eccentricity", value: customData.EC.toFixed(8) },
+        { label: "Inclination", value: customData.i.toFixed(3) +  "°"},
+        { label: "Periapsis", value: customData.omega.toFixed(2) + " km"},
+        { label: "Ascending Node", value: customData.Omega.toFixed(3) + "°"},
+        { label: "Mean Motion", value: customData.meanMotion.toFixed(6) + " deg/day" },
+        { label: "Mean Anomaly", value: customData.j2000MeanAnomaly.toFixed(3) + "°" },
+        { label: "True Anomaly", value: customData.trueAnomaly.toFixed(4) + "°" }
+      ]);
+      
 
       // Temporarily disable orbit controls while animating
       if (orbitControlsRef.current) {
