@@ -9,6 +9,7 @@ import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
 import { scalingFactor, planetScaling, moonOrbitalPathScaling } from "../App"
 import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
+import OrbitalLine from "./OrbitalLine";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 
@@ -83,9 +84,8 @@ function Moon({
     daysSinceJ2000
 }) {
 
-
-    const [updatedPoints, setUpdatedPoints] = useState(points);
-    const [updatedOrbitalPath, setUpdatedOrbitalPath] = useState(points);
+    const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
+    const [points, setPoints] = useState(generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega)); // Generate points based on Keplerian data);
     const geometryRef = useRef();
 
     var scaledSize = size / scalingFactor;
@@ -115,9 +115,9 @@ function Moon({
     }
 
     //Init trueAnomaly with its starting value at the current date.
-    var trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
+    
     useEffect(() => {
-          trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
+         setTrueAnomaly(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     }, [daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC])
 
     //console.log(A / scalingFactor, EC, i, omega, Omega);
@@ -140,22 +140,27 @@ function Moon({
             planetRef.current.userData = {
               name,
               size,
-              type: "Moon",
+              tilt,
+              A,
+              EC,
+              i,
+              omega,
+              Omega,
+              meanMotion,
+              j2000MeanAnomaly,
+              targetId,
+              trueAnomaly,
             };
           }
     }, [size, name]);
 
-    var orbitalPath = generateOrbitalPath(((A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, i, omega, Omega);;
-
-    useEffect(() => {
-       orbitalPath = generateOrbitalPath(((A * planetScaling) / moonOrbitalPathScaling) / scalingFactor, EC, i, omega, Omega);
-    }, [planetScaling])
+    
 
 
     let currentPointIndex = 0;
     let timeElapsed = 0;
     const planetOrbitSpeed = 5;  // Slow down to smooth out movement
-    const pathLength = orbitalPath.length;
+    const pathLength = points.length;
       
     const calculatePositionFromTrueAnomaly = (A, EC, theta, i, omega, Omega) => {
       // Convert angles from degrees to radians
@@ -199,34 +204,12 @@ function Moon({
       }
     }, [moonOrbitalPathScaling, planetScaling, trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
 
-    var atmosphereMaterial = generateAtmosphereMaterial();
-    useEffect(() => {
-          // Access the material and update the uniform value
-          if (atmosphereRef.current) {
-              const material = atmosphereRef.current.material;
-              material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
-              material.uniforms.coeficient.value	= 0.8;
-              material.uniforms.power.value		= 2.0;
-              material.emmisive = "blue"
-              material.emmisiveIntensity = 44.0;
-              
-          }
-          if (atmosphereRef2.current) {
-            const material = atmosphereRef.current.material;
-            material.side = THREE.BackSide;
-            material.uniforms.glowColor.value.set(atmosphereColor); // Set the glow color to a blue shade
-            material.uniforms.coeficient.value	= 0.5;
-            material.uniforms.power.value	= 4.0;
-            material.emmisive = "blue";
-            material.emmisiveIntensity = 44.0;  
-        }
-        }, [planetScaling, moonOrbitalPathScaling]); 
+    
+    
 
-    var points = generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
       
     useEffect(() => { //Update orbital path for the moon.
-      points = generateOrbitalPath(((A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega);
-
+      setPoints(generateOrbitalPath(((A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega));
       if (geometryRef.current) {
         const positions = new Float32Array(points.flatMap(p => [p.x, p.y, p.z]));
         geometryRef.current.attributes.position.array = positions;
@@ -238,17 +221,7 @@ function Moon({
     return (
         <group>
           {/* Orbit Path */}
-          <lineLoop raycast={() => {}} ref={orbitRef}>
-            <bufferGeometry ref={geometryRef}>
-                <bufferAttribute 
-                    attach="attributes-position" 
-                    array={new Float32Array(points.flatMap(p => [p.x, p.y, p.z]))} 
-                    count={points.length} 
-                    itemSize={3} 
-                />
-            </bufferGeometry>
-            <lineBasicMaterial color={color} />
-        </lineLoop>
+          <OrbitalLine points={points} color={color}/>
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} position={[0, 0, 0]}>

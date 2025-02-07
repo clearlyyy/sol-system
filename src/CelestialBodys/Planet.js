@@ -93,13 +93,19 @@ function Planet({
     Omega,
     meanMotion,
     j2000MeanAnomaly,
+    j2000TrueAnomaly,
     targetId,
     children,
     hasClouds,
     daysSinceJ2000,
 }) {
 
-    var scaledSize = size / scalingFactor;
+
+    const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
+    const [points, setPoints] = useState(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega));
+    const [fresnelMat, setFresnelMat] = useState(getFresnelMat(atmosphereColor));
+    const [scaledSize, setScaledSize] = useState(size / scalingFactor);
+
 
     function calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, eccentricity) {
       //First find the Mean Anomaly of the planet.
@@ -124,12 +130,8 @@ function Planet({
       return nu * (180 / Math.PI);
     }
 
-    //Init trueAnomaly with its starting value at the current date.
-    var trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
-
-
     useEffect(() => {
-      trueAnomaly = calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC);
+      setTrueAnomaly(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     }, [daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC])
 
     const planetRef = useRef();
@@ -151,11 +153,7 @@ function Planet({
     }, [tilt]);
 
 
-    const orbitalPath = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega, 10000);
-    let currentPointIndex = 0;
-    let timeElapsed = 0;
-    const planetOrbitSpeed = 5;  // Slow down to smooth out movement
-    const pathLength = orbitalPath.length;
+  
       
     const calculatePositionFromTrueAnomaly = (A, EC, theta, i, omega, Omega) => {
       // Convert angles from degrees to radians
@@ -199,7 +197,10 @@ function Planet({
       }
     }, [planetScaling, trueAnomaly, A, EC, i, omega, Omega]); 
 
-    const points = generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega); // Generate points based on Keplerian data
+    
+    useEffect(() => {
+        setPoints(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega)); // Generate points based on Keplerian data
+    },[]) 
 
     useEffect(() => {
       if (planetRef.current) {
@@ -220,8 +221,6 @@ function Planet({
         };
       }
     }, [size, name]);
-
-    const fresnelMat = getFresnelMat(atmosphereColor);
 
     
     return (

@@ -39,22 +39,25 @@ const UserControls = ({setTableData}) => {
       const worldPos = new THREE.Vector3();
       var customData;
       try {
-        customData = object.children[1].parent.userData || {};
+        if (object.name === "Sun") { customData = object.userData || {}; }
+        else {  customData = object.children[1].parent.userData || {}; }
       } catch {
-        customData  = object.userData || {};
+        customData = object.userData || {};
       }
       console.log("Clicked object Mesh", object);
       console.log("Clicked object data:", customData);
       setPlanetSize(customData.size);
-      console.log("Clicked Object Size: ", customData.size)
+      console.log("Clicked Object Size: ", customData.size);
       object.getWorldPosition(worldPos); // Get world position of the clicked object
+      console.log("Clicked object worldPos:", worldPos);
       setTargetPosition(worldPos); // Set target position to the object’s world position
       setPlanetPosition(worldPos); // Store the planet position for orbitControls
       setIsAnimating(true); // Start the animation
       setAnimationTime(0); // Reset animation time to 0
 
+
       //Update Table data for orbital information in PlanetaryInfo.js
-      setTableData([
+      object.name != "Sun" && setTableData([
         { label: "Semi Major Axis", value: customData.A.toLocaleString() + " km" },
         { label: "Eccentricity", value: customData.EC.toFixed(8) },
         { label: "Inclination", value: customData.i.toFixed(3) +  "°"},

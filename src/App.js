@@ -24,8 +24,8 @@ import Sun from "./CelestialBodys/Sun.js";
 import UserControls from "./UserControls/UserControls.js";
 
 export var scalingFactor = 1.495239195637494e7;
-export var planetScaling = 500;
-export var moonOrbitalPathScaling = 7;
+export var planetScaling = 5;
+export var moonOrbitalPathScaling = 1;
 
 
 function getDaysSinceJ2000(date) {
@@ -71,7 +71,7 @@ function App() {
   const [planetScalingState, setPlanetScalingState] = useState(planetScaling);
   const [moonOrbitalPathScalingState, setMoonOrbitalPathScalingState] = useState(moonOrbitalPathScaling);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [daysSinceJ2000, setDaysSinceJ2000] = useState(getDaysSinceJ2000(currentDate));
+  const daysSinceJ2000 = useRef(getDaysSinceJ2000(currentDate));
   const [timeMultiplier, setTimeMultiplier] = useState(1);
   //Table Data for PlanetaryInfo 
   const [tableData, setTableData] = useState([]);
@@ -83,7 +83,7 @@ function App() {
     const interval = setInterval(() => {
       setCurrentDate((prevDate) => {
         const newDate = new Date(prevDate.getTime() + 10 * timeMultiplier);
-        setDaysSinceJ2000(getDaysSinceJ2000(newDate));
+        daysSinceJ2000.current = getDaysSinceJ2000(newDate);
         return newDate;
       })
     }, 10);
@@ -123,8 +123,8 @@ function App() {
           zIndex: -1 }}>
       <Canvas
         camera={{ position: [0, 50, 100], fov: 90, near: 0.0001, far: 100000 }}
-        onCreated={state => state.gl.setClearColor("#2e3440")} // This will set the background to black
-        gl={{logarithmicDepthBuffer: true}}
+        onCreated={state => state.gl.setClearColor("#2e3440")} 
+        gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
       >
         
 
@@ -140,27 +140,25 @@ function App() {
         <Stars radius={300} />
 
         
-        <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" />
+        <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />
 
         {/* Planets */}
-        <Mercury delay={50} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Venus delay={55} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Earth delay={60} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Mars delay={70} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Jupiter delay={80} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Saturn delay={90} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Uranus delay={100} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Neptune delay={110} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
-        <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000}/>
+        <Mercury delay={50} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Venus delay={55} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Earth delay={60} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Mars delay={70} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Jupiter delay={80} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Saturn delay={90} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Uranus delay={100} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Neptune delay={110} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
 
         {/* Camera Controls */}
         <UserControls setTableData={setTableData}/>
         
       </Canvas>
       </div>
-      
-
-
+    
         <Controls
          currentDate={currentDate} 
          timeMultiplier={timeMultiplier}

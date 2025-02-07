@@ -26,6 +26,7 @@ const OrbitalLine = ({ points, color }) => {
             lineRef.current.geometry = geometry;
             lineRef.current.material = material;
         }
+        
     }, [points, color]);
 
     return <line2 ref={lineRef} raycast={() => {}} />;

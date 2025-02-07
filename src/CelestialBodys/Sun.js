@@ -1,10 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useThree } from "@react-three/fiber";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
-function Sun() {
+import { scalingFactor, planetScaling } from "../App"
+
+function Sun({size}) {
   const lightRef = useRef();
   const meshRef = useRef();
   const sunRef = useRef();
+
+  const [scaledSize, setScaledSize] = useState(size * planetScaling / scalingFactor);
+  
+  useEffect(() => {
+    setScaledSize(size * planetScaling / scalingFactor);
+    meshRef.current.userData = {
+      size
+    }
+  },[size])
 
   return (
     <group ref={sunRef}>
@@ -20,16 +31,16 @@ function Sun() {
       />
 
       {/* Sun's glowing sphere */}
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[1, 32, 32]} />
+      <mesh ref={meshRef} position={[0, 0, 0]} name="Sun">
+        <sphereGeometry args={[scaledSize, 32, 32]} />
         <meshStandardMaterial
           color="yellow"
           emissive="yellow"
           emissiveIntensity={2.0} // Increased emissive intensity
         />
       </mesh>
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[1.5, 32, 32]} />
+      <mesh ref={meshRef} position={[0, 0, 0]} name="Sun">
+        <sphereGeometry args={[scaledSize * 1.5, 32, 32]} />
         <meshStandardMaterial
           color="yellow"
           emissive="yellow"
