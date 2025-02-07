@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useThree } from "@react-three/fiber";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
-import { scalingFactor, planetScaling } from "../App"
+import { scalingFactor, planetScaling, sunScaling } from "../App"
 
 function Sun({size}) {
   const lightRef = useRef();
   const meshRef = useRef();
   const sunRef = useRef();
 
-  const [scaledSize, setScaledSize] = useState(size * planetScaling / scalingFactor);
+  const [scaledSize, setScaledSize] = useState(size * (planetScaling / sunScaling) / scalingFactor);
   
   useEffect(() => {
-    setScaledSize(size * planetScaling / scalingFactor);
+    setScaledSize(size * (planetScaling / sunScaling) / scalingFactor);
     meshRef.current.userData = {
       size
     }

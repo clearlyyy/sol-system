@@ -24,8 +24,9 @@ import Sun from "./CelestialBodys/Sun.js";
 import UserControls from "./UserControls/UserControls.js";
 
 export var scalingFactor = 1.495239195637494e7;
-export var planetScaling = 5;
-export var moonOrbitalPathScaling = 1;
+export var planetScaling = 500;
+export var sunScaling = 20; // Sun gets a bit too big when planetScaling goes up, which engulfs close planets.
+export var moonOrbitalPathScaling = 7;
 
 
 function getDaysSinceJ2000(date) {

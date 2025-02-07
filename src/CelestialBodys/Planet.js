@@ -24,7 +24,7 @@ const degToRad = (deg) => deg * (Math.PI / 180);
 
 
 // Function to generate orbital path based on Keplerian elements
-const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 1000) => {
+const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
   const points = [];
   
   // Convert the angles from degrees to radians
@@ -68,6 +68,7 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 1000) => {
     
     points.push(new THREE.Vector3(xFinal, yFinal, zFinal)); // 3D coordinates
   }
+  points.push(points[0]); // close the loop.
 
   return points;
 };
@@ -232,7 +233,7 @@ function Planet({
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
-            <sphereGeometry args={[scaledSize * planetScaling, 32, 32]} scale={scaledSize * planetScaling} />
+            <sphereGeometry args={[scaledSize * planetScaling, 16, 16]} scale={scaledSize * planetScaling} />
 
             <meshStandardMaterial map={texture}/>
 
@@ -240,7 +241,7 @@ function Planet({
 
             {/* Atmospheric Glow Effect */}
             <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={fresnelMat}>
-              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 32, 32]}/>
+              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 16, 16]}/>
             </mesh>
             {/* 
             <mesh ref={atmosphereRef2} position={[0, 0, 0]} raycast={() => {}} material={atmosphereMaterial}>

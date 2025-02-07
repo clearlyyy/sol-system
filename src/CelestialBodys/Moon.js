@@ -57,7 +57,9 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
     const zFinal = -y3; // Negate the original y to complete the rotation
     
     points.push(new THREE.Vector3(xFinal, yFinal, zFinal)); // 3D coordinates
+
   }
+  points.push(points[0]); // close the loop.
 
   return points;
 };
@@ -225,7 +227,7 @@ function Moon({
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} position={[0, 0, 0]}>
-            <sphereGeometry args={[scaledSize * planetScaling, 32, 32]} />
+            <sphereGeometry args={[scaledSize * planetScaling, 16, 16]} />
             <meshPhongMaterial map={texture} />
 
             {/* Atmospheric Glow Effect */}
