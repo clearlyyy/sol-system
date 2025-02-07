@@ -37,6 +37,8 @@ function Pluto({daysSinceJ2000, ...props}) {
       targetId="999"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Dwarf Planet"}
+      description={"Pluto is a small, icy body located in the Kuiper Belt beyond Neptune. Once considered the ninth planet, it is now classified as a dwarf planet. Pluto has a highly elliptical orbit and is known for its reddish-brown surface, frozen methane, and a complex system of five moons."}
     />
     
   ) : null;

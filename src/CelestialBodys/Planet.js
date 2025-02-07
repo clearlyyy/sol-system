@@ -99,6 +99,8 @@ function Planet({
     children,
     hasClouds,
     daysSinceJ2000,
+    type,
+    description
 }) {
 
 
@@ -219,6 +221,8 @@ function Planet({
           targetId,
           hasClouds,
           trueAnomaly,
+          type,
+          description
         };
       }
     }, [size, name]);
@@ -233,7 +237,7 @@ function Planet({
 
           {/* Planet and atmosphere */}
           <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
-            <sphereGeometry args={[scaledSize * planetScaling, 16, 16]} scale={scaledSize * planetScaling} />
+            <sphereGeometry args={[scaledSize * planetScaling, 32, 32]} scale={scaledSize * planetScaling} />
 
             <meshStandardMaterial map={texture}/>
 
@@ -241,7 +245,7 @@ function Planet({
 
             {/* Atmospheric Glow Effect */}
             <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={fresnelMat}>
-              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 16, 16]}/>
+              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 32, 32]}/>
             </mesh>
             {/* 
             <mesh ref={atmosphereRef2} position={[0, 0, 0]} raycast={() => {}} material={atmosphereMaterial}>

@@ -40,6 +40,8 @@ function Earth({daysSinceJ2000, ...props}) {
       targetId="399"
       hasClouds={true}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Terrestrial"}
+      description={"Earth is the third planet from the Sun and the only known celestial body that supports life. Its diverse ecosystems, rich atmosphere, and liquid water make it unique in the universe."}
     >
       <Luna position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000} />
       </Planet>

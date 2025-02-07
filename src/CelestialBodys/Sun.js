@@ -18,7 +18,7 @@ function Sun({size}) {
   },[size])
 
   return (
-    <group ref={sunRef}>
+    <group ref={sunRef} raycast={()=>{}}>
       {/* Point Light - Sun's light source */}
       <pointLight
         ref={lightRef}

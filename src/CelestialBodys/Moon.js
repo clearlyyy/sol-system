@@ -83,7 +83,9 @@ function Moon({
     meanMotion,
     j2000MeanAnomaly,
     targetId,
-    daysSinceJ2000
+    daysSinceJ2000,
+    type,
+    description
 }) {
 
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
@@ -152,6 +154,8 @@ function Moon({
               j2000MeanAnomaly,
               targetId,
               trueAnomaly,
+              type,
+              description
             };
           }
     }, [size, name]);
@@ -221,12 +225,13 @@ function Moon({
 
 
     return (
+      <>
         <group>
           {/* Orbit Path */}
           <OrbitalLine points={points} color={color}/>
 
           {/* Planet and atmosphere */}
-          <mesh ref={planetRef} position={[0, 0, 0]}>
+          <mesh ref={planetRef} name={name} position={[0, 0, 0]}>
             <sphereGeometry args={[scaledSize * planetScaling, 16, 16]} />
             <meshPhongMaterial map={texture} />
 
@@ -235,6 +240,7 @@ function Moon({
             
           </mesh>
         </group>
+        </>
     );
 }
 

@@ -9,13 +9,15 @@ const easeInOut = (t) => {
   return 0.5 * (1 - Math.cos(Math.PI * t)); // This will ease in and out smoothly
 };
 
-const UserControls = ({setTableData}) => {
+const UserControls = ({setTableData, setIsPlanetaryInfoVisible, canvasRef, followBody, setFollowBody, selectedBody, setSelectedBody}) => {
   const { camera, scene, mouse } = useThree();
   const [targetPosition, setTargetPosition] = useState(null);
   const [planetPosition, setPlanetPosition] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [animationTime, setAnimationTime] = useState(0); // To track animation progress
   const [currentPlanetSize, setPlanetSize] = useState(null);
+  
+  const [currentClickType, setCurrentClickType] = useState(null);
 
   // Adjust this value to control the speed
   const animationSpeed = 0.0005 // Control the animation speed (higher = faster)
@@ -25,10 +27,52 @@ const UserControls = ({setTableData}) => {
   // Create a ref for OrbitControls
   const orbitControlsRef = useRef();
 
+
+  let mouseDownTime = 0;
+  let mouseDownPosition = { x: 0, y: 0 };
+
+
+  const checkClickType = (event) => {
+    const clickThreshold = 200; // Time threshold for checking click types.
+    const dragThreshold = 5; // Movemennt threshold to detect dragging in px
+    const doubleClickThreshold = 200; // Time window for double click detection in ms
+
+    if (event.type === "mousedown") {
+      mouseDownTime = Date.now();
+      mouseDownPosition = { x: event.clientX, y: event.clientY };
+      
+    }
+
+    if (event.type === "mouseup") {
+      const timeDiff = Date.now() - mouseDownTime;
+      const movementX = Math.abs(event.clientX - mouseDownPosition.x);
+      const movementY = Math.abs(event.clientY - mouseDownPosition.y);
+
+      // Determine click type based on time and movement
+      if (timeDiff <= clickThreshold && movementX <= dragThreshold && movementY <= dragThreshold) {
+        setCurrentClickType("Click");
+        selectBody(event);
+      } else if (movementX > dragThreshold || movementY > dragThreshold) {
+        setCurrentClickType("Drag");
+      } else {
+        setCurrentClickType("Hold");
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log(currentClickType); // Log the updated click type
+  }, [currentClickType]);
+  
+
   // Function to handle mouse down event
-  const onMouseDown = () => {
+  const selectBody = (event) => {
+
+    console.log("Moving to Planet")
+
     // Update raycaster with mouse position and camera
     raycaster.setFromCamera(mouse, camera);
+    
 
     // Get intersected objects
     const intersects = raycaster.intersectObjects(scene.children, true);
@@ -45,6 +89,7 @@ const UserControls = ({setTableData}) => {
         customData = object.userData || {};
       }
       console.log("Clicked object Mesh", object);
+      console.log("Clicked Object Name", object.name);
       console.log("Clicked object data:", customData);
       setPlanetSize(customData.size);
       console.log("Clicked Object Size: ", customData.size);
@@ -54,6 +99,9 @@ const UserControls = ({setTableData}) => {
       setPlanetPosition(worldPos); // Store the planet position for orbitControls
       setIsAnimating(true); // Start the animation
       setAnimationTime(0); // Reset animation time to 0
+      setFollowBody(false);
+      setSelectedBody(object);
+      setIsPlanetaryInfoVisible(true);
 
 
       //Update Table data for orbital information in PlanetaryInfo.js
@@ -67,23 +115,20 @@ const UserControls = ({setTableData}) => {
         { label: "Mean Anomaly", value: customData.j2000MeanAnomaly.toFixed(3) + "°" },
         { label: "True Anomaly", value: customData.trueAnomaly.toFixed(4) + "°" }
       ]);
-      
 
       // Temporarily disable orbit controls while animating
       if (orbitControlsRef.current) {
         orbitControlsRef.current.enabled = false;
       }
-    }
+    } 
+      
   };
 
   // Add event listener for mouse down
   useEffect(() => {
-    window.addEventListener("mousedown", onMouseDown);
-
-    // Cleanup the event listener on unmount
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-    };
+    window.addEventListener("mousedown", checkClickType);
+    window.addEventListener("mouseup", checkClickType);
+    
   }, [mouse]);
 
   useFrame((state, delta) => {
@@ -123,6 +168,7 @@ const UserControls = ({setTableData}) => {
         // Stop animation when the camera is close enough to the target
         if (camera.position.distanceTo(cameraTargetPosition) < 0.05) {
             setIsAnimating(false); // Stop the animation when complete
+            setFollowBody(true);
 
             // Re-enable orbit controls after animation
             if (orbitControlsRef.current) {
@@ -140,56 +186,27 @@ const UserControls = ({setTableData}) => {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Update orbit controls if they are enabled
     if (orbitControlsRef.current && orbitControlsRef.current.enabled) {
       orbitControlsRef.current.update(); // Manually update the controls while enabled
     }
   });
+
+
+  //Handle Selected Body and Follow it.
+  useFrame(() => {
+    if (selectedBody != null && followBody) {
+      const worldPos = new THREE.Vector3();
+      const offset = new THREE.Vector3(0, 0, ((currentPlanetSize / scalingFactor) * planetScaling) * 4);
+      const cameraPos = worldPos.clone().add(offset);
+      selectedBody.getWorldPosition(worldPos);
+      if (orbitControlsRef.current) {
+        orbitControlsRef.current.target.set(worldPos.x, worldPos.y, worldPos.z);
+        //orbitControlsRef.current.object.position.copy(cameraPos);
+        orbitControlsRef.current.update();
+      }
+    }
+  })
 
   return (
     <>

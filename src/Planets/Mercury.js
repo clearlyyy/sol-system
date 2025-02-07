@@ -37,6 +37,8 @@ function Mercury({daysSinceJ2000, ...props}) {
       targetId="199"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Terrestrial"}
+      description={"Mercury is the closest planet to the Sun and has extreme temperature variations, with scorching heat during the day and freezing cold at night. It has a thin atmosphere, making it unable to retain heat. Its surface is heavily cratered, resembling the Moon's."}
     />
     
   ) : null;

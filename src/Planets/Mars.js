@@ -39,6 +39,8 @@ function Mars({daysSinceJ2000, ...props}) {
       targetId="499"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Terrestrial"}
+      description={"Mars is the fourth planet from the Sun, known for its red color due to iron oxide on its surface. It has a thin atmosphere and features such as valleys, deserts, and the largest volcano in the solar system, Olympus Mons. It's a prime candidate for potential human exploration."}
     >
       <Phobos daysSinceJ2000={daysSinceJ2000}/>
       <Deimos daysSinceJ2000={daysSinceJ2000}/>

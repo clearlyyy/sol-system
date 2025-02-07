@@ -41,6 +41,8 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       targetId="599"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Gas Giant"}
+      description={"Jupiter is the fifth planet from the Sun and the largest in our solar system. Known for its massive size, powerful storms, and striking Great Red Spot, Jupiter is a gas giant with a predominantly hydrogen and helium composition. It has a strong magnetic field, numerous moons, and a ring system, making it a fascinating and dynamic planet in the outer solar system."}
     >
       <Io position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
       <Europa position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>

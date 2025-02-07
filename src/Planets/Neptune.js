@@ -36,6 +36,8 @@ function Neptune({daysSinceJ2000, ...props}) {
       targetId="899"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Ice Giant"}
+      description={"Neptune is the eighth planet from the Sun, famous for its deep blue color, caused by methane in its atmosphere. It is an ice giant with strong winds, the fastest in the solar system, and has a stormy climate. Neptune is known for its dark, cold environment and a system of moons and rings."}
     />
     
   ) : null;

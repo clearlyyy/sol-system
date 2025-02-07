@@ -37,6 +37,8 @@ function Uranus({daysSinceJ2000, ...props}) {
       targetId="799"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Ice Giant"}
+      description={"Uranus is the seventh planet from the Sun, known for its blue-green color due to methane in its atmosphere. It has a unique tilt, rotating on its side compared to other planets. Uranus is an ice giant with a cold, distant atmosphere of hydrogen, helium, and icy compounds."}
     />
     
   ) : null;

@@ -37,6 +37,8 @@ function Venus({daysSinceJ2000, ...props}) {
       targetId="299"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Terrestrial"}
+      description={"Venus is the second planet from the Sun, often called Earth's 'sister planet' due to its similar size and composition. However, its thick atmosphere, composed mainly of carbon dioxide, creates an extreme greenhouse effect, making it the hottest planet in the solar system. Its surface is hidden by dense clouds of sulfuric acid."}
     />
     
   ) : null;

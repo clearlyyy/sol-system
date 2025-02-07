@@ -6,7 +6,7 @@ body {
 .controls-container {
     
     position: absolute;
-    bottom: 20px;
+    bottom: -10px;
     align-self: center;
     justify-self: center;
     transform: translateX(-50%);
@@ -63,4 +63,60 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: elipsis;
+}
+
+.following-body-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.following-body-container.visible:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.following-body-container {
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    color: #a7a9ad;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+    background-color: #2e3440;
+    height: 30px;
+    align-self: center;
+    justify-self: center;
+    animation: pulse 2s infinite;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.follow-body-circle {
+    color: #93b54a;
+    margin-right: 8px;
+}
+
+.follow-body-text {
+   padding: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #2e3440;
+    }
+    50% {
+        background-color: #414a5c;
+    }
+    100% {
+        background-color: #2e3440;
+    }
+
 }

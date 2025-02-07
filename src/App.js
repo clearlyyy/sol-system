@@ -3,8 +3,9 @@ import * as THREE from 'three';
 import './App.css';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO, FXAA } from '@react-three/postprocessing';
-import { ToneMappingMode, Resizer, KernelSize } from 'postprocessing';
+import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO, FXAA, ChromaticAberration } from '@react-three/postprocessing';
+import { BlendFunction } from "postprocessing";
+import { ToneMappingMode, Resizer, KernelSize, Effect, Resolution } from 'postprocessing';
 import { Perf } from 'r3f-perf'
 
 import Navbar from "./UI/Navbar.js"
@@ -35,45 +36,22 @@ function getDaysSinceJ2000(date) {
   return diffInMs / (1000 * 60 * 60 * 24);
 }
 
-function CameraControls() {
-  const { camera } = useThree();
-  const sunRef = React.useRef();
-
-  // Update the camera's near and far planes dynamically based on camera position
-  useEffect(() => {
-    const adjustCameraPlanes = () => {
-      if (sunRef.current) {
-        const distanceToSun = camera.position.length(); // Distance from camera to Sun
-        const minDistance = Math.max(10, distanceToSun - 500); // Avoid too small near values
-        const maxDistance = distanceToSun + 5000; // Distance to most distant objects
-        
-        // Smoothly adjust the near and far planes to avoid depth issues
-        camera.near = minDistance;
-        camera.far = maxDistance;
-        
-        camera.updateProjectionMatrix(); // Update projection matrix with new near/far values
-      }
-    };
-
-    adjustCameraPlanes();
-    // Run adjustCameraPlanes whenever the camera position changes
-    return () => adjustCameraPlanes();
-  }, [camera.position]);
-
-  return <Sun ref={sunRef} emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" />;
-}
-
-
-
 function App() {
   
   const sunRef = useRef();
+  const starsRef = useRef();
+  const canvasRef = useRef(null);
 
   const [planetScalingState, setPlanetScalingState] = useState(planetScaling);
   const [moonOrbitalPathScalingState, setMoonOrbitalPathScalingState] = useState(moonOrbitalPathScaling);
   const [currentDate, setCurrentDate] = useState(new Date());
   const daysSinceJ2000 = useRef(getDaysSinceJ2000(currentDate));
   const [timeMultiplier, setTimeMultiplier] = useState(1);
+  const [followBody, setFollowBody] = useState(false);
+  const [selectedBody, setSelectedBody] = useState(null);
+
+  const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
+
   //Table Data for PlanetaryInfo 
   const [tableData, setTableData] = useState([]);
 
@@ -89,7 +67,10 @@ function App() {
       })
     }, 10);
     return () => clearInterval(interval);
-  }, [timeMultiplier])
+  }, [timeMultiplier]);
+
+
+  
 
   const handleTimeMultiplier = (e) => {
     setTimeMultiplier(e);
@@ -111,7 +92,7 @@ function App() {
 
       {/* Navbar */}
       <Navbar/>
-      <PlanetaryInfo tableData={tableData}/>
+      <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} selectedObject={selectedBody}/>
       
       
 
@@ -122,7 +103,7 @@ function App() {
           width: "100vw", 
           height: "100vh", 
           zIndex: -1 }}>
-      <Canvas
+      <Canvas ref={canvasRef}
         camera={{ position: [0, 50, 100], fov: 90, near: 0.0001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} 
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
@@ -130,6 +111,12 @@ function App() {
         
 
         {/* Post-Processing Effects */}
+        <EffectComposer multisampling={0} enableNormalPass>
+          <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+          
+          <ChromaticAberration offset={[0.0001, 0.0001]} blendFunction={BlendFunction.NORMAL} />
+          
+        </EffectComposer>
         
 
         {/* Lighting */}
@@ -138,7 +125,7 @@ function App() {
         <Perf position='bottom-right' logsPerSecond={1}/>
 
         {/* Star Field */}
-        <Stars radius={300} />
+        <Stars ref={starsRef} layers={1} radius={800} raycast={null} ignorePointer />
 
         
         <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />
@@ -155,15 +142,26 @@ function App() {
         <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
 
         {/* Camera Controls */}
-        <UserControls setTableData={setTableData}/>
+        <UserControls 
+        followBody={followBody} 
+        setFollowBody={setFollowBody} 
+        setTableData={setTableData} 
+        setIsPlanetaryInfoVisible={setIsPlanetaryInfoVisible}
+        selectedBody={selectedBody}
+        setSelectedBody={setSelectedBody}/>
+
         
       </Canvas>
       </div>
     
         <Controls
+         setIsPlanetaryInfoVisible={setIsPlanetaryInfoVisible}
+         followingBody={followBody}
+         setFollowBody={setFollowBody}
          currentDate={currentDate} 
          timeMultiplier={timeMultiplier}
          onChangeTimeMultiplier={handleTimeMultiplier}
+         selectedBody={selectedBody}
          />
 
     </div>

@@ -37,6 +37,8 @@ function Saturn({daysSinceJ2000, ...props}) {
       targetId="699"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
+      type={"Gas Giant"}
+      description={"Saturn is the sixth planet from the Sun, famous for its stunning rings made of ice and rock. It is a gas giant with a thick atmosphere of hydrogen and helium, and it has over 80 moons, including Titan, the second-largest moon in the solar system."}
     />
     
   ) : null;

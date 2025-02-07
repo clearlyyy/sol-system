@@ -18,7 +18,7 @@ function Luna({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Moon
       {...props}
-      name="Luna"
+      name="Luna (The Moon)"
       textureUrl="/luna_texture.jpg"
       size={1737.4}
       color={"grey"}
@@ -36,6 +36,8 @@ function Luna({daysSinceJ2000, ...props}) {
       j2000MeanAnomaly={1.407402571142365E+02}
       targetId="301"
       daysSinceJ2000={daysSinceJ2000}
+      type={"Rocky Moon"}
+      description={"The Moon is Earth's only natural satellite, with a surface covered in craters. It is tidally locked to Earth, always showing the same face, and affects Earth's tides and climate stability."}
     />
   ) : null; // Don't render anything before the delay
 }

@@ -3,7 +3,7 @@ import { timeMultipliers } from "./timeMultipliers";
 import "../styles/timeslider.css"
 
 
-const DraggablePath = ({ setTimeMultiplier }) => {
+const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const circleRef = useRef(null);
@@ -71,9 +71,6 @@ const DraggablePath = ({ setTimeMultiplier }) => {
     });
   };
   
-  
-  
-
   const handleMouseMove = (event) => {
     if (!isDragging || !svgRef.current) return;
 
@@ -99,7 +96,6 @@ const DraggablePath = ({ setTimeMultiplier }) => {
     updateCirclePosition(progress);
   };
   
-
   return (
     <div className="time-slider">
     <svg

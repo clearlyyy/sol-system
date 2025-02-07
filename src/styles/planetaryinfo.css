@@ -4,6 +4,7 @@
     flex-direction: column;
     position: absolute;
     margin: 20px;
+    left: -500px;
     width: 25%;
     top: 50%;
     transform: translateY(-50%);
@@ -12,6 +13,11 @@
     border-radius: 30px;
     border: 2px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    transition: left 0.5s ease-in-out;
+}
+
+.planetaryinfo-container.visible {
+    left: 0px;
 }
 
 .title-container {
