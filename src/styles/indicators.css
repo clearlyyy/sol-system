@@ -1,0 +1,39 @@
+/* PlanetIndicator.css */
+
+:root {
+    --circle-border-color: white; /* Default Color */
+}
+
+.circle-container {
+    position: relative; /* Set relative position to position text */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Circle */
+    background-color: transparent; /* Hollow core */
+    border: 2px solid var(--circle-border-color); /* Outer border */
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease-in-out, opacity 0.5s ease;
+  }
+
+  .circle-container.dissolved {
+    opacity: 0;
+  }
+
+  .circle-container:hover {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  
+  .text-above {
+    position: absolute; /* Position text relative to the circle */
+    top: -50px; /* Move text above the circle */
+    transform: translateX(-50%); /* Offset by 50% to truly center the text */
+    font-size: 16px; /* Text size */
+    color: white; /* Text color */
+    text-align: center; /* Center the text horizontally */
+    transition: opacity 0.5s ease;
+  }
+
+  .text-above.dissolved {
+    opacity: 0;
+  }
+  

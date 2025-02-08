@@ -3,7 +3,7 @@ import Planet from "../CelestialBodys/Planet";
 import Deimos from "../Moons/Deimos"
 import Phobos from "../Moons/Phobos"
 
-function Mars({daysSinceJ2000, ...props}) {
+function Mars({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -20,6 +20,8 @@ function Mars({daysSinceJ2000, ...props}) {
     return loaded ? (
     <Planet
       {...props}
+      userControlsRef={userControlsRef}
+      distanceThreshold={55}
       name="Mars"
       textureUrl="/mars_texture.jpg"
       size={3396}

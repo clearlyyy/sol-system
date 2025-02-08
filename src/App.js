@@ -25,9 +25,9 @@ import Sun from "./CelestialBodys/Sun.js";
 import UserControls from "./UserControls/UserControls.js";
 
 export var scalingFactor = 1.495239195637494e7;
-export var planetScaling = 500;
+export var planetScaling = 1000;
 export var sunScaling = 20; // Sun gets a bit too big when planetScaling goes up, which engulfs close planets.
-export var moonOrbitalPathScaling = 7;
+export var moonOrbitalPathScaling = 5;
 
 
 function getDaysSinceJ2000(date) {
@@ -41,6 +41,7 @@ function App() {
   const sunRef = useRef();
   const starsRef = useRef();
   const canvasRef = useRef(null);
+  const userControlsRef = useRef();
 
   const [planetScalingState, setPlanetScalingState] = useState(planetScaling);
   const [moonOrbitalPathScalingState, setMoonOrbitalPathScalingState] = useState(moonOrbitalPathScaling);
@@ -55,8 +56,6 @@ function App() {
   //Table Data for PlanetaryInfo 
   const [tableData, setTableData] = useState([]);
 
-  
-
   //Update the date every second based on timeMultiplier.
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,9 +67,6 @@ function App() {
     }, 10);
     return () => clearInterval(interval);
   }, [timeMultiplier]);
-
-
-  
 
   const handleTimeMultiplier = (e) => {
     setTimeMultiplier(e);
@@ -131,18 +127,19 @@ function App() {
         <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />
 
         {/* Planets */}
-        <Mercury delay={50} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Venus delay={55} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Earth delay={60} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Mars delay={70} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Jupiter delay={80} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Saturn delay={90} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Uranus delay={100} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Neptune delay={110} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
-        <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current}/>
+        <Mercury delay={50} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Venus delay={55} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Earth delay={60} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Mars delay={70} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Jupiter delay={80} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Saturn delay={90} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Uranus delay={100} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Neptune delay={110} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
+        <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
 
         {/* Camera Controls */}
-        <UserControls 
+        <UserControls
+        ref={userControlsRef} 
         followBody={followBody} 
         setFollowBody={setFollowBody} 
         setTableData={setTableData} 

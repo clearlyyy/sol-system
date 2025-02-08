@@ -3,7 +3,7 @@ import Planet from "../CelestialBodys/Planet";
 import Luna from "../Moons/Luna";
 import { CSS3DObject } from '@react-three/drei';
 
-function Earth({daysSinceJ2000, ...props}) {
+function Earth({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
   
@@ -21,6 +21,8 @@ function Earth({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Planet
       {...props}
+      userControlsRef={userControlsRef}
+      distanceThreshold={50}
       name="Earth"
       textureUrl="/earth_texture.jpg"
       size={6371}

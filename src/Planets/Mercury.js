@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../CelestialBodys/Planet";
 
-function Mercury({daysSinceJ2000, ...props}) {
+function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -18,6 +18,8 @@ function Mercury({daysSinceJ2000, ...props}) {
     return loaded ? (
     <Planet
       {...props}
+      userControlsRef={userControlsRef}
+      distanceThreshold={45}
       name="Mercury"
       textureUrl="/mercury_texture.jpg"
       size={2440}

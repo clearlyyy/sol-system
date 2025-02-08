@@ -36,7 +36,7 @@ export const timeMultipliers = {
     518400:    "6 DAYS/S",
     604800:    "1 WK/S",
     1814400:   "3 WKS/S",
-    2592000:   "1 MTH/S",
+    2630016:   "1 MTH/S",
     5184000:   "2 MTHS/S",
     10368000:  "4 MTHS/S",
     15552000:  "6 MTHS/S",
@@ -46,4 +46,7 @@ export const timeMultipliers = {
     630720000: "2 YRS/S",
     946080000: "3 YRS/S"
   };
+
+
+  //TODO MAKE THESE MULTIPLIERS ACCURATE.
   

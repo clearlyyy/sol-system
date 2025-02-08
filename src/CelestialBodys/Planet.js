@@ -17,6 +17,7 @@ import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/Atmos
 import { getFresnelMat } from "../Shaders/getFresnelMat";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
 import OrbitalLine from "./OrbitalLine";
+import PlanetIndicator from "./PlanetIndicator";
 
 
 const degToRad = (deg) => deg * (Math.PI / 180);
@@ -75,6 +76,8 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
 
 
 function Planet({
+    userControlsRef,
+    distanceThreshold,
     name,
     textureUrl,
     bumpMapUrl,
@@ -108,7 +111,6 @@ function Planet({
     const [points, setPoints] = useState(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega));
     const [fresnelMat, setFresnelMat] = useState(getFresnelMat(atmosphereColor));
     const [scaledSize, setScaledSize] = useState(size / scalingFactor);
-
 
     function calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, eccentricity) {
       //First find the Mean Anomaly of the planet.
@@ -261,6 +263,9 @@ function Planet({
               <meshBasicMaterial map={ring_texture} transparent={true} opacity={1} side={THREE.DoubleSide}/>
             </mesh> }
 
+            {/* Planetary Indicator Circle,\*/}
+            <PlanetIndicator distanceThreshold={distanceThreshold} userControlsRef={userControlsRef} name={name} color={color}/>
+            
           </mesh>
         </group>
         </>

@@ -24,6 +24,7 @@ function PlanetaryInfo({tableData, isVisible, selectedObject}) {
               <DynamicTable data={tableData}/>
             </DropList>
             
+            
         </div>
         
     </div>

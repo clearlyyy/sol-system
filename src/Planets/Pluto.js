@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Planet from "../CelestialBodys/Planet";
 
-function Pluto({daysSinceJ2000, ...props}) {
+function Pluto({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
   
@@ -18,6 +18,7 @@ function Pluto({daysSinceJ2000, ...props}) {
     return loaded ? (
     <Planet
       {...props}
+      userControlsRef={userControlsRef}
       name="Pluto"
       textureUrl="/pluto_texture.jpg"
       size={1188.5}

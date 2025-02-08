@@ -73,6 +73,7 @@ body {
 .following-body-container.visible:hover {
     opacity: 1;
     cursor: pointer;
+    animation: pulsehover 2s infinite;
 }
 
 .following-body-container {
@@ -117,6 +118,18 @@ body {
     }
     100% {
         background-color: #2e3440;
+    }
+}
+
+@keyframes pulsehover {
+    0% {
+        background-color: #402e2e;
+    }
+    50% {
+        background-color: #5c4141;
+    }
+    100% {
+        background-color: #402e2e;
     }
 
 }

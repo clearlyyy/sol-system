@@ -5,7 +5,7 @@ import Europa from "../Moons/Europa"
 import Ganymede from "../Moons/Ganymede"
 import Callisto from "../Moons/Callisto"
 
-function Jupiter({daysSinceJ2000, ...props}) {
+function Jupiter({daysSinceJ2000, userControlsRef, ...props}) {
 const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -22,6 +22,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
   return loaded ? (
     <Planet
       {...props}
+      userControlsRef={userControlsRef}
       name="Jupiter"
       textureUrl="/jupiter_texture.jpg"
       size={69911}
