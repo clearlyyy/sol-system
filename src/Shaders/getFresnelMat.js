@@ -4,7 +4,8 @@ function getFresnelMat(
     rimHex, 
     facingHex = 0x000000, 
     fresnelStart = 0.001,
-    fresnelEnd =  0.5    
+    fresnelEnd =  0.5,
+    planetScaling
 ) {
     const uniforms = {
         color1: { value: new THREE.Color(rimHex) },
@@ -13,8 +14,8 @@ function getFresnelMat(
         fresnelScale: { value: 7 },
         fresnelPower: { value: 2.1 },
         glowIntensity: { value: 0.1 },
-        fresnelStart: { value: fresnelStart },
-        fresnelEnd: { value: fresnelEnd }
+        fresnelStart: { value:  0.00001 },
+        fresnelEnd: { value:  0.0001 }
     };
 
     const vs = `

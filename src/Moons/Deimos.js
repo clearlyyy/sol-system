@@ -20,7 +20,7 @@ function Luna({daysSinceJ2000, ...props}) {
       {...props}
       name="Deimos"
       textureUrl="/deimos_texture.jpg"
-      size={0.083 * 24440}
+      size={6.2}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}

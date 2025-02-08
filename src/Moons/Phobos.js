@@ -20,7 +20,7 @@ function Luna({daysSinceJ2000, ...props}) {
       {...props}
       name="Deimos"
       textureUrl="/phobos_texture.jpg"
-      size={0.083 * 24440}
+      size={11}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}

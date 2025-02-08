@@ -109,7 +109,7 @@ function Planet({
 
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     const [points, setPoints] = useState(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega));
-    const [fresnelMat, setFresnelMat] = useState(getFresnelMat(atmosphereColor));
+    const [fresnelMat, setFresnelMat] = useState(getFresnelMat(atmosphereColor, 0x000000, 0.01, 0.5, planetScaling));
     const [scaledSize, setScaledSize] = useState(size / scalingFactor);
 
     function calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, eccentricity) {

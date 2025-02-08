@@ -4,7 +4,7 @@
     flex-direction: column;
     position: absolute;
     margin: 20px;
-    left: -500px;
+    left: -50vw;
     width: 25%;
     top: 50%;
     transform: translateY(-50%);
@@ -25,6 +25,21 @@
     margin-left: 20px;
     padding: 0px;
     margin-bottom: 0px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.title i:hover {
+    cursor: pointer;
 }
 
 .title-container p {

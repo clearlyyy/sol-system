@@ -23,7 +23,6 @@ function PlanetIndicator({name, color, userControlsRef, distanceThreshold}) {
     if (planetObject) {
         const distance = camera.position.length();
         const distanceToPlanet = camera.position.distanceTo(planetObject.position);
-        console.log(distance);
         if (distance > distanceThreshold) {
             setIsDissolved(true);
         }

@@ -67,6 +67,10 @@ const UserControls = React.forwardRef(
       console.log(currentClickType);
     }, [currentClickType]);
 
+    const getPlanetByName = (name) => {
+      return scene.getObjectByName(name);
+    }
+
     const selectBody = (eventOrObject) => {
       let object;
 
@@ -133,6 +137,7 @@ const UserControls = React.forwardRef(
     // Expose selectBody to parent components via ref
     useImperativeHandle(ref, () => ({
       selectBody,
+      getPlanetByName,
     }));
 
     useEffect(() => {

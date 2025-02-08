@@ -6,13 +6,19 @@ import { DynamicTable } from './DynamicTable';
 
 import "../styles/planetaryinfo.css"
 
-function PlanetaryInfo({tableData, isVisible, selectedObject}) {
+function PlanetaryInfo({tableData, isVisible, setIsVisible, selectedObject}) {
   
+  const hidePlanetaryInfo = () => {
+    setIsVisible(false);
+  }
 
   return (
     <div className={`planetaryinfo-container ${isVisible ? 'visible' : ''}`}>
         <div className="title-container">
+          <div className="title">
             <h1 className="title">{selectedObject?.name}</h1>
+            <i onClick={hidePlanetaryInfo} class="fa fa-angle-double-left"></i>
+            </div>
             <p>{selectedObject?.userData.type}</p>
         </div>
         <div className="content">

@@ -87,8 +87,8 @@ function App() {
     <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
 
       {/* Navbar */}
-      <Navbar/>
-      <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} selectedObject={selectedBody}/>
+      <Navbar userControlsRef={userControlsRef}/>
+      <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} setIsVisible={setIsPlanetaryInfoVisible} selectedObject={selectedBody}/>
       
       
 
@@ -160,6 +160,15 @@ function App() {
          onChangeTimeMultiplier={handleTimeMultiplier}
          selectedBody={selectedBody}
          />
+
+      <input
+        type="range"
+        min="1"
+        max="1000"
+        step="0.1"
+        defaultValue={planetScaling}
+        onChange={handlePlanetScalingChange}
+      />
 
     </div>
   );
