@@ -26,10 +26,10 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
       name="Earth"
       textureUrl="/earth_texture.jpg"
       size={6371}
-      color={"cyan"}
+      color={"#2E52A3"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
-      tilt={23.5}
+      tilt={23.4}
       orbitRadius={44}
       atmosphereColor={0x0099dd}
       A={149.598 * 1e6}
@@ -44,6 +44,11 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Terrestrial"}
       description={"Earth is the third planet from the Sun and the only known celestial body that supports life. Its diverse ecosystems, rich atmosphere, and liquid water make it unique in the universe."}
+
+      mass={5.97e24}
+      gravity={9.81}
+      density={5.51}
+      escapeVelocity={11.19}
     >
       <Luna position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000} />
       </Planet>

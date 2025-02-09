@@ -60,11 +60,11 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDate((prevDate) => {
-        const newDate = new Date(prevDate.getTime() + 10 * timeMultiplier);
+        const newDate = new Date(prevDate.getTime() + 1 * timeMultiplier);
         daysSinceJ2000.current = getDaysSinceJ2000(newDate);
         return newDate;
       })
-    }, 10);
+    }, 1);
     return () => clearInterval(interval);
   }, [timeMultiplier]);
 
@@ -121,7 +121,7 @@ function App() {
         <Perf position='bottom-right' logsPerSecond={1}/>
 
         {/* Star Field */}
-        <Stars ref={starsRef} layers={1} radius={800} raycast={null} ignorePointer />
+        <Stars ref={starsRef} layers={1} radius={400} raycast={null} ignorePointer />
 
         
         <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />

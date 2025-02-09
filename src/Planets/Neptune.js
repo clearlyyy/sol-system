@@ -22,7 +22,7 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/neptune_texture.jpg"
       size={24622}
       rotationSpeed={0.0005}
-      color={"blue"}
+      color={"#2D5B9A"}
       orbitSpeed={0.002}
       tilt={28.5}
       orbitRadius={5}
@@ -39,6 +39,11 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Ice Giant"}
       description={"Neptune is the eighth planet from the Sun, famous for its deep blue color, caused by methane in its atmosphere. It is an ice giant with strong winds, the fastest in the solar system, and has a stormy climate. Neptune is known for its dark, cold environment and a system of moons and rings."}
+      mass={1.02e26}
+      gravity={11.15}
+      density={1.638}
+      escapeVelocity={23.5}
+    
     />
     
   ) : null;

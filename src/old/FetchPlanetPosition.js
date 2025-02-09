@@ -1,3 +1,5 @@
+//Deprecated, using NASA's API was too much of a hassle, calculating celestial bodys positions from J2000 causes less problems.
+
 // JPL Horizons API endpoint
 const API_URL = "https://ssd.jpl.nasa.gov/api/horizons.api";
 

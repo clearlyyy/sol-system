@@ -26,7 +26,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       name="Jupiter"
       textureUrl="/jupiter_texture.jpg"
       size={69911}
-      color={"brown"}
+      color={"#D9A066"}
       rotationSpeed={0.001}
       orbitSpeed={0.0001}
       tilt={3.1}
@@ -44,6 +44,11 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       daysSinceJ2000={daysSinceJ2000}
       type={"Gas Giant"}
       description={"Jupiter is the fifth planet from the Sun and the largest in our solar system. Known for its massive size, powerful storms, and striking Great Red Spot, Jupiter is a gas giant with a predominantly hydrogen and helium composition. It has a strong magnetic field, numerous moons, and a ring system, making it a fascinating and dynamic planet in the outer solar system."}
+      mass={1.90e27}
+      gravity={24.79}
+      density={1.33}
+      escapeVelocity={59.5}
+    
     >
       <Io position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
       <Europa position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>

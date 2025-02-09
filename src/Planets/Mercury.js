@@ -24,7 +24,7 @@ function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/mercury_texture.jpg"
       size={2440}
       rotationSpeed={0.012}
-      color={"orange"}
+      color={"#918273"}
       orbitSpeed={0.0007}
       tilt={0.034}
       orbitRadius={15}
@@ -41,6 +41,11 @@ function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Terrestrial"}
       description={"Mercury is the closest planet to the Sun and has extreme temperature variations, with scorching heat during the day and freezing cold at night. It has a thin atmosphere, making it unable to retain heat. Its surface is heavily cratered, resembling the Moon's."}
+      mass={3.30e23}
+      gravity={3.7}
+      density={5.43}
+      escapeVelocity={4.25}
+
     />
     
   ) : null;

@@ -23,7 +23,7 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/uranus_texture.jpg"
       size={25362}
       rotationSpeed={0.0005}
-      color={"blue"}
+      color={"#ACE5EE"}
       orbitSpeed={0.002}
       tilt={97.8}
       orbitRadius={5}
@@ -40,6 +40,12 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Ice Giant"}
       description={"Uranus is the seventh planet from the Sun, known for its blue-green color due to methane in its atmosphere. It has a unique tilt, rotating on its side compared to other planets. Uranus is an ice giant with a cold, distant atmosphere of hydrogen, helium, and icy compounds."}
+      mass={8.68e25}
+      gravity={8.69}
+      density={1.27}
+      escapeVelocity={21.3}
+    
+    
     />
     
   ) : null;

@@ -26,7 +26,7 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/mars_texture.jpg"
       size={3396}
       rotationSpeed={0.012}
-      color={"orange"}
+      color={"#B84E36"}
       orbitSpeed={0.0007}
       tilt={25.2}
       orbitRadius={15}
@@ -43,6 +43,11 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Terrestrial"}
       description={"Mars is the fourth planet from the Sun, known for its red color due to iron oxide on its surface. It has a thin atmosphere and features such as valleys, deserts, and the largest volcano in the solar system, Olympus Mons. It's a prime candidate for potential human exploration."}
+      mass={6.42e23}
+      gravity={3.71}
+      density={3.93}
+      escapeVelocity={5.03}
+    
     >
       <Phobos daysSinceJ2000={daysSinceJ2000}/>
       <Deimos daysSinceJ2000={daysSinceJ2000}/>

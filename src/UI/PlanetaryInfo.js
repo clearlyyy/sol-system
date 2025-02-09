@@ -26,8 +26,12 @@ function PlanetaryInfo({tableData, isVisible, setIsVisible, selectedObject}) {
             <p>
                 {selectedObject?.userData.description}
             </p>
-            <DropList>
-              <DynamicTable data={tableData}/>
+            <DropList name={"Physical Characteristics"}>
+              <DynamicTable selectedBody={selectedObject} type={"Physical Characteristics"}/>
+            </DropList>
+            <br></br>
+            <DropList name={"Orbital Information"}>
+              <DynamicTable selectedBody={selectedObject} type={"Orbital Information"}/>
             </DropList>
             
             

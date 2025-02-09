@@ -4,7 +4,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from 'three';
 import { useTexture } from '@react-three/drei';
-import getPlanetPosition from "../old/FetchPlanetPosition"
 import { useLoader, useFrame } from "@react-three/fiber";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial";
 import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2";
@@ -12,9 +11,10 @@ import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeome
 import { TextureLoader } from "three";
 import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
 import { moonOrbitalPathScaling, planetScaling, scalingFactor } from "../App"
+import { getFresnelMat } from "../Shaders/getFresnelMat";
+
 import EarthCloud from '../Shaders/EarthClouds'
 import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
-import { getFresnelMat } from "../Shaders/getFresnelMat";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
 import OrbitalLine from "./OrbitalLine";
 import PlanetIndicator from "./PlanetIndicator";
@@ -25,7 +25,7 @@ const degToRad = (deg) => deg * (Math.PI / 180);
 
 
 // Function to generate orbital path based on Keplerian elements
-const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
+const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
   const points = [];
   
   // Convert the angles from degrees to radians
@@ -103,10 +103,14 @@ function Planet({
     hasClouds,
     daysSinceJ2000,
     type,
-    description
+    description,
+    mass,
+    gravity,
+    density,
+    escapeVelocity
 }) {
 
-
+    const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     const [points, setPoints] = useState(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega));
     const [fresnelMat, setFresnelMat] = useState(getFresnelMat(atmosphereColor, 0x000000, 0.01, 0.5, planetScaling));
@@ -137,6 +141,7 @@ function Planet({
 
     useEffect(() => {
       setTrueAnomaly(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
+      setMeanAnomaly((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     }, [daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC])
 
     const planetRef = useRef();
@@ -222,12 +227,17 @@ function Planet({
           j2000MeanAnomaly,
           targetId,
           hasClouds,
+          meanAnomaly,
           trueAnomaly,
           type,
-          description
+          description,
+          mass,
+          gravity,
+          density,
+          escapeVelocity
         };
       }
-    }, [size, name]);
+    }, [size, name, trueAnomaly, meanAnomaly]);
 
     
     return (

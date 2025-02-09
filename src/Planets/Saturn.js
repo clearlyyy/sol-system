@@ -23,7 +23,7 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/saturn_texture.jpg"
       size={58230}
       rotationSpeed={0.0005}
-      color={"orange"}
+      color={"#e2bf7d"}
       orbitSpeed={0.002}
       tilt={26.7}
       orbitRadius={5}
@@ -40,6 +40,11 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Gas Giant"}
       description={"Saturn is the sixth planet from the Sun, famous for its stunning rings made of ice and rock. It is a gas giant with a thick atmosphere of hydrogen and helium, and it has over 80 moons, including Titan, the second-largest moon in the solar system."}
+      mass={5.68e26}
+      gravity={10.44}
+      density={0.687}
+      escapeVelocity={35.5}
+    
     />
     
   ) : null;

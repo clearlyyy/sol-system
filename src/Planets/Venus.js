@@ -24,7 +24,7 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       textureUrl="/venus_texture.jpg"
       size={6052}
       rotationSpeed={0.0005}
-      color={"orange"}
+      color={"#E7C27E"}
       orbitSpeed={0.002}
       tilt={177.4}
       orbitRadius={5}
@@ -41,6 +41,11 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       daysSinceJ2000={daysSinceJ2000}
       type={"Terrestrial"}
       description={"Venus is the second planet from the Sun, often called Earth's 'sister planet' due to its similar size and composition. However, its thick atmosphere, composed mainly of carbon dioxide, creates an extreme greenhouse effect, making it the hottest planet in the solar system. Its surface is hidden by dense clouds of sulfuric acid."}
+
+      mass={4.87e24}
+      gravity={8.87}
+      density={5.24}
+      escapeVelocity={10.36}
     />
     
   ) : null;

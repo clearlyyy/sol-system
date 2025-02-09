@@ -117,18 +117,6 @@ const UserControls = React.forwardRef(
       setSelectedBody(object);
       setIsPlanetaryInfoVisible(true);
 
-      object.name !== "Sun" &&
-        setTableData([
-          { label: "Semi Major Axis", value: customData.A.toLocaleString() + " km" },
-          { label: "Eccentricity", value: customData.EC.toFixed(8) },
-          { label: "Inclination", value: customData.i.toFixed(3) + "°" },
-          { label: "Periapsis", value: customData.omega.toFixed(2) + " km" },
-          { label: "Ascending Node", value: customData.Omega.toFixed(3) + "°" },
-          { label: "Mean Motion", value: customData.meanMotion.toFixed(6) + " deg/day" },
-          { label: "Mean Anomaly", value: customData.j2000MeanAnomaly.toFixed(3) + "°" },
-          { label: "True Anomaly", value: customData.trueAnomaly.toFixed(4) + "°" },
-        ]);
-
       if (orbitControlsRef.current) {
         orbitControlsRef.current.enabled = false;
       }

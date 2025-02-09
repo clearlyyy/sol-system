@@ -18,7 +18,7 @@ function Luna({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Moon
       {...props}
-      name="Deimos"
+      name="Phobos"
       textureUrl="/phobos_texture.jpg"
       size={11}
       color={"grey"}
