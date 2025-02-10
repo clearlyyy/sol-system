@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 import Io from "../Moons/Io"
 import Europa from "../Moons/Europa"
 import Ganymede from "../Moons/Ganymede"
 import Callisto from "../Moons/Callisto"
-
+import * as THREE from 'three';
 function Jupiter({daysSinceJ2000, userControlsRef, ...props}) {
 const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
+
+  const hostPosition = useRef(new THREE.Vector3(0,0,0));
 
   // Use useEffect to trigger the delay
   useEffect(() => {
@@ -20,6 +22,7 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
 
   // Render the Planet component only after the delay
   return loaded ? (
+    <>
     <Planet
       {...props}
       userControlsRef={userControlsRef}
@@ -48,14 +51,16 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       gravity={24.79}
       density={1.33}
       escapeVelocity={59.5}
+
+      setHostPosition={hostPosition}
     
     >
-      <Io position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Europa position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Ganymede position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Callisto position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
       </Planet>
-    
+      <Io hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Europa hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Ganymede hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Callisto hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+    </>
   ) : null;
 }
 

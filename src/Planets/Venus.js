@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
+import * as THREE from 'three';
 
 function Venus({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
+
+    const hostPosition = useRef(new THREE.Vector3(0,0,0));
   
     // Use useEffect to trigger the delay
     useEffect(() => {
@@ -46,6 +49,8 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       gravity={8.87}
       density={5.24}
       escapeVelocity={10.36}
+
+      setHostPosition={hostPosition}
     />
     
   ) : null;

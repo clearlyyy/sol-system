@@ -76,6 +76,7 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
 
 
 function Planet({
+    setHostPosition,
     userControlsRef,
     distanceThreshold,
     name,
@@ -107,7 +108,7 @@ function Planet({
     mass,
     gravity,
     density,
-    escapeVelocity
+    escapeVelocity,
 }) {
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
@@ -154,11 +155,13 @@ function Planet({
     const bumpMap = useLoader(TextureLoader, "/earthbump1k.jpg");
     const specMap = useTexture('/earthspec1k.jpg');
     const ring_texture = useLoader(TextureLoader, "/rings.png");
+    
 
+    
 
     useEffect(() => {
         if (planetRef.current) {
-            planetRef.current.rotation.z = degToRad(tilt || 0);
+            planetRef.current.rotation.x = degToRad(-26.7 || 0);
         }
     }, [tilt]);
 
@@ -238,6 +241,18 @@ function Planet({
         };
       }
     }, [size, name, trueAnomaly, meanAnomaly]);
+
+    
+
+    //Get The Planets Position for its moons.
+    useFrame(() => {
+      if (planetRef.current && setHostPosition)
+      {
+        const worldPosition = new THREE.Vector3;
+        planetRef.current.getWorldPosition(worldPosition);
+        setHostPosition.current = worldPosition;
+      }
+    })
 
     
     return (

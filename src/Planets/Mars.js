@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 import Deimos from "../Moons/Deimos"
 import Phobos from "../Moons/Phobos"
-
+import * as THREE from 'three';
 function Mars({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
+
+    const hostPosition = useRef(new THREE.Vector3(0,0,0));
   
     // Use useEffect to trigger the delay
     useEffect(() => {
@@ -18,6 +20,7 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
   
     // Render the Planet component only after the delay
     return loaded ? (
+      <>
     <Planet
       {...props}
       userControlsRef={userControlsRef}
@@ -47,12 +50,14 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
       gravity={3.71}
       density={3.93}
       escapeVelocity={5.03}
+
+      setHostPosition={hostPosition}
     
     >
-      <Phobos daysSinceJ2000={daysSinceJ2000}/>
-      <Deimos daysSinceJ2000={daysSinceJ2000}/>
       </Planet>
-    
+      <Phobos hostPosition={hostPosition} daysSinceJ2000={daysSinceJ2000}/>
+      <Deimos hostPosition={hostPosition} daysSinceJ2000={daysSinceJ2000}/>
+    </>
   ) : null;
 }
 

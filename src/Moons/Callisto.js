@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
-function Callisto({daysSinceJ2000, ...props}) {
+function Callisto({daysSinceJ2000, hostPosition, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -17,6 +17,7 @@ function Callisto({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Moon
       {...props}
+      hostPosition={hostPosition}
       name="callisto"
       textureUrl="/callisto_texture.jpg"
       size={2410.3}

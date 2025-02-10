@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
-function Luna({daysSinceJ2000, ...props}) {
+function Luna({daysSinceJ2000, hostPosition, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -18,6 +18,7 @@ function Luna({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Moon
       {...props}
+      hostPosition={hostPosition}
       name="Phobos"
       textureUrl="/phobos_texture.jpg"
       size={11}

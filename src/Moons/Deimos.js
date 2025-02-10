@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
-function Luna({daysSinceJ2000, ...props}) {
+function Luna({daysSinceJ2000,  hostPosition, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -18,6 +18,7 @@ function Luna({daysSinceJ2000, ...props}) {
   return loaded ? (
     <Moon
       {...props}
+      hostPosition={hostPosition}
       name="Deimos"
       textureUrl="/deimos_texture.jpg"
       size={6.2}
@@ -29,10 +30,10 @@ function Luna({daysSinceJ2000, ...props}) {
       atmosphereColor={"black"}
       A={23460}
       EC={2.326887806077698E-02}
-      i={2.139216434505546E+00}
-      omega={1.857454990105412E+02}
-      Omega={4.083435101456297E+01}
-      meanMotion={4.538}
+      i={2.757017394063173E+01}
+      omega={4.325664744499282E+01}
+      Omega={8.366378692998410E+01}
+      meanMotion={3.300101389496568E-03}
       j2000MeanAnomaly={1.305487789185887E+02}
       targetId="402"
       daysSinceJ2000={daysSinceJ2000}

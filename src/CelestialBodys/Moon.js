@@ -14,7 +14,7 @@ import OrbitalLine from "./OrbitalLine";
 const degToRad = (deg) => deg * (Math.PI / 180);
 
 // Function to generate orbital path based on Keplerian elements
-const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
+const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
   const points = [];
   
   // Convert the angles from degrees to radians
@@ -57,7 +57,6 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
     const zFinal = -y3; // Negate the original y to complete the rotation
     
     points.push(new THREE.Vector3(xFinal, yFinal, zFinal)); // 3D coordinates
-
   }
   points.push(points[0]); // close the loop.
 
@@ -65,6 +64,7 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 100) => {
 };
 
 function Moon({
+    hostPosition,
     name,
     textureUrl,
     size,
@@ -85,12 +85,13 @@ function Moon({
     targetId,
     daysSinceJ2000,
     type,
-    description
+    description,
 }) {
 
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     const [points, setPoints] = useState(generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega)); // Generate points based on Keplerian data);
     const geometryRef = useRef();
+    const MoonRef = useRef();
 
     var scaledSize = size / scalingFactor;
 
@@ -210,6 +211,14 @@ function Moon({
       }
     }, [moonOrbitalPathScaling, planetScaling, trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
 
+
+    //Update the moons position every frame.
+    useFrame(() => {
+      if (MoonRef.current && hostPosition)
+      {
+        MoonRef.current.position.copy(hostPosition.current);
+      }
+    })
     
     
 
@@ -226,7 +235,7 @@ function Moon({
 
     return (
       <>
-        <group>
+        <group ref={MoonRef}>
           {/* Orbit Path */}
           <OrbitalLine points={points} color={color}/>
 
