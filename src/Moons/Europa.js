@@ -30,15 +30,21 @@ function Europa({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={6.709358927628163E+05}
-      EC={9.470430684303763E-03}
-      i={1.790939298819423E+00}
-      omega={2.557894434175601E+02}
-      Omega={3.326264490462856E+02}
-      meanMotion={1.6131}
-      j2000MeanAnomaly={2.935886924948249E+02}
+      A={ 6.712584086671803E+05 }
+      EC={ 9.490553938596196E-03 }
+      i={ 2.233867251662807E+00 }
+      omega={ 3.174765257330752E+02 }
+      Omega={ 3.260082520334616E+02 }
+      meanMotion={ 1.172623887824027E-03 * 86400 }
+      j2000MeanAnomaly={ 2.688444933781274E+02 }
       targetId="502"
       daysSinceJ2000={daysSinceJ2000}
+      type={"Icy Moon"}
+			description={"Europa is one of Jupiter's largest moons, with a smooth, icy surface and a likely subsurface ocean. It is considered one of the most promising places in the solar system to search for extraterrestrial life."}
+			mass={4.7998e22}
+			gravity={1.315}
+			density={3.01}
+			escapeVelocity={2.025}
     />
   ) : null; // Don't render anything before the delay
 }

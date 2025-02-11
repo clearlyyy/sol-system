@@ -29,15 +29,21 @@ function Mimas({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       tilt={0.06}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={1.860055707917493E+05}
-      EC={1.760587913972963E-02}
-      i={2.699265270244498E+01}
-      omega={9.918321111653152E+01}
-      Omega={1.720385191460957E+02}
-      meanMotion={4.398778022919621E-03 * 86400}
-      j2000MeanAnomaly={2.159494611442844E+02}
+      A={ 1.860122166254450E+05 }
+      EC={ 1.837040397107320E-02 }
+      i={ 2.935875624238190E+01 }
+      omega={ 2.948629186416495E+02 }
+      Omega={ 1.677003121499674E+02 }
+      meanMotion={ 4.398542286095829E-03 * 86400 }
+      j2000MeanAnomaly={ 1.089647008780583E+02 }
       targetId="601"
       daysSinceJ2000={daysSinceJ2000}
+      type={"Icy Moon"}
+			description={"Mimas is a small, icy moon of Saturn known for its massive Herschel Crater, which gives it a striking resemblance to the Death Star from Star Wars. Its surface is heavily cratered and icy."}
+			mass={3.7493e19}
+			gravity={0.064}
+			density={1.15}
+			escapeVelocity={0.16}
     />
   ) : null; // Don't render anything before the delay
 }

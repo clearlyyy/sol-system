@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 
 import Mimas from "../Moons/Mimas";
-import Luna from "../Moons/Luna";
+import Enceladus from "../Moons/Enceladus";
+import Tethys from "../Moons/Tethys";
+import Dione from "../Moons/Dione";
+import Rhea from "../Moons/Rhea";
+import Titan from "../Moons/Titan";
+
+
 import * as THREE from 'three';
 
 function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
@@ -35,13 +41,13 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
       tilt={26.7}
       orbitRadius={5}
       atmosphereColor={"#F4E1B1"}
-      A = {1432.041 * 1e6}
-      EC = {5.559928887285597E-02}
-      i = {2.484368779807340E+00}
-      omega = {3.359006492558044E+02}
-      Omega = {1.136930130794106E+02}
-      meanMotion={.03346}
-      j2000MeanAnomaly={3.203798737892262E+02}
+      A={ 1.429815962622609E+09 }
+      EC={ 5.537129625010676E-02 }
+      i={ 2.488916875118528E+00 }
+      omega={ 3.368250431033135E+02 }
+      Omega={ 1.136666573187736E+02 }
+      meanMotion={ 3.861182175316644E-07 * 86400 }
+      j2000MeanAnomaly={ 2.666107526968741E+02 }
       targetId="699"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
@@ -57,6 +63,11 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
     >
       </Planet>
       <Mimas hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Enceladus hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Tethys hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Dione hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Rhea hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Titan hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
     </>
     
   ) : null;

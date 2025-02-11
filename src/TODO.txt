@@ -1,0 +1,11 @@
+Things that need to be done.
+
+NOTE: POSITIONS ARE NO LONGER BEING CALCULATED FROM J2000, Currently using FEB 11TH, 2025. 
+
+Done: Set all Planets and Moons to calculate mean motion in deg/day, NASA provides deg/sec. 
+Done: Figure out why moons true anomalys aren't being calculated properly.
+Done: Implement every single major moon.
+Done: Fix Moon Physical Characteristics
+Implement Moon Atmospheres.
+Fix HTML indictors glitching when they move.
+

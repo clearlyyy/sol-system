@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 import * as THREE from 'three';
 
-import Io from "../Moons/Io";
+import Triton from "../Moons/Triton";
 
 function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
@@ -34,13 +34,13 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       tilt={28.5}
       orbitRadius={5}
       atmosphereColor={"#4B7F9A"}
-      A = {	4514.953 * 1e6}
-      EC = {1.114797945577682E-02}
-      i = {1.773472322935706E+00}
-      omega = {2.668221317471495E+02}
-      Omega = {1.317693429431158E+02}
-      meanMotion={.00601}
-      j2000MeanAnomaly={2.666047613305240E+02}
+      A={ 4.514059315175322E+09 }
+      EC={ 1.245084205819332E-02 }
+      i={ 1.774960464801212E+00 }
+      omega={ 2.690615092816622E+02 }
+      Omega={ 1.319527478357895E+02 }
+      meanMotion={ 6.882381472728602E-08 * 86400 }
+      j2000MeanAnomaly={ 3.189794970194312E+02 }
       targetId="899"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
@@ -54,6 +54,7 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       setHostPosition={hostPosition}
     
     />
+    <Triton hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
     </>
   ) : null;
 }

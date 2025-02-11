@@ -2,6 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 import * as THREE from 'three';
 
+import Miranda from "../Moons/Miranda";
+import Ariel from "../Moons/Ariel";
+import Umbriel from "../Moons/Umbriel";
+import Titania from "../Moons/Titania";
+import Oberon from "../Moons/Oberon";
+
+
 function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
     const [loaded, setLoaded] = useState(false);
@@ -19,6 +26,7 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
   
     // Render the Planet component only after the delay
     return loaded ? (
+      <>
     <Planet
       {...props}
       userControlsRef={userControlsRef}
@@ -31,13 +39,13 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
       tilt={97.8}
       orbitRadius={5}
       atmosphereColor={"#00B5E2"}
-      A = {	2867.043 * 1e6}
-      EC = {4.439367187710320E-02}
-      i = {7.723813829207361E-01}
-      omega = {9.660797275005378E+01}
-      Omega = {7.396291773291530E+01}
-      meanMotion={.01190}
-      j2000MeanAnomaly={1.429079296754021E+02}
+      A={ 2.887319030356802E+09 }
+      EC={ 4.578275341337535E-02 }
+      i={ 7.722278083166019E-01 }
+      omega={ 9.048538744812166E+01 }
+      Omega={ 7.402930173479820E+01 }
+      meanMotion={ 1.345382485136898E-07 * 86400 }
+      j2000MeanAnomaly={ 2.563701189504871E+02 }
       targetId="799"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}
@@ -52,6 +60,16 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
     
     
     />
+      <Miranda hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Ariel hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Umbriel hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Titania hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Oberon hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+
+
+
+
+    </>
     
   ) : null;
 }

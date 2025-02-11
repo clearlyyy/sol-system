@@ -30,15 +30,21 @@ function Luna({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={9377}
-      EC={1.541577819823969E-02}
-      i={2.605134469886070E+01}
-      omega={3.423765737283923E+02}
-      Omega={8.481060425430211E+01}
-      meanMotion={17.9548}
-      j2000MeanAnomaly={3.458103512387291E+02}
+      A={ 9.379270986268926E+03 }
+      EC={ 1.474328572002532E-02 }
+      i={ 2.670531680335356E+01 }
+      omega={ 1.523533451538571E+01 }
+      Omega={ 8.524082427595087E+01 }
+      meanMotion={ 1.305373529536435E-02 * 86400 }
+      j2000MeanAnomaly={ 1.663327823615191E+02 }
       targetId="401"
       daysSinceJ2000={daysSinceJ2000}
+      type={"Small Irregular Moon"}
+			description={"Phobos is the larger and innermost of Mars's two moons, with an irregular shape and a heavily cratered surface. It orbits so close to Mars that it is gradually spiraling inward and will eventually collide with the planet."}
+			mass={1.0659e16}
+			gravity={0.0057}
+			density={1.88}
+			escapeVelocity={0.011}
     />
   ) : null; // Don't render anything before the delay
 }

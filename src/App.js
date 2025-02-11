@@ -31,7 +31,7 @@ export var moonOrbitalPathScaling = 1;
 
 
 function getDaysSinceJ2000(date) {
-  const j2000 = new Date(Date.UTC(2000, 0, 1, 12, 0, 0));
+  const j2000 = new Date(Date.UTC(2025, 1, 11, 0, 0, 0, 0));
   const diffInMs = date - j2000;
   return diffInMs / (1000 * 60 * 60 * 24);
 }
@@ -100,7 +100,7 @@ function App() {
           height: "100vh", 
           zIndex: -1 }}>
       <Canvas ref={canvasRef}
-        camera={{ position: [0, 50, 100], fov: 70, near: 0.0001, far: 100000 }}
+        camera={{ position: [0, 50, 100], fov: 70, near: 0.00001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} 
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
       >

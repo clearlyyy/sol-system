@@ -19,7 +19,7 @@ function Callisto({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       {...props}
       userControlsRef={userControlsRef}
       hostPosition={hostPosition}
-      name="callisto"
+      name="Callisto"
       distanceThreshold={10}
       textureUrl="/callisto_texture.jpg"
       size={2410.3}
@@ -29,13 +29,19 @@ function Callisto({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={1.882779892377612E+06}
-      EC={7.432941708860398E-03}
-      i={2.016913882947653E+00}
-      omega={1.632003665270385E+01}
-      Omega={3.379432608177467E+02}
-      meanMotion={0.3435}
-      j2000MeanAnomaly={2.549532190835189E+02}
+      A={ 1.883801220323989E+06 }
+      EC={ 7.184196428316506E-03 }
+      i={ 1.949923844891594E+00 }
+      omega={ 2.856253032554822E+01 }
+      Omega={ 3.367433492632588E+02 }
+      meanMotion={ 2.494293474500411E-04 * 86400 }
+      j2000MeanAnomaly={ 2.945072298709688E+02 }
+      type={"Icy Moon"}
+      description={"Callisto is the second-largest moon of Jupiter and one of the most heavily cratered objects in the solar system. Its ancient surface suggests it has been geologically inactive for billions of years."}
+      mass={1.0759e23}
+      gravity={1.24}
+      density={1.83}
+      escapeVelocity={2.44}
       targetId="504"
       daysSinceJ2000={daysSinceJ2000}
     />

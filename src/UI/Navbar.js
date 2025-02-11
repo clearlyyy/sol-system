@@ -18,8 +18,8 @@ function Navbar({userControlsRef}) {
         Jupiter: ["Io", "Europa", "Ganymede", "Callisto"],
         Saturn: ["Titan", "Enceladus", "Mimas", "Dione", "Rhea", "Tethys"],
         Uranus: ["Titania", "Oberon", "Ariel", "Umbriel", "Miranda"],
-        Neptune: ["Triton", "Proteus", "Nereid"],
-        Pluto: ["Charon", "Styx", "Nix", "Kerberos", "Hydra"]
+        Neptune: ["Triton"],
+        Pluto: []
     };
 
     const factsList = [
@@ -143,7 +143,7 @@ function Navbar({userControlsRef}) {
                                         ))
                                     ) : (
                                         <div className="Moon">
-                                            <li className="Moon-Text">No Moons</li>
+                                            <li className="Moon-Text">No Major Moons</li>
                                         </div>
                                     )}
                                 </ul>

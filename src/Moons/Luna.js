@@ -30,17 +30,21 @@ function Luna({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={3.851657706075175E+05}
-      EC={3.606565421276240E-02}
-      i={5.172024573626966E+00}
-      omega={2.546820332712215E+01}
-      Omega={3.575618180910739E+02}
-      meanMotion={13.176}
-      j2000MeanAnomaly={8.305719762886987E+01}
+      A={ 3.863941711873159E+05 }
+      EC={ 3.800991571525237E-02 }
+      i={ 5.177402323054894E+00 }
+      omega={ 3.035654526445038E+01 }
+      Omega={ 3.574558934810182E+02 }
+      meanMotion={ 1.515305828164929E-04 * 86400 }
+      j2000MeanAnomaly={ 9.117669164122039E+01 }
       targetId="301"
       daysSinceJ2000={daysSinceJ2000}
       type={"Rocky Moon"}
-      description={"The Moon is Earth's only natural satellite, with a surface covered in craters. It is tidally locked to Earth, always showing the same face, and affects Earth's tides and climate stability."}
+      description={"Luna, commonly known as the Moon, is Earth's only natural satellite and the fifth-largest moon in the solar system. It has a heavily cratered surface and influences Earth's tides."}
+      mass={7.342e22}
+      gravity={1.62}
+      density={3.34}
+      escapeVelocity={2.38}
     />
   ) : null; // Don't render anything before the delay
 }

@@ -90,6 +90,10 @@ function Moon({
     daysSinceJ2000,
     type,
     description,
+    mass,
+    gravity,
+    density,
+    escapeVelocity
 }) {
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
@@ -161,7 +165,11 @@ function Moon({
               trueAnomaly,
               meanAnomaly,
               type,
-              description
+              description,
+              mass,
+              gravity,
+              density,
+              escapeVelocity
             };
           }
     }, [size, name, trueAnomaly, meanAnomaly]);

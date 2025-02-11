@@ -30,15 +30,21 @@ function Luna({daysSinceJ2000,  hostPosition, userControlsRef, ...props}) {
       tilt={23.5}
       orbitRadius={44}
       atmosphereColor={"black"}
-      A={23460}
-      EC={2.326887806077698E-02}
-      i={2.757017394063173E+01}
-      omega={4.325664744499282E+01}
-      Omega={8.366378692998410E+01}
-      meanMotion={3.300101389496568E-03 * 86400}
-      j2000MeanAnomaly={1.305487789185887E+02}
+      A={ 2.345970623300157E+04 }
+      EC={ 2.909257113435189E-04 }
+      i={ 2.423956367943092E+01 }
+      omega={ 3.497573115350104E+01 }
+      Omega={ 8.081223220483606E+01 }
+      meanMotion={ 3.299928803366823E-03 * 86400 }
+      j2000MeanAnomaly={ 7.214050074527356E+01 }
       targetId="402"
       daysSinceJ2000={daysSinceJ2000}
+      type={"Small Irregular Moon"}
+			description={"Deimos is the smaller and outermost of Mars's two moons, with a heavily cratered and smooth surface. Its irregular shape and low gravity make it resemble a captured asteroid."}
+			mass={1.4762e15}
+			gravity={0.003}
+			density={1.47}
+			escapeVelocity={0.0057}
     />
   ) : null; // Don't render anything before the delay
 }
