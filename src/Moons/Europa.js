@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
-function Europa({daysSinceJ2000, hostPosition, ...props}) {
+function Europa({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -18,8 +18,10 @@ function Europa({daysSinceJ2000, hostPosition, ...props}) {
   return loaded ? (
     <Moon
       {...props}
+      userControlsRef={userControlsRef}
       hostPosition={hostPosition}
       name="Europa"
+      distanceThreshold={3000}
       textureUrl="/europa_texture.jpg"
       size={1560.8}
       color={"grey"}

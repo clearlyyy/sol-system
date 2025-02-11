@@ -161,7 +161,7 @@ function Planet({
 
     useEffect(() => {
         if (planetRef.current) {
-            planetRef.current.rotation.x = degToRad(-26.7 || 0);
+            planetRef.current.rotation.x = degToRad(-tilt || 0);
         }
     }, [tilt]);
 

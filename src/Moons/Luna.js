@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
-function Luna({daysSinceJ2000, hostPosition, ...props}) {
+function Luna({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
 
@@ -18,7 +18,9 @@ function Luna({daysSinceJ2000, hostPosition, ...props}) {
   return loaded ? (
     <Moon
       {...props}
+      userControlsRef={userControlsRef}
       hostPosition={hostPosition}
+      distanceThreshold={10}
       name="Luna (The Moon)"
       textureUrl="/luna_texture.jpg"
       size={1737.4}
@@ -33,7 +35,7 @@ function Luna({daysSinceJ2000, hostPosition, ...props}) {
       i={5.172024573626966E+00}
       omega={2.546820332712215E+01}
       Omega={3.575618180910739E+02}
-      meanMotion={1.522560701434421E-04}
+      meanMotion={13.176}
       j2000MeanAnomaly={8.305719762886987E+01}
       targetId="301"
       daysSinceJ2000={daysSinceJ2000}

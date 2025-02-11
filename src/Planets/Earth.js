@@ -29,7 +29,7 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
     <Planet
       {...props}
       userControlsRef={userControlsRef}
-      distanceThreshold={50}
+      distanceThreshold={3000}
       name="Earth"
       textureUrl="/earth_texture.jpg"
       size={6371}
@@ -60,7 +60,7 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
 
     >
       </Planet>
-      <Luna hostPosition={hostPosition} daysSinceJ2000={daysSinceJ2000} />
+      <Luna hostPosition={hostPosition} userControlsRef={userControlsRef} daysSinceJ2000={daysSinceJ2000} />
       </>
       
   ) : null; // Don't render anything before the delay

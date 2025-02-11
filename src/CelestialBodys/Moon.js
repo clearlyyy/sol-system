@@ -11,10 +11,12 @@ import { scalingFactor, planetScaling, moonOrbitalPathScaling } from "../App"
 import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
 import OrbitalLine from "./OrbitalLine";
 
+import MoonIndicator from "./MoonIndicator";
+
 const degToRad = (deg) => deg * (Math.PI / 180);
 
 // Function to generate orbital path based on Keplerian elements
-const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
+const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 70) => {
   const points = [];
   
   // Convert the angles from degrees to radians
@@ -65,6 +67,8 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
 
 function Moon({
     hostPosition,
+    userControlsRef,
+    distanceThreshold,
     name,
     textureUrl,
     size,
@@ -88,6 +92,7 @@ function Moon({
     description,
 }) {
 
+    const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     const [points, setPoints] = useState(generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega)); // Generate points based on Keplerian data);
     const geometryRef = useRef();
@@ -100,7 +105,6 @@ function Moon({
       var meanAnomaly = (j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360;
 
       //Now we use the Mean Anomaly and Eccentricity of the planet and its orbit to get a true anomaly.
-
       let M = meanAnomaly * (Math.PI / 180);
       let E = M;
       let delta = 1;
@@ -120,9 +124,9 @@ function Moon({
     }
 
     //Init trueAnomaly with its starting value at the current date.
-    
     useEffect(() => {
-         setTrueAnomaly(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
+      setTrueAnomaly(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
+      setMeanAnomaly((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     }, [daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC])
 
     //console.log(A / scalingFactor, EC, i, omega, Omega);
@@ -136,7 +140,7 @@ function Moon({
   
     useEffect(() => {
         if (planetRef.current) {
-            planetRef.current.rotation.z = degToRad(tilt || 0);
+            planetRef.current.rotation.x = degToRad(-tilt || 0);
         }
     }, [tilt]);
 
@@ -155,11 +159,12 @@ function Moon({
               j2000MeanAnomaly,
               targetId,
               trueAnomaly,
+              meanAnomaly,
               type,
               description
             };
           }
-    }, [size, name]);
+    }, [size, name, trueAnomaly, meanAnomaly]);
 
     
 
@@ -212,10 +217,23 @@ function Moon({
     }, [moonOrbitalPathScaling, planetScaling, trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
 
 
+    
+
     //Update the moons position every frame.
     useFrame(() => {
-      if (MoonRef.current && hostPosition)
+      if (MoonRef.current && hostPosition && planetRef.current)
       {
+        const trueAnomalyRad = degToRad(trueAnomaly);
+        const orbitalOffset = calculatePositionFromTrueAnomaly(
+          (A * planetScaling) / moonOrbitalPathScaling / scalingFactor,
+          EC,
+          trueAnomalyRad,
+          i,
+          omega,
+          Omega
+        );
+        if (name === "Luna (The Moon)") { console.log(orbitalOffset); }
+        planetRef.current.position.copy(orbitalOffset);
         MoonRef.current.position.copy(hostPosition.current);
       }
     })
@@ -246,7 +264,8 @@ function Moon({
 
             {/* Atmospheric Glow Effect */}
             
-            
+            {/* Planetary Indicator Circle,\*/}
+            <MoonIndicator distanceThreshold={distanceThreshold} hostPosition={hostPosition} type={"moon"} userControlsRef={userControlsRef} name={name} color={color}/>
           </mesh>
         </group>
         </>

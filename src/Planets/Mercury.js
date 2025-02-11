@@ -21,7 +21,7 @@ function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
     <Planet
       {...props}
       userControlsRef={userControlsRef}
-      distanceThreshold={45}
+      distanceThreshold={2500}
       name="Mercury"
       textureUrl="/mercury_texture.jpg"
       size={2440}

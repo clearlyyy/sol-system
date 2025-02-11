@@ -24,7 +24,7 @@ import Pluto from "./Planets/Pluto.js";
 import Sun from "./CelestialBodys/Sun.js";
 import UserControls from "./UserControls/UserControls.js";
 
-export var scalingFactor = 1.495239195637494e7;
+export var scalingFactor = 0.0495239195637494e7;
 export var planetScaling = 1;
 export var sunScaling = 1 // Sun gets a bit too big when planetScaling goes up, which engulfs close planets.
 export var moonOrbitalPathScaling = 1;
@@ -100,18 +100,15 @@ function App() {
           height: "100vh", 
           zIndex: -1 }}>
       <Canvas ref={canvasRef}
-        camera={{ position: [0, 50, 100], fov: 90, near: 0.0001, far: 100000 }}
+        camera={{ position: [0, 50, 100], fov: 70, near: 0.0001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} 
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
       >
         
 
         {/* Post-Processing Effects */}
-        <EffectComposer multisampling={0} enableNormalPass>
-          <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-          
-          <ChromaticAberration offset={[0.0001, 0.0001]} blendFunction={BlendFunction.NORMAL} />
-          
+        <EffectComposer multisampling={0}>
+          <ToneMapping mode={ToneMappingMode.CINEON}/>
         </EffectComposer>
         
 
@@ -121,7 +118,7 @@ function App() {
         <Perf position='bottom-right' logsPerSecond={1}/>
 
         {/* Star Field */}
-        <Stars ref={starsRef} layers={1} radius={400} raycast={null} ignorePointer />
+        <Stars ref={starsRef} layers={1} radius={10000} raycast={null} ignorePointer />
 
         
         <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />

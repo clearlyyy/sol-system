@@ -56,7 +56,7 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
     
     >
       </Planet>
-      <Mimas hostPosition={hostPosition} position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Mimas hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
     </>
     
   ) : null;

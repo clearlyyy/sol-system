@@ -24,7 +24,7 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
     <Planet
       {...props}
       userControlsRef={userControlsRef}
-      distanceThreshold={55}
+      distanceThreshold={3000}
       name="Mars"
       textureUrl="/mars_texture.jpg"
       size={3396}
@@ -55,8 +55,8 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
     
     >
       </Planet>
-      <Phobos hostPosition={hostPosition} daysSinceJ2000={daysSinceJ2000}/>
-      <Deimos hostPosition={hostPosition} daysSinceJ2000={daysSinceJ2000}/>
+      <Phobos hostPosition={hostPosition}  userControlsRef={userControlsRef} daysSinceJ2000={daysSinceJ2000}/>
+      <Deimos hostPosition={hostPosition}  userControlsRef={userControlsRef} daysSinceJ2000={daysSinceJ2000}/>
     </>
   ) : null;
 }

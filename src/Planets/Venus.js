@@ -22,7 +22,7 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
     <Planet
       {...props}
       userControlsRef={userControlsRef}
-      distanceThreshold={48}
+      distanceThreshold={3000}
       name="Venus"
       textureUrl="/venus_texture.jpg"
       size={6052}

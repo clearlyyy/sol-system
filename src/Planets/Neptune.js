@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Planet from "../CelestialBodys/Planet";
 import * as THREE from 'three';
 
+import Io from "../Moons/Io";
 
 function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
@@ -20,6 +21,7 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
   
     // Render the Planet component only after the delay
     return loaded ? (
+      <>
     <Planet
       {...props}
       userControlsRef={userControlsRef}
@@ -52,7 +54,7 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       setHostPosition={hostPosition}
     
     />
-    
+    </>
   ) : null;
 }
 

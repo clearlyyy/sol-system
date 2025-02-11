@@ -56,10 +56,10 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
     
     >
       </Planet>
-      <Io hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Europa hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Ganymede hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
-      <Callisto hostPosition={hostPosition} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Io hostPosition={hostPosition}  userControlsRef={userControlsRef} position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Europa hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Ganymede hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
+      <Callisto hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0, 0, 0]} daysSinceJ2000={daysSinceJ2000}/>
     </>
   ) : null;
 }
