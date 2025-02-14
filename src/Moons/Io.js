@@ -20,7 +20,7 @@ function Io({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       {...props}
       userControlsRef={userControlsRef}
       hostPosition={hostPosition}
-      distanceThreshold={10}
+      distanceThreshold={20}
       name="Io"
       textureUrl="/io_texture.jpg"
       size={1821.6}

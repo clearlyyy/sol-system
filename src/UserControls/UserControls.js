@@ -26,9 +26,12 @@ const UserControls = React.forwardRef(
     const [currentPlanetSize, setPlanetSize] = useState(null);
     const [currentClickType, setCurrentClickType] = useState(null);
 
+    const [_, forceUpdate] = useState();
+
     const animationSpeed = 0.0005;
     const raycaster = new THREE.Raycaster();
     const orbitControlsRef = useRef();
+    const selectedBodyPositionRef = useRef(new THREE.Vector3());
 
     let mouseDownTime = 0;
     let mouseDownPosition = { x: 0, y: 0 };
@@ -172,27 +175,52 @@ const UserControls = React.forwardRef(
         }
       }
 
-      if (orbitControlsRef.current && orbitControlsRef.current.enabled) {
-        orbitControlsRef.current.update();
-      }
+      
+
+      
     });
+
+    //////////////////////////////////////////////////////////////////////////////////////// 
+    // CAMERA TRACKING OBJECTS
+
+
+    const prevPosRef = useRef(new THREE.Vector3());
+    useEffect(() => {
+      prevPosRef.current = undefined;
+    }, [followBody, selectedBody]);
 
     useFrame(() => {
-      if (selectedBody != null && followBody) {
-        const worldPos = new THREE.Vector3();
-        const offset = new THREE.Vector3(0, 0, (currentPlanetSize / scalingFactor) * planetScaling * 4);
-        const cameraPos = worldPos.clone().add(offset);
-        selectedBody.getWorldPosition(worldPos);
-        if (orbitControlsRef.current) {
-          orbitControlsRef.current.target.set(worldPos.x, worldPos.y, worldPos.z);
-          orbitControlsRef.current.update();
-        }
+      if (!orbitControlsRef.current || !selectedBody || !followBody) return;
+    
+      const worldPos = new THREE.Vector3();
+      selectedBody.getWorldPosition(worldPos);
+    
+      if (!prevPosRef.current) {
+        // First frame - initialize previous position
+        prevPosRef.current = worldPos.clone();
+      } else {
+        // Calculate movement delta
+        const delta = new THREE.Vector3().subVectors(worldPos, prevPosRef.current);
+        
+        // Move camera by the same delta
+        camera.position.add(delta);
+        
+        // Update camera matrix if needed
+        camera.updateMatrixWorld();
       }
+    
+      // Update OrbitControls target
+      orbitControlsRef.current.target.copy(worldPos);
+      prevPosRef.current.copy(worldPos);
+      
+      // Update controls
+      orbitControlsRef.current.update();
     });
 
+    
     return (
       <>
-        <OrbitControls ref={orbitControlsRef} />
+        <OrbitControls ref={orbitControlsRef} enableDamping={true} dampingFactor={0.05} zoomSpeed={4} autoRotate={false} makeDefault/>
       </>
     );
   }

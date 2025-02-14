@@ -48,6 +48,8 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 1.136666573187736E+02 }
       meanMotion={ 3.861182175316644E-07 * 86400 }
       j2000MeanAnomaly={ 2.666107526968741E+02 }
+      j2000Rotation={79.520297}
+      siderealPeriod={10.7}
       targetId="699"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

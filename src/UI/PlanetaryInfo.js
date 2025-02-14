@@ -14,6 +14,7 @@ function PlanetaryInfo({tableData, isVisible, setIsVisible, selectedObject}) {
 
   return (
     <div className={`planetaryinfo-container ${isVisible ? 'visible' : ''}`}>
+      <div className="mobile-margin">
         <div className="title-container">
           <div className="title">
             <h1 className="title">{selectedObject?.name}</h1>
@@ -36,7 +37,7 @@ function PlanetaryInfo({tableData, isVisible, setIsVisible, selectedObject}) {
             
             
         </div>
-        
+        </div>
     </div>
   );
 }

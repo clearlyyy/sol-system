@@ -46,6 +46,8 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 7.402930173479820E+01 }
       meanMotion={ 1.345382485136898E-07 * 86400 }
       j2000MeanAnomaly={ 2.563701189504871E+02 }
+      j2000Rotation={343.908823}
+      siderealPeriod={17.24}
       targetId="799"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

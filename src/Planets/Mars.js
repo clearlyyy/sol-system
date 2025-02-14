@@ -41,6 +41,8 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 4.948496365154590E+01 }
       meanMotion={ 6.065276409771121E-06 * 86400 }
       j2000MeanAnomaly={ 1.459495683062712E+02 }
+      j2000Rotation={234.56}
+      siderealPeriod={24.622962}
       targetId="499"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

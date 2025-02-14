@@ -3,7 +3,7 @@ import { timeMultipliers } from "./timeMultipliers";
 import "../styles/timeslider.css"
 
 
-const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
+const DraggablePath = ({ setTimeMultiplier, setisLive, currentTimeMultiplier }) => {
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const circleRef = useRef(null);
@@ -13,8 +13,50 @@ const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
 
 
   useEffect(() => {
+    if (!pathRef.current || !circleRef.current) return;
+  
+    // Convert timeMultipliers keys to numbers
+    const keys = Object.keys(timeMultipliers).map(Number);
+  
+    let currentMultiplier;
+  
+    // Handle case where currentTimeMultiplier is a string
+    if (typeof currentTimeMultiplier === "string") {
+      // Find the key in timeMultipliers that matches the string value
+      const matchingKey = Object.keys(timeMultipliers).find(
+        (key) => timeMultipliers[key] === currentTimeMultiplier
+      );
+  
+      if (!matchingKey) {
+        console.warn("currentTimeMultiplier not found in timeMultipliers:", currentTimeMultiplier);
+        return;
+      }
+  
+      currentMultiplier = Number(matchingKey);
+    } else {
+
+      currentMultiplier = Math.abs(Number(currentTimeMultiplier));
+    }
+  
+
+    const index = keys.findIndex((key) => Math.abs(key - currentMultiplier) < 0.01); // Tolerance for floating-point precision
+  
+    if (index === -1) {
+      console.warn("currentTimeMultiplier not found in timeMultipliers:", currentTimeMultiplier);
+      return;
+    }
+  
+
+    const progress = currentMultiplier < 0 ? 0.5 - (index / (keys.length - 1)) * 0.5 : 0.5 + (index / (keys.length - 1)) * 0.5;
+  
+    // Update the circle position
+    updateCirclePosition(progress, true);
+  }, [currentTimeMultiplier]);
+
+  useEffect(() => {
     if (!pathRef.current) return;
     updateCirclePosition(0.5); // Start at the middle of the path
+    setisLive(true);
   }, []);
 
   const getClosestPointOnPath = (clientX, clientY) => {
@@ -43,7 +85,8 @@ const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
   };
   
   
-  const updateCirclePosition = (progress) => {
+  const updateCirclePosition = (progress, reset = false) => {
+    setisLive(false);
     if (!pathRef.current || !circleRef.current) return;
 
     cancelAnimationFrame(animationFrame.current);
@@ -64,6 +107,11 @@ const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
         newSliderValue = -newSliderValue;
       } else if (progress === 0.5) {
         newSliderValue = 1; // The center (1x)
+      }
+
+      if (progress === 0.5 && reset)
+      {
+        setisLive(true);
       }
 
       setSliderValue(newSliderValue);
@@ -121,6 +169,7 @@ const DraggablePath = ({ setTimeMultiplier, currentTimeMultiplier }) => {
 
       {/* Draggable Circle with Custom Color */}
       <circle
+        className="knob"
         ref={circleRef}
         r="12" // Slightly larger circle
         fill="#93b54a" // Custom color for the circle

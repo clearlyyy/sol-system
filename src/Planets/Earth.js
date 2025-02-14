@@ -46,6 +46,8 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 1.675963295196312E+02 }
       meanMotion={ 1.142205052753467E-05 * 86400 }
       j2000MeanAnomaly={ 3.948832849013939E+01 }
+      j2000Rotation={185.599020}
+      siderealPeriod={24}
       targetId="399"
       hasClouds={true}
       daysSinceJ2000={daysSinceJ2000}

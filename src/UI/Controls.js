@@ -7,12 +7,25 @@ import DraggablePath from './RangeSlider';
 import "../styles/controls.css"
 import "../styles/timeslider.css"
 
-function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody }) {
+function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody }) {
 
 
     const [currentTimeMultiplier, setCurrentTimeMultiplierState] = useState("");
     const [selectedName, setSelectedName] = useState(null);
     const multiplierKeys = Object.keys(timeMultipliers).map(Number);
+
+    const [isLive, setisLive] = useState(true);
+
+
+    function setToLive() {
+      console.log("Going to Live");
+      setisLive(true);
+      const date = new Date()
+      setCurrentDate(date);
+      setCurrentTimeMultiplierState("REAL TIME");
+      onChangeTimeMultiplier(1);
+    }
+
 
     function getDaySuffix(day) {
         if (day > 3 && day < 21) return 'th'; // for 11th, 12th, 13th
@@ -31,6 +44,7 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, followin
     
 
       const increaseMultiplier = () => {
+      setisLive(false);
       const absVal = Math.abs(timeMultiplier);
       let currentIndex = multiplierKeys.indexOf(absVal);
       if (timeMultiplier >= 0) {
@@ -55,6 +69,7 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, followin
     //    – If exactly 1, flip the sign to negative (to –1).
     // • When negative, move to a larger absolute value (i.e. next key in the sorted order).
     const decreaseMultiplier = () => {
+      setisLive(false);
       const absVal = Math.abs(timeMultiplier);
       let currentIndex = multiplierKeys.indexOf(absVal);
       if (timeMultiplier > 0) {
@@ -123,6 +138,15 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, followin
       
 
   return (
+    <>
+    <div className="live-container">       
+      <h4 
+        onClick={() => setToLive()}
+        className={`live-text ${isLive ? "live" : ""}`}>
+        <i className={`fa fa-circle live-circle ${isLive ? "live" : ""}`}> </i> 
+         LIVE
+        </h4>
+    </div>
     <div className="controls-container">
           <div className={`following-body-container ${followingBody ? 'visible' : ''}`}>       
             <h4 
@@ -135,13 +159,14 @@ function Controls({currentDate, timeMultiplier, onChangeTimeMultiplier, followin
         <div className="time-speed-container">
             <h3 className="current-date">{formatDateWithLocale(currentDate)}</h3>
             <div className="multiplier-container">
-                <button onClick={decreaseMultiplier} className="time-button">-</button>
+
                 <h1 className="time-display">{currentTimeMultiplier}</h1>
-                <button onClick={increaseMultiplier} id="plus-time" className="time-button">+</button>
+
             </div>
-            <DraggablePath setTimeMultiplier={onChangeTimeMultiplier} currentTimeMultiplier={currentTimeMultiplier}/>
+            <DraggablePath setisLive={setisLive} setTimeMultiplier={onChangeTimeMultiplier} currentTimeMultiplier={currentTimeMultiplier}/>
         </div>
     </div>
+    </>
   );
 }
 

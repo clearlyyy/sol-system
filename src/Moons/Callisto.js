@@ -20,7 +20,7 @@ function Callisto({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       userControlsRef={userControlsRef}
       hostPosition={hostPosition}
       name="Callisto"
-      distanceThreshold={10}
+      distanceThreshold={20}
       textureUrl="/callisto_texture.jpg"
       size={2410.3}
       color={"grey"}

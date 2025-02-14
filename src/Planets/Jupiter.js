@@ -42,6 +42,8 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       Omega={ 1.005214898855339E+02 }
       meanMotion={ 9.613596887355097E-07 * 86400 }
       j2000MeanAnomaly={ 6.214731499421698E+01 }
+      j2000Rotation={188.147221}
+      siderealPeriod={9.925}
       targetId="599"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

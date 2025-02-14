@@ -6,3 +6,13 @@
   justify-self: center;
   width: 200%;
 }
+
+@media (max-width: 700px) {
+  .time-slider {
+    width: 100%;
+  }
+
+  .knob {
+    r: 20px;
+  }
+}

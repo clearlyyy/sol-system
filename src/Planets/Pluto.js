@@ -30,7 +30,7 @@ function Pluto({daysSinceJ2000, userControlsRef, ...props}) {
       orbitSpeed={0.002}
       tilt={120.5}
       orbitRadius={5}
-      atmosphereColor={"brown"}
+      atmosphereColor={"black"}
       A={ 5.932548642959757E+09 }
       EC={ 2.501324112782218E-01 }
       i={ 1.736678729503515E+01 }
@@ -38,6 +38,8 @@ function Pluto({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 1.104677676773093E+02 }
       meanMotion={ 4.567898962415817E-08 * 86400 }
       j2000MeanAnomaly={ 5.049381029769149E+01 }
+      j2000Rotation={79.520297}
+      siderealPeriod={153}
       targetId="999"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

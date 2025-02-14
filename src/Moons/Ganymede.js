@@ -20,7 +20,7 @@ function Ganymede({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       {...props}
       userControlsRef={userControlsRef}
       hostPosition={hostPosition}
-      distanceThreshold={10}
+      distanceThreshold={20}
       name="Ganymede"
       textureUrl="/ganymede_texture.jpg"
       size={2631}

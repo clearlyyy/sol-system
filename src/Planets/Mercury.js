@@ -38,6 +38,8 @@ function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 4.829968514953469E+01 }
       meanMotion={ 4.736501839898613E-05 * 86400 }
       j2000MeanAnomaly={ 2.717303512882007E+02 }
+      j2000Rotation={338.856597}
+      siderealPeriod={1407.504}
       targetId="199"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

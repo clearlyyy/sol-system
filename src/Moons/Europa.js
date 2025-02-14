@@ -21,13 +21,13 @@ function Europa({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       userControlsRef={userControlsRef}
       hostPosition={hostPosition}
       name="Europa"
-      distanceThreshold={3000}
+      distanceThreshold={20}
       textureUrl="/europa_texture.jpg"
       size={1560.8}
       color={"grey"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
-      tilt={23.5}
+      tilt={0.1}
       orbitRadius={44}
       atmosphereColor={"black"}
       A={ 6.712584086671803E+05 }

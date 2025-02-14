@@ -31,7 +31,7 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       orbitSpeed={0.002}
       tilt={177.4}
       orbitRadius={5}
-      atmosphereColor={"#C2B280"}
+      atmosphereColor={"#EED6A4"}
       A={ 1.082091114849111E+08 }
       EC={ 6.746020028596929E-03 }
       i={ 3.394369649329146E+00 }
@@ -39,6 +39,8 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 7.661172857123719E+01 }
       meanMotion={ 1.854313817536282E-05 * 86400 }
       j2000MeanAnomaly={ 3.458433182420262E+02 }
+      j2000Rotation={42.432535}
+      siderealPeriod={5832.443616}
       targetId="299"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

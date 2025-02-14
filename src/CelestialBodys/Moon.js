@@ -93,7 +93,8 @@ function Moon({
     mass,
     gravity,
     density,
-    escapeVelocity
+    escapeVelocity,
+    atmosphere
 }) {
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
@@ -216,19 +217,19 @@ function Moon({
       return new THREE.Vector3(xFinal, yFinal, zFinal);
     };
 
-    useEffect(() => {
-      if (planetRef.current) {
-        const trueAnomaly2 = degToRad(trueAnomaly); // Example true anomaly in degrees (convert to radians)
-        const position = calculatePositionFromTrueAnomaly(((A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
-        planetRef.current.position.copy(position);
-      }
-    }, [moonOrbitalPathScaling, planetScaling, trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
+    //useEffect(() => {
+    //  if (planetRef.current) {
+    //    const trueAnomaly2 = degToRad(trueAnomaly); // Example true anomaly in degrees (convert to radians)
+    //    //const position = calculatePositionFromTrueAnomaly(((A * planetScaling) / moonOrbitalPathScaling ) / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
+    //    //planetRef.current.position.copy(position);
+    //  }
+    //}, [moonOrbitalPathScaling, planetScaling, trueAnomaly, A, EC, i, omega, Omega]); // Dependencies to recalculate if any of these change
 
 
     
 
     //Update the moons position every frame.
-    useFrame(() => {
+    useFrame((state, delta) => {
       if (MoonRef.current && hostPosition && planetRef.current)
       {
         const trueAnomalyRad = degToRad(trueAnomaly);
@@ -240,9 +241,15 @@ function Moon({
           omega,
           Omega
         );
-        if (name === "Luna (The Moon)") { console.log(orbitalOffset); }
-        planetRef.current.position.copy(orbitalOffset);
+        
         MoonRef.current.position.copy(hostPosition.current);
+        planetRef.current.position.copy(orbitalOffset);
+
+        if (name == "Luna (The Moon)") {
+          planetRef.current.lookAt(hostPosition.current);
+          planetRef.current.rotation.y += degToRad(290);
+        }
+
       }
     })
     
@@ -271,6 +278,9 @@ function Moon({
             <meshPhongMaterial map={texture} />
 
             {/* Atmospheric Glow Effect */}
+            { atmosphere && <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={atmosphere}>
+                          <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 32, 32]}/>
+                        </mesh> }
             
             {/* Planetary Indicator Circle,\*/}
             <MoonIndicator distanceThreshold={distanceThreshold} hostPosition={hostPosition} type={"moon"} userControlsRef={userControlsRef} name={name} color={color}/>

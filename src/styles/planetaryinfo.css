@@ -14,7 +14,15 @@
     border: 2px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
     transition: left 0.5s ease-in-out;
+    max-height: 90%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+
+.planetaryinfo-container::-webkit-scrollbar {
+    display: none;
+  }
 
 .planetaryinfo-container.visible {
     left: 0px;
@@ -109,4 +117,24 @@
 
 .dropdown-button.fa-chevron-right {
     transform: rotate(0deg); /* Rightward arrow */
+}
+
+
+@media (max-width: 700px) {
+    .planetaryinfo-container {
+        z-index: 10;
+        left: -200%;
+        width: 90%;
+        background-color: #2e3440c4;
+        top: 50%;
+    }
+    .planetaryinfo-container.visible {
+        left: 0px;
+    }
+
+    .mobile-margin {
+        margin-bottom: 50px;
+    }
+
+
 }

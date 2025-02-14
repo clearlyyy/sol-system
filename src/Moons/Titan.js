@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Moon from "../CelestialBodys/Moon";
 
+import { getFresnelMat } from "../Shaders/getFresnelMat";
+import { planetScaling } from "../App";
+
 function Titan({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
   const { delay = 0 } = props; // Default delay is 0 if not provided
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +47,7 @@ function Titan({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={1.352}
 			density={1.88}
 			escapeVelocity={2.64}
+      atmosphere={getFresnelMat("#E2903D", 0x000000, 0.01, 0.5, planetScaling)}
     />
   ) : null; // Don't render anything before the delay
 }

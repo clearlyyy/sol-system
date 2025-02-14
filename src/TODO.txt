@@ -6,6 +6,10 @@ Done: Set all Planets and Moons to calculate mean motion in deg/day, NASA provid
 Done: Figure out why moons true anomalys aren't being calculated properly.
 Done: Implement every single major moon.
 Done: Fix Moon Physical Characteristics
-Implement Moon Atmospheres.
-Fix HTML indictors glitching when they move.
+Done: Implement Planet rotations
+Done: Fix HTML indictors glitching when they move.
+Done: Implement Moon Atmospheres.
+
+
+Implement Mean Surface Temperatures, Night and Day 
 

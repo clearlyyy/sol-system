@@ -53,20 +53,47 @@ function App() {
 
   const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
 
+  const [controlsLoaded, setControlsLoaded] = useState(false);
+
   //Table Data for PlanetaryInfo 
   const [tableData, setTableData] = useState([]);
 
   //Update the date every second based on timeMultiplier.
   useEffect(() => {
-    const interval = setInterval(() => {
+    let animationFrameId;
+    let lastUpdateTime = performance.now();
+  
+    const updateDate = () => {
+      const now = performance.now();
+      const elapsedTime = now - lastUpdateTime; // Time since last update in milliseconds
+  
+      const timeToAdd = elapsedTime * timeMultiplier;
+  
       setCurrentDate((prevDate) => {
-        const newDate = new Date(prevDate.getTime() + 1 * timeMultiplier);
+        const newDate = new Date(prevDate.getTime() + timeToAdd);
         daysSinceJ2000.current = getDaysSinceJ2000(newDate);
         return newDate;
-      })
-    }, 1);
-    return () => clearInterval(interval);
+      });
+  
+      lastUpdateTime = now; // Update the last update time
+      animationFrameId = requestAnimationFrame(updateDate); // Schedule the next update
+    };
+  
+    // Start the animation loop
+    animationFrameId = requestAnimationFrame(updateDate);
+  
+    // Cleanup on unmount or when timeMultiplier changes
+    return () => cancelAnimationFrame(animationFrameId);
   }, [timeMultiplier]);
+
+  //Delay User Controls from loading instantly.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setControlsLoaded(true);
+    }, 1000); // 1-second delay
+    return () => clearTimeout(timer);
+  }, []);
+
 
   const handleTimeMultiplier = (e) => {
     setTimeMultiplier(e);
@@ -115,7 +142,7 @@ function App() {
         {/* Lighting */}
         <ambientLight intensity={0.1} />
         
-        <Perf position='bottom-right' logsPerSecond={1}/>
+        {/* <Perf position='bottom-right' logsPerSecond={1}/> */}
 
         {/* Star Field */}
         <Stars ref={starsRef} layers={1} radius={10000} raycast={null} ignorePointer />
@@ -135,14 +162,14 @@ function App() {
         <Pluto delay={120} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>
 
         {/* Camera Controls */}
-        <UserControls
+        {controlsLoaded && <UserControls
         ref={userControlsRef} 
         followBody={followBody} 
         setFollowBody={setFollowBody} 
         setTableData={setTableData} 
         setIsPlanetaryInfoVisible={setIsPlanetaryInfoVisible}
         selectedBody={selectedBody}
-        setSelectedBody={setSelectedBody}/>
+        setSelectedBody={setSelectedBody}/> }
 
         
       </Canvas>
@@ -153,19 +180,13 @@ function App() {
          followingBody={followBody}
          setFollowBody={setFollowBody}
          currentDate={currentDate} 
+         setCurrentDate={setCurrentDate}
          timeMultiplier={timeMultiplier}
          onChangeTimeMultiplier={handleTimeMultiplier}
          selectedBody={selectedBody}
          />
 
-      <input
-        type="range"
-        min="1"
-        max="1000"
-        step="0.1"
-        defaultValue={planetScaling}
-        onChange={handlePlanetScalingChange}
-      />
+      
 
     </div>
   );

@@ -57,6 +57,10 @@ body {
     border-radius: 40px;
 }
 
+.time-button:hover {
+    cursor: pointer;
+}
+
 .time-display {
     width: 180px;
     text-align: center;
@@ -100,6 +104,52 @@ body {
     transition: opacity 0.5s ease;
 }
 
+.live-container {
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    color: #a7a9ad;
+    position: absolute;
+    top: 95%;
+    left: 2%;
+    background-color: #2e3440;
+    height: 40px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.live-container:hover {
+    background-color: #93b54a33;
+    color: #a7a9ad;
+    cursor: pointer;
+}
+
+.live-container h4 {
+    font-size: 20px;
+}
+
+.live-circle {
+    color: #4c566a;
+    margin-right: 8px;
+}
+
+.live-circle.live {
+    color: #93b54a;
+    margin-right: 8px;
+}
+
+.live-text.live {
+    color: #93b54a;
+    padding: 10px;
+}
+
+.live-text {
+    color: #4c566a;
+    padding: 10px;
+}
+
 .follow-body-circle {
     color: #93b54a;
     margin-right: 8px;
@@ -131,5 +181,44 @@ body {
     100% {
         background-color: #402e2e;
     }
+
+}
+
+
+@media (max-width: 700px) {
+    .controls-container {
+        bottom: 10%;
+        width: 100%;
+    }
+
+    .current-date {
+        font-size: 80%;
+    }
+    
+    .time-display {
+        padding: 0px;
+        margin: 0;
+    }
+
+    .live-container {
+        z-index: 9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        color: #a7a9ad;
+        position: absolute;
+        top: 85%;
+        left: 2%;
+        background-color: #2e3440;
+        height: 40px;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    
+
+    
 
 }

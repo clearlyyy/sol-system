@@ -74,6 +74,15 @@ const generateOrbitalPath = (A, EC, i, omega, Omega, numPoints = 500) => {
   return points;
 };
 
+function getCurrentRotation(daysSinceJ2000, j2000Rotation, offset, siderealRotation) {
+  const rotationPerDay = (360 / siderealRotation) * 24;
+
+  const totalRotation = j2000Rotation + (rotationPerDay * daysSinceJ2000);
+  const currentRotation = (totalRotation - offset) % 360;
+  return currentRotation < 0 ? currentRotation + 360 : currentRotation;
+}
+
+
 
 function Planet({
     setHostPosition,
@@ -99,6 +108,8 @@ function Planet({
     meanMotion,
     j2000MeanAnomaly,
     j2000TrueAnomaly,
+    j2000Rotation,
+    siderealPeriod,
     targetId,
     children,
     hasClouds,
@@ -165,6 +176,10 @@ function Planet({
         }
     }, [tilt]);
 
+    useEffect(() => {
+      const rot = getCurrentRotation(daysSinceJ2000, j2000Rotation, 90, siderealPeriod);
+      planetRef.current.rotation.y = degToRad(rot);
+    }, [daysSinceJ2000])
 
   
       
@@ -202,13 +217,13 @@ function Planet({
       return new THREE.Vector3(xFinal, yFinal, zFinal);
     };
 
-    useEffect(() => {
+    useFrame(() => {
       if (planetRef.current) {
         const trueAnomaly2 = degToRad(trueAnomaly); 
         const position = calculatePositionFromTrueAnomaly(A / scalingFactor, EC, trueAnomaly2, i, omega, Omega);
         planetRef.current.position.copy(position);
       }
-    }, [planetScaling, trueAnomaly, A, EC, i, omega, Omega]); 
+    }); 
 
     
     useEffect(() => {
@@ -249,8 +264,8 @@ function Planet({
       if (planetRef.current && setHostPosition)
       {
         const worldPosition = new THREE.Vector3;
-        planetRef.current.getWorldPosition(worldPosition);
-        setHostPosition.current = worldPosition;
+        planetRef.current.getWorldPosition(setHostPosition.current);
+        
       }
     })
 
@@ -274,11 +289,7 @@ function Planet({
             <mesh ref={atmosphereRef} position={[0, 0, 0]}  raycast={() => {}} material={fresnelMat}>
               <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.1, 32, 32]}/>
             </mesh>
-            {/* 
-            <mesh ref={atmosphereRef2} position={[0, 0, 0]} raycast={() => {}} material={atmosphereMaterial}>
-              <sphereGeometry raycast={() => {}} args={[(scaledSize * planetScaling) * 1.05, 32, 32]}/>
-            </mesh>
-            */}
+            
 
             {hasClouds && <EarthCloud size={scaledSize * planetScaling * 1.02} />}
 

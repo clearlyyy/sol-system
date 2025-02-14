@@ -41,6 +41,8 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       Omega={ 1.319527478357895E+02 }
       meanMotion={ 6.882381472728602E-08 * 86400 }
       j2000MeanAnomaly={ 3.189794970194312E+02 }
+      j2000Rotation={284.003736}
+      siderealPeriod={16.11}
       targetId="899"
       hasClouds={false}
       daysSinceJ2000={daysSinceJ2000}

@@ -209,3 +209,48 @@ body {
     background-color: #5f7432;
 }
 
+
+@media (max-width: 700px) {
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        margin: 20px auto;
+        border-radius: 30px;
+        border: 2px;
+        width: 92%;
+        height: 149px;
+        background-color: #2e3440;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        height: 78px;
+        
+    }
+
+    .Planets {
+        width: 200%;
+    }
+
+    .fact-message-style {
+        display: none;
+    }
+
+    .nav-middle-button-container {
+        width: 10px;
+    }
+
+    .nav-middle-button {
+        user-select: none; /* Disable text selection */
+
+        padding: 9px;
+    }
+
+    .nav-middle-button h3 {
+        font-size: 80%;
+    }
+    
+
+    .nav-middle img {
+        width: 15%;
+        margin: 10px;
+    }
+}
+
