@@ -24,7 +24,7 @@ function Luna({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Phobos"
       textureUrl="/phobos_texture.jpg"
       size={11}
-      color={"grey"}
+      color={"#B84E36"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}

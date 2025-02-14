@@ -24,7 +24,7 @@ function Luna({daysSinceJ2000,  hostPosition, userControlsRef, ...props}) {
       distanceThreshold={10}
       textureUrl="/deimos_texture.jpg"
       size={6.2}
-      color={"grey"}
+      color={"#B84E36"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}

@@ -23,7 +23,7 @@ function Triton({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Triton"
       textureUrl="/oberon_texture.jpg"
       size={761.4}
-      color={"grey"}
+      color={"#2D5B9A"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

@@ -26,7 +26,7 @@ function Titan({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Titan"
       textureUrl="/titan_texture.jpg"
       size={2575}
-      color={"grey"}
+      color={"#e2bf7d"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={27}

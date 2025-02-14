@@ -23,7 +23,7 @@ function Enceladus({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Enceladus"
       textureUrl="/enceladus_texture.jpg"
       size={561.4}
-      color={"grey"}
+      color={"#e2bf7d"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

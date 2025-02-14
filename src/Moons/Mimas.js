@@ -23,7 +23,7 @@ function Mimas({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Mimas"
       textureUrl="/mimas_texture.jpg"
       size={198.2}
-      color={"grey"}
+      color={"#e2bf7d"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0.06}

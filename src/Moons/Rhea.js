@@ -23,7 +23,7 @@ function Rhea({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Rhea"
       textureUrl="/rhea_texture.jpg"
       size={763.8}
-      color={"grey"}
+      color={"#e2bf7d"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0.35}

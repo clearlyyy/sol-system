@@ -23,7 +23,7 @@ function Miranda({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Miranda"
       textureUrl="/miranda_texture.png"
       size={235.8}
-      color={"grey"}
+      color={"#ACE5EE"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

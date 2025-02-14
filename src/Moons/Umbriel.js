@@ -23,7 +23,7 @@ function Umbriel({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Umbriel"
       textureUrl="/umbriel_texture.jpg"
       size={584.7}
-      color={"grey"}
+      color={"#ACE5EE"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

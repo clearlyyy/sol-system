@@ -23,7 +23,7 @@ function Dione({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Dione"
       textureUrl="/dione_texture.jpg"
       size={561}
-      color={"grey"}
+      color={"#e2bf7d"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0.06}

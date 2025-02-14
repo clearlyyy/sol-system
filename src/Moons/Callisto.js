@@ -23,7 +23,7 @@ function Callisto({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       distanceThreshold={20}
       textureUrl="/callisto_texture.jpg"
       size={2410.3}
-      color={"grey"}
+      color={"#D9A066"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={23.5}

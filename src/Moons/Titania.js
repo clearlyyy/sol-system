@@ -23,7 +23,7 @@ function Titania({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Titania"
       textureUrl="/titania_texture.jpg"
       size={788}
-      color={"grey"}
+      color={"#ACE5EE"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

@@ -23,7 +23,7 @@ function Ariel({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Ariel"
       textureUrl="/ariel_texture.png"
       size={578.9}
-      color={"grey"}
+      color={"#ACE5EE"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}

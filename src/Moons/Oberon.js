@@ -23,7 +23,7 @@ function Oberon({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       name="Oberon"
       textureUrl="/oberon_texture.jpg"
       size={761.4}
-      color={"grey"}
+      color={"#ACE5EE"}
       rotationSpeed={0.01}
       orbitSpeed={0.001}
       tilt={0}
