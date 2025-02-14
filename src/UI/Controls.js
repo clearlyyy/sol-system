@@ -7,7 +7,7 @@ import DraggablePath from './RangeSlider';
 import "../styles/controls.css"
 import "../styles/timeslider.css"
 
-function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody }) {
+function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody, notToScale, setToScale }) {
 
 
     const [currentTimeMultiplier, setCurrentTimeMultiplierState] = useState("");
@@ -147,6 +147,15 @@ function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMult
          LIVE
         </h4>
     </div>
+
+    { notToScale && <div title="You altered some settings in the Tools Menu, change them back to 1x for proper scaling" className="notscale-container">       
+      <h4 
+        onClick={() => setToScale()}
+        className={`live-text.live`}>
+        <i className={`fa fa-circle live-circle ${isLive ? "live" : ""}`}> </i> 
+         NOT TO SCALE
+        </h4>
+    </div> }
     <div className="controls-container">
           <div className={`following-body-container ${followingBody ? 'visible' : ''}`}>       
             <h4 

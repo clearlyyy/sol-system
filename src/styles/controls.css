@@ -110,7 +110,7 @@ body {
     justify-content: space-between;
     align-items: center;
     justify-content: center;
-    color: #a7a9ad;
+    color: #93b54a;
     position: absolute;
     top: 95%;
     left: 2%;
@@ -118,6 +118,29 @@ body {
     height: 40px;
     opacity: 1;
     transition: opacity 0.5s ease;
+}
+
+.notscale-container {
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    color: #93b54a;
+    padding-right: 10px;
+    padding-left: 10px;
+    position: absolute;
+    top: 95%;
+    right: 2%;
+    background-color: #2e3440;
+    height: 40px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.notscale-container:hover {
+    cursor: pointer;
+    background-color: #31402e;
 }
 
 .live-container:hover {
@@ -212,6 +235,23 @@ body {
         top: 85%;
         left: 2%;
         background-color: #2e3440;
+        height: 40px;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    .notscale-container {
+        z-index: 9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        color: #93b54a80;
+        background-color: #ffffff00;
+        position: absolute;
+        top: 85%;
+        right: 2%;
         height: 40px;
         opacity: 1;
         transition: opacity 0.5s ease;

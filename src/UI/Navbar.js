@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 
 import "../styles/navbar.css"
 
-function Navbar({userControlsRef}) {
+function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
 
     const [showPlanets, setShowPlanets] = useState(false);// For Planets Container
     const [showMoons, setShowMoons] = useState(false);// For Moons Container
@@ -155,7 +155,7 @@ function Navbar({userControlsRef}) {
         </div>
 
             <div className="nav-middle-button-container">
-                <div className="nav-middle-button">
+                <div onClick={() => setisToolsVisible(!isToolsVisible)}className="nav-middle-button">
                     <h3><i className="fa fa-wrench"></i> Tools</h3>
                 </div>
             </div>

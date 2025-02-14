@@ -2,6 +2,8 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, Html } from "@react-three/drei";
 import { useRef, useEffect, useCallback, useState } from "react";
 
+import { planetScaling } from "../App";
+
 import '../styles/indicators.css'
 
 function PlanetIndicator({name, color, userControlsRef, distanceThreshold}) {

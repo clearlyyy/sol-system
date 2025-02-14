@@ -11,6 +11,7 @@ import { Perf } from 'r3f-perf'
 import Navbar from "./UI/Navbar.js"
 import Controls from "./UI/Controls.js"
 import PlanetaryInfo from './UI/PlanetaryInfo.js';
+import Tools from './UI/Tools.js';
 
 import Earth from "./Planets/Earth";
 import Mercury from "./Planets/Mercury";
@@ -22,6 +23,7 @@ import Uranus from "./Planets/Uranus.js";
 import Neptune from "./Planets/Neptune.js";
 import Pluto from "./Planets/Pluto.js";
 import Sun from "./CelestialBodys/Sun.js";
+
 import UserControls from "./UserControls/UserControls.js";
 
 export var scalingFactor = 0.0495239195637494e7;
@@ -52,6 +54,8 @@ function App() {
   const [selectedBody, setSelectedBody] = useState(null);
 
   const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
+  const [isToolsVisible, setIsToolsVisible] = useState(false);
+  const [isToScale, setIsToScale] = useState(true);
 
   const [controlsLoaded, setControlsLoaded] = useState(false);
 
@@ -94,6 +98,15 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  //Check if scene is to proper scale;
+  useEffect(() => {
+    if (planetScaling == 1 && moonOrbitalPathScaling == 1 && sunScaling == 1 ) {
+      setIsToScale(true);
+    } else {
+    setIsToScale(false);
+    }
+  }, [planetScaling, moonOrbitalPathScaling, sunScaling, scalingFactor])
+
 
   const handleTimeMultiplier = (e) => {
     setTimeMultiplier(e);
@@ -101,22 +114,29 @@ function App() {
 
 
   const handlePlanetScalingChange = (e) => {
-    setPlanetScalingState(e.target.value);
-    planetScaling = e.target.value;  // Update global variable
+    setPlanetScalingState(e);
+    planetScaling = e;  // Update global variable
   };
 
   const handleMoonOrbitalPathScalingChange = (e) => {
-    setMoonOrbitalPathScalingState(e.target.value);
-    moonOrbitalPathScaling = e.target.value;  // Update global variable
+    setMoonOrbitalPathScalingState(e);
+    moonOrbitalPathScaling = e;  // Update global variable
   };
+
+  const setToScale = () => {
+    handlePlanetScalingChange(1);
+    handleMoonOrbitalPathScalingChange(1);
+  }
 
   return (
     <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
 
       {/* Navbar */}
-      <Navbar userControlsRef={userControlsRef}/>
+      <Navbar userControlsRef={userControlsRef} isToolsVisible={isToolsVisible} setisToolsVisible={setIsToolsVisible}/>
       <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} setIsVisible={setIsPlanetaryInfoVisible} selectedObject={selectedBody}/>
-      
+      <Tools isVisible={isToolsVisible} setIsVisible={setIsToolsVisible} setPlanetScalingState={setPlanetScalingState}
+             handlePlanetScalingChange={handlePlanetScalingChange}
+             handleMoonOrbitalPathScalingChange={handleMoonOrbitalPathScalingChange}/>
       
 
       <div style={{ 
@@ -184,6 +204,8 @@ function App() {
          timeMultiplier={timeMultiplier}
          onChangeTimeMultiplier={handleTimeMultiplier}
          selectedBody={selectedBody}
+         notToScale={!isToScale}
+         setToScale={setToScale}
          />
 
       

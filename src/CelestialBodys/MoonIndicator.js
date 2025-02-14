@@ -3,8 +3,9 @@ import { Text, Html } from "@react-three/drei";
 import { useRef, useEffect, useCallback, useState } from "react";
 import * as THREE from 'three';
 
+import { planetScaling } from "../App";
+
 import '../styles/indicators.css'
-import { object } from "framer-motion/client";
 
 function MoonIndicator({name, color, userControlsRef, hostPosition, distanceThreshold}) {
   const ref = useRef();
@@ -27,7 +28,7 @@ function MoonIndicator({name, color, userControlsRef, hostPosition, distanceThre
       planetObject.getWorldPosition(objectPosition);
       const distanceToPlanet = camera.position.distanceTo(objectPosition);
       
-      if (distanceToPlanet > 10) {
+      if (distanceToPlanet > 10 * planetScaling) {
           setIsDissolved(true);
       }
       else {

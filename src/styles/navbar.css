@@ -106,6 +106,8 @@ body {
     align-items: center; /* Center content vertically */
     border-left: 1px solid #4c566a;
     flex-direction: column;
+
+
 }
 
 .nav-middle-button-container:hover .Planets {
@@ -148,6 +150,11 @@ body {
     width: 100%; /* Ensure it takes up all available space */
     height: 100%; /* Ensure it takes up full height of the container */
 }
+
+.nav-middle-button-container:last-child .nav-middle-button {
+    border-bottom-right-radius: 30px;
+}
+
 
 .nav-middle-button:hover {
     background-color: #5f7432;
