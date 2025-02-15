@@ -8,13 +8,12 @@ import { scalingFactor, planetScaling } from "../App";
 const UserControls = React.forwardRef(
   (
     {
-      setTableData,
       setIsPlanetaryInfoVisible,
-      canvasRef,
       followBody,
       setFollowBody,
       selectedBody,
       setSelectedBody,
+      orbitControlsRef,
     },
     ref
   ) => {
@@ -30,7 +29,6 @@ const UserControls = React.forwardRef(
 
     const animationSpeed = 0.0005;
     const raycaster = new THREE.Raycaster();
-    const orbitControlsRef = useRef();
     const selectedBodyPositionRef = useRef(new THREE.Vector3());
 
     let mouseDownTime = 0;

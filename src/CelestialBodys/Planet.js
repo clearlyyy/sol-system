@@ -298,7 +298,7 @@ function Planet({
 
             {hasClouds && <EarthCloud size={scaledSize * planetScaling * 1.02} />}
 
-            {name == "Saturn" && <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
+            {name == "Saturn" && <mesh raycast={() => {}} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
               {/* Outer Ring */}
               <ringGeometry args={[((scaledSize * planetScaling) * 0.058) + (scaledSize * planetScaling), ((scaledSize * planetScaling) * 1.5) + (scaledSize * planetScaling), 128]} />
               <meshBasicMaterial map={ring_texture} transparent={true} opacity={1} side={THREE.DoubleSide}/>

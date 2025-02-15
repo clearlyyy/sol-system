@@ -91,7 +91,7 @@ function EarthCloud({ size }) {
   }
 
   return (
-    <mesh raycast={() => {}} ref={meshRef}>
+    <mesh name="clouds" raycast={() => {}} ref={meshRef}>
       <sphereGeometry args={[size, 32, 32]} />
       <meshPhongMaterial
         map={texture } 

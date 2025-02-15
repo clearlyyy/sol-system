@@ -7,7 +7,7 @@ import DraggablePath from './RangeSlider';
 import "../styles/controls.css"
 import "../styles/timeslider.css"
 
-function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody, notToScale, setToScale }) {
+function Controls({orbitControlsRef, currentDate, setCurrentDate, timeMultiplier, onChangeTimeMultiplier, followingBody, setFollowBody, setIsPlanetaryInfoVisible, selectedBody, notToScale, setToScale }) {
 
 
     const [currentTimeMultiplier, setCurrentTimeMultiplierState] = useState("");
@@ -142,6 +142,15 @@ function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMult
       }, [selectedBody]);
       
 
+      const zoomIn = () => {
+        orbitControlsRef.current.dollyOut(1.5);
+        orbitControlsRef.current.update();
+
+      }
+      const zoomOut = () => {
+        orbitControlsRef.current.dollyIn(1.5);
+        orbitControlsRef.current.update();
+      }
 
       
 
@@ -155,6 +164,20 @@ function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMult
          LIVE
         </h4>
     </div>
+
+    <div className="zoom-container">       
+      <h4 
+        onClick={() => zoomIn()}
+        className={`zoom-text`}>      
+         +
+        </h4>
+        <h4 
+        onClick={() => zoomOut()}
+        className={`zoom-text`}>
+         -
+        </h4>
+    </div>
+    
 
     { notToScale && <div title="You altered some settings in the Tools Menu, change them back to 1x for proper scaling" className="notscale-container">       
       <h4 

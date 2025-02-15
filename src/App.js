@@ -44,6 +44,7 @@ function App() {
   const starsRef = useRef();
   const canvasRef = useRef(null);
   const userControlsRef = useRef();
+  const orbitControlsRef = useRef();
 
   const [planetScalingState, setPlanetScalingState] = useState(planetScaling);
   const [moonOrbitalPathScalingState, setMoonOrbitalPathScalingState] = useState(moonOrbitalPathScaling);
@@ -183,6 +184,7 @@ function App() {
 
         {/* Camera Controls */}
         {controlsLoaded && <UserControls
+        orbitControlsRef={orbitControlsRef}
         ref={userControlsRef} 
         followBody={followBody} 
         setFollowBody={setFollowBody} 
@@ -196,6 +198,7 @@ function App() {
       </div>
     
         <Controls
+         orbitControlsRef={orbitControlsRef}
          setIsPlanetaryInfoVisible={setIsPlanetaryInfoVisible}
          followingBody={followBody}
          setFollowBody={setFollowBody}

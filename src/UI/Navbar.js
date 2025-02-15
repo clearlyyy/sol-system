@@ -22,26 +22,6 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
         Pluto: []
     };
 
-    const factsList = [
-        "The Sun makes up more than 99% of the mass of our solar system.",
-        "Jupiter is the largest planet in the solar system and has a mass 318 times that of Earth.",
-        "Saturn's rings are made up of ice, rock, and dust particles.",
-        "Venus has a surface temperature hotter than Mercury’s, despite being farther from the Sun.",
-        "Mars has the largest volcano in the solar system, Olympus Mons.",
-        "The asteroid belt between Mars and Jupiter contains millions of asteroids.",
-        "Neptune's winds are the fastest in the solar system, reaching up to 1,200 miles per hour.",
-        "Uranus rotates on its side, with its axis tilted at about 98 degrees.",
-        "Mercury has no atmosphere and experiences extreme temperature fluctuations.",
-        "Earth is the only known planet to support life.",
-        "The moon Titan, orbiting Saturn, has lakes and rivers made of liquid methane.",
-        "Pluto was reclassified as a dwarf planet by the International Astronomical Union in 2006.",
-        "The Great Red Spot on Jupiter is a storm that has been raging for at least 400 years.",
-        "The solar system's outermost boundary is called the Oort Cloud, a region filled with icy bodies.",
-        "Earth's magnetic field helps protect it from the Sun's harmful solar winds.",
-        "Venus has a day longer than its year, taking 243 Earth days to rotate once."
-    ];
-
-
 
    
   const handlePlanetsClick = (event) => {

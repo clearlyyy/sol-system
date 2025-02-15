@@ -120,6 +120,35 @@ body {
     transition: opacity 0.5s ease;
 }
 
+.zoom-container {
+    border-radius: 5px;
+    display: flex;
+    right: 2%;
+    bottom: 7%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    color: #93b54a;
+    position: absolute;
+    background-color: #2e3440;
+    width: 30px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    border: 1px solid;
+    user-select: none;
+}
+
+.zoom-text {
+    padding: 10px;
+    margin: 0px;
+}
+
+.zoom-text:hover {
+    background-color: #414a5c;
+    cursor: pointer;
+}
+
 .notscale-container {
     border-radius: 5px;
     display: flex;
@@ -210,7 +239,7 @@ body {
 
 @media (max-width: 700px) {
     .controls-container {
-        bottom: 10%;
+        bottom: 10vh;
         width: 100%;
     }
 
@@ -257,6 +286,24 @@ body {
         transition: opacity 0.5s ease;
     }
 
+    .zoom-container {
+        border-radius: 5px;
+        display: flex;
+        right: 2%;
+        bottom: 45%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        color: #93b54a;
+        position: absolute;
+        background-color: #2e3440;
+        width: 30px;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        border: 1px solid;
+        user-select: none;
+    }
     
 
     
