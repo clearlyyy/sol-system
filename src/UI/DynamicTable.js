@@ -19,9 +19,23 @@ export const DynamicTable = ({ data, selectedBody, type }) => {
     {   
         if (selectedBody.name == "Sun")
         {
-            data = ([
-                { label: "No Orbital Information for The Sun", value: ":(" }
-            ])
+            if (type == "Orbital Information") {
+                data = ([
+                    { label: "No Orbital Information For the Sun." }
+                    
+                  ]);
+            }
+            else if (type =="Physical Characteristics") {
+                const customData = selectedBody.userData;
+                data = ([
+                    { label: "Diameter", value: (customData.size * 2).toLocaleString() + " km" },
+                    { label: "Mass", value: getSciNotation(customData.mass) + " kg"},
+                    { label: "Surface Gravity", value: customData.gravity.toFixed(2) + "m/s²" + " (" + (customData.gravity / 9.81 ).toFixed(1) + "g)" },
+                    { label: "Density", value: customData.density.toFixed(2) + " g/cm³" },
+                    { label: "Axial Tilt", value: customData.tilt.toFixed(1) + "°" },
+                    
+                  ]);
+            }
         }
         else {
             if (type == "Orbital Information") {

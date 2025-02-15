@@ -168,7 +168,7 @@ function App() {
         <Stars ref={starsRef} layers={1} radius={10000} raycast={null} ignorePointer />
 
         
-        <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} />
+        <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} type="Yellow Dwarf Star" mass={1.989e30} gravity={274} density={1.41} tilt={7.25} />
 
         {/* Planets */}
         <Mercury delay={50} position={[0, 0, 0]} scalingFactor={scalingFactor} daysSinceJ2000={daysSinceJ2000.current} userControlsRef={userControlsRef}/>

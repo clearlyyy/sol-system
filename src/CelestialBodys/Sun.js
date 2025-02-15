@@ -3,17 +3,23 @@ import { useThree } from "@react-three/fiber";
 import FakeGlowMaterial from "../Shaders/FakeGlowMaterial";
 import { scalingFactor, planetScaling, sunScaling } from "../App"
 
-function Sun({size}) {
+function Sun({size, type, mass, gravity, density, tilt}) {
   const lightRef = useRef();
   const meshRef = useRef();
   const sunRef = useRef();
 
   const [scaledSize, setScaledSize] = useState(size * (planetScaling / sunScaling) / scalingFactor);
-  
+  const description = "The Sun is a G2V main-sequence star at the center of our Solar System, primarily composed of hydrogen and helium. It provides the energy necessary for life on Earth through nuclear fusion, and its gravitational influence governs the orbits of all objects in the Solar System."
   useEffect(() => {
     setScaledSize(size * (planetScaling / sunScaling) / scalingFactor);
     meshRef.current.userData = {
-      size
+      size,
+      description,
+      type,
+      mass,
+      gravity,
+      density,
+      tilt
     }
   },[size])
 
