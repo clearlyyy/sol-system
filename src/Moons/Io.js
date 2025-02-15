@@ -45,6 +45,9 @@ function Io({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={1.796}
 			density={3.53}
 			escapeVelocity={2.56}
+      siderealPeriod={42.46}
+      meanTempDay={-130}
+			meanTempNight={-140}
     />
   ) : null; // Don't render anything before the delay
 }

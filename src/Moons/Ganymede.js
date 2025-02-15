@@ -45,6 +45,10 @@ function Ganymede({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={1.428}
 			density={1.94}
 			escapeVelocity={2.741}
+      siderealPeriod={171.60}
+      meanTempDay={-145}
+			meanTempNight={-185}
+
     />
   ) : null; // Don't render anything before the delay
 }

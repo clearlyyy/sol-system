@@ -44,6 +44,9 @@ function Miranda({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.079}
 			density={1.20}
 			escapeVelocity={0.19}
+      siderealPeriod={33.84}
+      meanTempDay={-190}
+			meanTempNight={-210}
     />
   ) : null; // Don't render anything before the delay
 }

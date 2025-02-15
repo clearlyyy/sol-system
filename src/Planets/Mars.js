@@ -54,6 +54,9 @@ function Mars({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={5.03}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={20}
+      meanTempNight={-73}
     
     >
       </Planet>

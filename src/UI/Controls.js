@@ -16,6 +16,14 @@ function Controls({currentDate, setCurrentDate, timeMultiplier, onChangeTimeMult
 
     const [isLive, setisLive] = useState(true);
 
+    useEffect(() => {
+      const now = new Date();
+      const dif = Math.abs(now - currentDate);
+      if (dif > 60000) {
+        setisLive(false);
+      }
+    }, [currentDate])
+
 
     function setToLive() {
       console.log("Going to Live");

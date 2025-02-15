@@ -44,6 +44,9 @@ function Triton({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.779}
 			density={2.06}
 			escapeVelocity={1.45}
+      siderealPeriod={141.12}
+      meanTempDay={-230}
+			meanTempNight={-240}
     />
   ) : null; // Don't render anything before the delay
 }

@@ -44,6 +44,9 @@ function Titania({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.367}
 			density={1.71}
 			escapeVelocity={0.77}
+      siderealPeriod={209.04}
+      meanTempDay={-205}
+			meanTempNight={-215}
     />
   ) : null; // Don't render anything before the delay
 }

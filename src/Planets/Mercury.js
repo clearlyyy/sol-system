@@ -52,6 +52,9 @@ function Mercury({daysSinceJ2000, userControlsRef, ...props}) {
 
       setHostPosition={hostPosition}
 
+      meanTempDay={430}
+      meanTempNight={-180}
+
     />
     
   ) : null;

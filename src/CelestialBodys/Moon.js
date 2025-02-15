@@ -3,14 +3,12 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from 'three';
-import getPlanetPosition from "../old/FetchPlanetPosition"
+import { useGLTF } from "@react-three/drei";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import { SphereGeometry, ShaderMaterial, DoubleSide, MeshStandardMaterial, Line, LineLoop, BufferGeometry, LineBasicMaterial, Vector3, Float32BufferAttribute } from "three";
 import { scalingFactor, planetScaling, moonOrbitalPathScaling } from "../App"
-import generateAtmosphereMaterial, { atmosphereMaterial } from "../Shaders/AtmosphericShader"
-import OrbitalLine from "./OrbitalLine";
 
+import OrbitalLine from "./OrbitalLine";
 import MoonIndicator from "./MoonIndicator";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
@@ -94,12 +92,16 @@ function Moon({
     gravity,
     density,
     escapeVelocity,
-    atmosphere
+    atmosphere,
+    siderealPeriod,
+    meanTempDay,
+    meanTempNight
 }) {
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
     const [points, setPoints] = useState(generateOrbitalPath( ( (A * planetScaling) / moonOrbitalPathScaling  ) / scalingFactor, EC, i, omega, Omega)); // Generate points based on Keplerian data);
+
     const geometryRef = useRef();
     const MoonRef = useRef();
 
@@ -150,6 +152,13 @@ function Moon({
     }, [tilt]);
 
     useEffect(() => {
+          if (name != "Luna (The Moon)") {
+            const rot = 0 + 360 * daysSinceJ2000/siderealPeriod;
+            planetRef.current.rotation.y = degToRad(rot);
+          }
+    }, [daysSinceJ2000])
+
+    useEffect(() => {
           if (planetRef.current) {
             planetRef.current.userData = {
               name,
@@ -170,7 +179,10 @@ function Moon({
               mass,
               gravity,
               density,
-              escapeVelocity
+              escapeVelocity,
+              siderealPeriod,
+              meanTempDay,
+              meanTempNight,
             };
           }
     }, [size, name, trueAnomaly, meanAnomaly]);
@@ -245,7 +257,7 @@ function Moon({
         MoonRef.current.position.copy(hostPosition.current);
         planetRef.current.position.copy(orbitalOffset);
 
-        if (name == "Luna (The Moon)") {
+        if (name == "Luna (The Moon)") { // Luna is tidally locked.
           planetRef.current.lookAt(hostPosition.current);
           planetRef.current.rotation.y += degToRad(290);
         }
@@ -284,7 +296,10 @@ function Moon({
             
             {/* Planetary Indicator Circle,\*/}
             <MoonIndicator distanceThreshold={distanceThreshold} hostPosition={hostPosition} type={"moon"} userControlsRef={userControlsRef} name={name} color={color}/>
-          </mesh>
+          </mesh> 
+
+          
+
         </group>
         </>
     );

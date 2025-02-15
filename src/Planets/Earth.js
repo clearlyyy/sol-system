@@ -60,6 +60,9 @@ function Earth({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={11.19}
       setHostPosition={hostPosition}
 
+      meanTempDay={15}
+      meanTempNight={15}
+
     >
       </Planet>
       <Luna hostPosition={hostPosition} userControlsRef={userControlsRef} daysSinceJ2000={daysSinceJ2000} />

@@ -44,6 +44,9 @@ function Umbriel({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.23}
 			density={1.39}
 			escapeVelocity={0.52}
+      siderealPeriod={99.36}
+      meanTempDay={-205}
+			meanTempNight={-215}
     />
   ) : null; // Don't render anything before the delay
 }

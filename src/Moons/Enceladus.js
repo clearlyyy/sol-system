@@ -44,6 +44,9 @@ function Enceladus({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.113}
 			density={1.61}
 			escapeVelocity={0.24}
+      siderealPeriod={32.88}
+      meanTempDay={-195}
+			meanTempNight={-205}
     />
   ) : null; // Don't render anything before the delay
 }

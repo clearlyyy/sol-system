@@ -44,6 +44,9 @@ function Dione({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.232}
 			density={1.48}
 			escapeVelocity={0.51}
+      siderealPeriod={65.52}
+      meanTempDay={-200}
+			meanTempNight={-208}
     />
   ) : null; // Don't render anything before the delay
 }

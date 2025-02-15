@@ -44,6 +44,9 @@ function Oberon({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.346}
 			density={1.63}
 			escapeVelocity={0.73}
+      siderealPeriod={323.04}
+      meanTempDay={-210}
+			meanTempNight={-220}
     />
   ) : null; // Don't render anything before the delay
 }

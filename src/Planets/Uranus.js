@@ -59,6 +59,9 @@ function Uranus({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={21.3}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={-197}
+      meanTempNight={-197}
     
     
     />

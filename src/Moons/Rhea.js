@@ -44,6 +44,9 @@ function Rhea({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.264}
 			density={1.23}
 			escapeVelocity={0.58}
+      siderealPeriod={108.24}
+      meanTempDay={-190}
+			meanTempNight={-210}
     />
   ) : null; // Don't render anything before the delay
 }

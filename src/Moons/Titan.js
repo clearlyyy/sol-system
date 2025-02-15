@@ -48,6 +48,9 @@ function Titan({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			density={1.88}
 			escapeVelocity={2.64}
       atmosphere={getFresnelMat("#E2903D", 0x000000, 0.01, 0.5, planetScaling)}
+      siderealPeriod={382.80}
+      meanTempDay={-180}
+			meanTempNight={-180}
     />
   ) : null; // Don't render anything before the delay
 }

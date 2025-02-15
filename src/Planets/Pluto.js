@@ -51,6 +51,9 @@ function Pluto({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={1.3}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={-218}
+      meanTempNight={-240}
     
     />
     

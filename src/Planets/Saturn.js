@@ -61,6 +61,9 @@ function Saturn({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={35.5}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={-178}
+      meanTempNight={-178}
     
     >
       </Planet>

@@ -45,6 +45,10 @@ function Europa({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={1.315}
 			density={3.01}
 			escapeVelocity={2.025}
+      siderealPeriod={85.20}
+      meanTempDay={-160}
+			meanTempNight={-180}
+
     />
   ) : null; // Don't render anything before the delay
 }

@@ -53,6 +53,9 @@ function Venus({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={10.36}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={465}
+      meanTempNight={465}
     />
     
   ) : null;

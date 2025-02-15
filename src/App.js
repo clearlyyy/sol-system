@@ -115,12 +115,12 @@ function App() {
 
   const handlePlanetScalingChange = (e) => {
     setPlanetScalingState(e);
-    planetScaling = e;  // Update global variable
+    planetScaling = e; 
   };
 
   const handleMoonOrbitalPathScalingChange = (e) => {
     setMoonOrbitalPathScalingState(e);
-    moonOrbitalPathScaling = e;  // Update global variable
+    moonOrbitalPathScaling = e;  
   };
 
   const setToScale = () => {

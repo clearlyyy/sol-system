@@ -46,6 +46,9 @@ export const DynamicTable = ({ data, selectedBody, type }) => {
                     { label: "Density", value: customData.density.toFixed(2) + " g/cm³" },
                     { label: "Axial Tilt", value: customData.tilt.toFixed(1) + "°" },
                     { label: "Escape Velocity", value: customData.escapeVelocity.toFixed(3) + " km/s" },
+                    { label: "Side Real Period", value: customData.siderealPeriod.toFixed(2) + " hrs" },
+                    { label: "Average Temp (Day)", value: customData.meanTempDay.toFixed(1) + "° C, " + ((customData.meanTempNight * (1.8)) + 32) + "° F"  },
+                    { label: "Average Temp (Night)", value: customData.meanTempNight.toFixed(1) + "° C, " + ((customData.meanTempNight * (1.8)) + 32) + "° F" },
                   ]);
             }
         }

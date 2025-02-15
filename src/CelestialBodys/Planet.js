@@ -120,6 +120,8 @@ function Planet({
     gravity,
     density,
     escapeVelocity,
+    meanTempDay,
+    meanTempNight
 }) {
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
@@ -177,7 +179,7 @@ function Planet({
     }, [tilt]);
 
     useEffect(() => {
-      const rot = getCurrentRotation(daysSinceJ2000, j2000Rotation, 90, siderealPeriod);
+      const rot = getCurrentRotation(daysSinceJ2000, j2000Rotation, 55, siderealPeriod);
       planetRef.current.rotation.y = degToRad(rot);
     }, [daysSinceJ2000])
 
@@ -252,7 +254,10 @@ function Planet({
           mass,
           gravity,
           density,
-          escapeVelocity
+          escapeVelocity,
+          siderealPeriod,
+          meanTempDay,
+          meanTempNight,
         };
       }
     }, [size, name, trueAnomaly, meanAnomaly]);

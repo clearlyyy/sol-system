@@ -44,6 +44,9 @@ function Tethys({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.145}
 			density={0.98}
 			escapeVelocity={0.39}
+      siderealPeriod={45.12}
+      meanTempDay={-185}
+			meanTempNight={-205}
     />
   ) : null; // Don't render anything before the delay
 }

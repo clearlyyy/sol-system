@@ -44,6 +44,9 @@ function Mimas({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 			gravity={0.064}
 			density={1.15}
 			escapeVelocity={0.16}
+      siderealPeriod={22.56}
+      meanTempDay={-200}
+			meanTempNight={-210}
     />
   ) : null; // Don't render anything before the delay
 }

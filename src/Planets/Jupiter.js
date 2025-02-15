@@ -55,6 +55,9 @@ const { delay = 0 } = props; // Default delay is 0 if not provided
       escapeVelocity={59.5}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={-145}
+      meanTempNight={-145}
     
     >
       </Planet>

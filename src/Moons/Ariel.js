@@ -44,6 +44,9 @@ function Ariel({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       gravity={0.27}
       density={1.59}
       escapeVelocity={0.56}
+      siderealPeriod={60.48}
+      meanTempDay={-190}
+			meanTempNight={-210}
     />
   ) : null; // Don't render anything before the delay
 }

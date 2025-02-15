@@ -45,6 +45,9 @@ function Luna({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       gravity={1.62}
       density={3.34}
       escapeVelocity={2.38}
+      siderealPeriod={655.68}
+      meanTempDay={107}
+			meanTempNight={-153}
     />
   ) : null; // Don't render anything before the delay
 }

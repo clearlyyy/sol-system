@@ -44,6 +44,9 @@ function Callisto({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
       escapeVelocity={2.44}
       targetId="504"
       daysSinceJ2000={daysSinceJ2000}
+      siderealPeriod={400.56}
+      meanTempDay={-137}
+			meanTempNight={-191}
     />
   ) : null; // Don't render anything before the delay
 }

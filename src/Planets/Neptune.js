@@ -54,6 +54,9 @@ function Neptune({daysSinceJ2000, userControlsRef, ...props}) {
       escapeVelocity={23.5}
 
       setHostPosition={hostPosition}
+
+      meanTempDay={-201}
+      meanTempNight={-201}
     
     />
     <Triton hostPosition={hostPosition} userControlsRef={userControlsRef}  position={[0,0,0]} daysSinceJ2000={daysSinceJ2000}/>
