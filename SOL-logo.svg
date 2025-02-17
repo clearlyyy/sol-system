@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="55.19009mm"
+   height="15.47043mm"
+   viewBox="0 0 55.19009 15.47043"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="drawing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#2e3440"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.5101623"
+     inkscape:cx="415.79274"
+     inkscape:cy="607.23688"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="343"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="55.19009"
+       height="15.47043"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch5"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#93b54a;stop-opacity:1;"
+         offset="0"
+         id="stop5" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-86.914135,-127.96652)">
+    <path
+       style="font-weight:bold;font-size:19.7556px;font-family:Trueno;-inkscape-font-specification:'Trueno Bold';text-align:end;baseline-shift:baseline;text-anchor:end;fill:#8d9fc4;stroke-width:0.264583"
+       d="m 103.04741,140.86195 c 1.63972,1.34338 4.01039,2.21262 6.32179,2.21262 3.08188,0 5.53157,-1.46191 5.53157,-4.2277 0,-4.99816 -7.30957,-3.63503 -7.30957,-6.02545 0,-0.67169 0.61242,-1.00754 1.52118,-1.00754 1.12607,0 2.96334,0.59267 4.42525,1.44216 l 1.32363,-2.74603 c -1.4224,-0.92851 -3.45723,-1.54094 -5.45255,-1.54094 -3.31894,0 -5.51181,1.61996 -5.51181,4.16844 0,4.89939 7.30957,3.43747 7.30957,5.88717 0,0.79022 -0.69144,1.20509 -1.79776,1.20509 -1.44216,0 -3.57576,-0.82974 -4.99816,-2.07434 z m 12.86088,-4.84013 c 0,4.0499 3.20041,7.09226 7.46761,7.09226 4.28697,0 7.48738,-3.06211 7.48738,-7.09226 0,-4.01038 -3.20041,-7.01323 -7.48738,-7.01323 -4.2672,0 -7.46761,2.98309 -7.46761,7.01323 z m 3.59552,0.0198 c 0,-2.33116 1.778,-4.08941 3.91161,-4.08941 2.1336,0 3.83258,1.75825 3.83258,4.08941 0,2.33116 -1.69898,4.12892 -3.83258,4.12892 -2.11385,0 -3.91161,-1.79776 -3.91161,-4.12892 z m 13.2165,6.91446 h 9.38391 v -2.94358 h -5.86741 v -10.88534 h -3.5165 z"
+       id="text1"
+       aria-label="SOL"
+       inkscape:export-filename="SOL-LOGO.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:#93b54a;fill-opacity:1;stroke-width:0.200811"
+       id="path1"
+       cx="94.583931"
+       cy="135.54382"
+       r="3.5429094" />
+    <circle
+       style="fill:#93b54a;fill-opacity:0;stroke:#93b54a;stroke-width:0.802;stroke-dasharray:none;stroke-opacity:1"
+       id="path3"
+       cx="94.649353"
+       cy="135.70174"
+       r="7.334218" />
+    <circle
+       style="fill:#2c95e0;fill-opacity:1;stroke:none;stroke-width:0.595231;stroke-dasharray:none;stroke-opacity:1"
+       id="path6"
+       cx="89.573303"
+       cy="130.39177"
+       r="2.0997076" />
+  </g>
+</svg>
