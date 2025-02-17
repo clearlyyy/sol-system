@@ -53,6 +53,7 @@ function App() {
   const [timeMultiplier, setTimeMultiplier] = useState(1);
   const [followBody, setFollowBody] = useState(false);
   const [selectedBody, setSelectedBody] = useState(null);
+  const [showPerf, setShowPerf] = useState(false);
 
   const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
   const [isToolsVisible, setIsToolsVisible] = useState(false);
@@ -137,7 +138,8 @@ function App() {
       <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} setIsVisible={setIsPlanetaryInfoVisible} selectedObject={selectedBody}/>
       <Tools isVisible={isToolsVisible} setIsVisible={setIsToolsVisible} setPlanetScalingState={setPlanetScalingState}
              handlePlanetScalingChange={handlePlanetScalingChange}
-             handleMoonOrbitalPathScalingChange={handleMoonOrbitalPathScalingChange}/>
+             handleMoonOrbitalPathScalingChange={handleMoonOrbitalPathScalingChange}
+             showPerf={showPerf} setShowPerf={setShowPerf}/>
       
 
       <div style={{ 
@@ -163,7 +165,7 @@ function App() {
         {/* Lighting */}
         <ambientLight intensity={0.1} />
         
-        {/* <Perf position='bottom-right' logsPerSecond={1}/> */}
+        {showPerf && <Perf position='bottom-right' logsPerSecond={1}/>}
 
         {/* Star Field */}
         <Stars ref={starsRef} layers={1} radius={10000} raycast={null} ignorePointer />

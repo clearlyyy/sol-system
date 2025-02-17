@@ -73,7 +73,7 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
                     </div>
                 </div>
                 <a href="https://github.com/clearlyyy/sol-system">
-                <i className="fa fa-moon"></i>
+                
                 </a>
             </div>
         </div>

@@ -14,7 +14,9 @@ function Tools({
     isVisible, 
     setIsVisible,
     handlePlanetScalingChange,
-    handleMoonOrbitalPathScalingChange
+    handleMoonOrbitalPathScalingChange,
+    showPerf,
+    setShowPerf
     }) {
   
   const hideTools = () => {
@@ -57,6 +59,8 @@ function Tools({
                  value={moonOrbitalPathScaling} 
                  onChange={(e) => handleMoonOrbitalPathScalingChange(Number(e.target.value))}
                 />
+                <hr></hr>
+                <p>Show Performance Stats <input type="checkbox" checked={showPerf} onChange={(e) => setShowPerf(e.target.checked)}></input></p>
             </div>
 
         </div>

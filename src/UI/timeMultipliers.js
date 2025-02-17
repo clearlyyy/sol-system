@@ -42,11 +42,11 @@ export const timeMultipliers = {
     15552000:  "6 MTHS/S",
     24192000:  "8 MTHS/S",
     31536000:  "10 MTHS/S",
-    315360000: "1 YR/S",
-    630720000: "2 YRS/S",
-    946080000: "3 YRS/S"
+    31557600: "1 YR/S",
+    63115200: "2 YRS/S",
+    94672800: "3 YRS/S"
   };
 
 
-  //TODO MAKE THESE MULTIPLIERS ACCURATE.
+  //These should be accurate. i hope.
   

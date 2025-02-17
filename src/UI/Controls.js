@@ -26,7 +26,6 @@ function Controls({orbitControlsRef, currentDate, setCurrentDate, timeMultiplier
 
 
     function setToLive() {
-      console.log("Going to Live");
       setisLive(true);
       const date = new Date()
       setCurrentDate(date);
@@ -65,31 +64,24 @@ function Controls({orbitControlsRef, currentDate, setCurrentDate, timeMultiplier
         if (currentIndex === 0) {
           onChangeTimeMultiplier(1);
         } else {
-          // Otherwise, reduce the absolute value (move “up” the sorted list) keeping it negative.
+          // Otherwise reduce the absolute value keeping it negative.
           onChangeTimeMultiplier(-multiplierKeys[currentIndex - 1]);
         }
       }
     };
 
-    // Decrease multiplier:
-    // • When positive:
-    //    – If above 1, move to the previous (lower) key.
-    //    – If exactly 1, flip the sign to negative (to –1).
-    // • When negative, move to a larger absolute value (i.e. next key in the sorted order).
+
     const decreaseMultiplier = () => {
       setisLive(false);
       const absVal = Math.abs(timeMultiplier);
       let currentIndex = multiplierKeys.indexOf(absVal);
       if (timeMultiplier > 0) {
         if (absVal === 1) {
-          // If at 1× and decrement is clicked, flip to -1×.
           onChangeTimeMultiplier(-1);
         } else if (currentIndex > 0) {
-          // Otherwise, move to the previous (lower) positive value.
           onChangeTimeMultiplier(multiplierKeys[currentIndex - 1]);
         }
       } else {
-        // When negative, if not at the bottom, increase the absolute value.
         if (currentIndex < multiplierKeys.length - 1) {
           onChangeTimeMultiplier(-multiplierKeys[currentIndex + 1]);
         }
@@ -125,8 +117,6 @@ function Controls({orbitControlsRef, currentDate, setCurrentDate, timeMultiplier
           setCurrentTimeMultiplierState("-" + timeMultipliers[timeMultiplier * -1])
         }
 
-        console.log(currentTimeMultiplier);
-
       }, [timeMultiplier])
 
       useEffect(() => {
@@ -136,7 +126,7 @@ function Controls({orbitControlsRef, currentDate, setCurrentDate, timeMultiplier
           } else {
             setSelectedName(selectedBody.name);
           }
-        }, 1000); // Adjust the 1000 value (in milliseconds) to the desired delay time
+        }, 1000); 
 
         return () => clearTimeout(timeoutId);
       }, [selectedBody]);
