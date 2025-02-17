@@ -13,7 +13,7 @@ function Ariel({daysSinceJ2000, hostPosition, userControlsRef, ...props}) {
 
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, [delay]);
-  // Render the Planet component only after the delay
+
   return loaded ? (
     <Moon
       {...props}
