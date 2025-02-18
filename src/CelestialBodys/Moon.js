@@ -143,7 +143,7 @@ function Moon({
     const atmosphereRef2 = useRef();
 
     // Load texture
-    const texture = useLoader(TextureLoader, textureUrl);
+    const texture = useLoader(TextureLoader, process.env.PUBLIC_URL + textureUrl);
   
     useEffect(() => {
         if (planetRef.current) {

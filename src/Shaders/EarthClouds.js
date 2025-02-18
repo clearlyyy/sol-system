@@ -13,7 +13,7 @@ function EarthCloud({ size }) {
     const imageTrans = new Image();
 
     // Load earthcloudmap
-    imageMap.src = '/earthcloudmap.jpg';
+    imageMap.src = `${process.env.PUBLIC_URL}/earthcloudmap.jpg`;
     imageMap.onload = () => {
       console.log('earthcloudmap.jpg loaded');
     };
@@ -22,7 +22,7 @@ function EarthCloud({ size }) {
     };
 
     // Load earthcloudmaptrans
-    imageTrans.src = '/earthcloudmaptrans.jpg';
+    imageTrans.src = `${process.env.PUBLIC_URL}/earthcloudmaptrans.jpg`;
     imageTrans.onload = () => {
       console.log('earthcloudmaptrans.jpg loaded');
     };

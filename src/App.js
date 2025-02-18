@@ -8,6 +8,8 @@ import { BlendFunction } from "postprocessing";
 import { ToneMappingMode, Resizer, KernelSize, Effect, Resolution } from 'postprocessing';
 import { Perf } from 'r3f-perf'
 
+import Loading from './UI/Loading.js';
+
 import Navbar from "./UI/Navbar.js"
 import Controls from "./UI/Controls.js"
 import PlanetaryInfo from './UI/PlanetaryInfo.js';
@@ -132,7 +134,7 @@ function App() {
 
   return (
     <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
-
+      <Loading/>
       {/* Navbar */}
       <Navbar userControlsRef={userControlsRef} isToolsVisible={isToolsVisible} setisToolsVisible={setIsToolsVisible}/>
       <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} setIsVisible={setIsPlanetaryInfoVisible} selectedObject={selectedBody}/>

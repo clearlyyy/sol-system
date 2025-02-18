@@ -1,0 +1,55 @@
+
+
+.loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 215px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+    animation: zoomIn 1s ease-in-out forwards, expand 1.5s ease-in-out 1s forwards;
+}
+
+.SOL-ICON {
+    animation: rotateIcon 1s ease-in-out infinite, moveLeft 2s ease-in-out 2s forwards;
+    margin-right: 10px;
+}
+
+.SOL-TEXT {
+    animation: moveRight 2s ease-in-out 2s forwards;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes rotateIcon {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes expand {
+    0% {
+        width: 215px;
+        opacity: 1;
+    }
+    100% {
+        width: 200%;
+        opacity: 0;
+        display: none;
+    }
+}
+
+

@@ -159,15 +159,11 @@ function Planet({
     }, [daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC])
 
     const planetRef = useRef();
-    const orbitRef = useRef();
     const atmosphereRef = useRef();
-    const atmosphereRef2 = useRef();
 
     // Load texture
-    const texture = useLoader(TextureLoader, textureUrl);
-    const bumpMap = useLoader(TextureLoader, "/earthbump1k.jpg");
-    const specMap = useTexture('/earthspec1k.jpg');
-    const ring_texture = useLoader(TextureLoader, "/rings.png");
+    const texture = useLoader(TextureLoader, process.env.PUBLIC_URL + textureUrl);
+    const ring_texture = useLoader(TextureLoader, process.env.PUBLIC_URL + "/rings.png");
     
 
     

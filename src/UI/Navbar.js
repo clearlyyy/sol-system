@@ -44,7 +44,7 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
         {/* Top Portion of the Navbar */}
         <div className="nav-top">
             <div className="nav-top-left">
-                <p>Sol System 0.8</p>  
+                <p>Sol System 1.0</p>  
             </div>
             <div className="nav-top-right">
                 <a href="https://github.com/clearlyyy/sol-system">
@@ -80,7 +80,8 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
 
         {/* Middle Portion of the Navbar */}
         <div className="nav-middle">
-            <img src={"/SOL-logo.svg"}></img>
+        <img src={`${process.env.PUBLIC_URL}/Sol-logo.svg`} alt="SOL Logo" />
+
             <nav className='mainmenu'>
             <div className="nav-middle-button-container"
                 onMouseEnter={() => setShowPlanets(true)} 
