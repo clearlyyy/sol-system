@@ -10,8 +10,25 @@
     display: flex;
     justify-content: space-between;
     filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-    animation: zoomIn 1s ease-in-out forwards, expand 1.5s ease-in-out 1s forwards;
+    animation: zoomIn 1s ease-in-out forwards, expand 1s ease-in-out 1s forwards;
 }
+
+.loading-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    width: auto;
+    text-wrap: nowrap;
+    transform: translate(-50%, -50%);
+    color: #a7a9ad;
+    animation: expand 1s ease-out forwards;
+    animation-delay: 5s;
+}
+
 
 .SOL-ICON {
     animation: rotateIcon 1s ease-in-out infinite, moveLeft 2s ease-in-out 2s forwards;
@@ -42,11 +59,9 @@
 
 @keyframes expand {
     0% {
-        width: 215px;
         opacity: 1;
     }
     100% {
-        width: 200%;
         opacity: 0;
         display: none;
     }

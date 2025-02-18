@@ -152,7 +152,7 @@ function App() {
           height: "100vh", 
           zIndex: -1 }}>
       <Canvas ref={canvasRef}
-        camera={{ position: [0, 50, 100], fov: 70, near: 0.00001, far: 100000 }}
+        camera={{ position: [0, 400, 700], fov: 70, near: 0.00001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} 
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
       >
