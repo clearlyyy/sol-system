@@ -9,10 +9,8 @@ import "../styles/loading.css"
 function Loading() {
 
   const loadingStates = ["Loading.", "Loading..", "Loading..."];
-  const [isVisible, setIsVisible] = useState(true);
   const [isVisible2, setIsVisible2] = useState(true);
   const [index, setIndex] = useState(2);
-  const containerRef = useRef(null);
   const container2Ref = useRef(null);
 
 
