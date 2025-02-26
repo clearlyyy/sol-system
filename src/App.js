@@ -134,7 +134,6 @@ function App() {
 
   return (
     <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
-      <Loading/>
       {/* Navbar */}
       <Navbar userControlsRef={userControlsRef} isToolsVisible={isToolsVisible} setisToolsVisible={setIsToolsVisible}/>
       <PlanetaryInfo tableData={tableData} isVisible={isPlanetaryInfoVisible} setIsVisible={setIsPlanetaryInfoVisible} selectedObject={selectedBody}/>
