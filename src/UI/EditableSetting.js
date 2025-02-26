@@ -2,8 +2,9 @@ import { useState } from "react";
 
 
 import "../styles/tools.css"
+import { mul } from "three/tsl";
 
-function EditableSetting({ title, value, onChange }) {
+function EditableSetting({ title, value, onChange, unit, multiplier = 1}) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -19,7 +20,7 @@ function EditableSetting({ title, value, onChange }) {
           <input
             type="number"
             value={value}
-            onChange={(e) => onChange(Number(e.target.value))}
+            onChange={(e) => onChange(Number(e.target.value) * multiplier)}
             onBlur={() => setIsEditing(false)}
             onKeyDown={(e) => {
               if (e.key === "Enter") setIsEditing(false);
@@ -28,7 +29,7 @@ function EditableSetting({ title, value, onChange }) {
             className="setting-input-box"
           />
         ) : (
-          <h4 className="value">{value}x</h4>
+          <h4 className="value">{value}{unit}</h4>
         )}
       </div>
     </div>

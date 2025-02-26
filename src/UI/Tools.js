@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Html } from "@react-three/drei"
 import { timeMultipliers } from './timeMultipliers';
 import DropList from "./DropList"
 import { DynamicTable } from './DynamicTable';
+import { useThree } from "@react-three/fiber"
+import { SceneContext } from '../App';
 
 import "../styles/tools.css"
 import "../styles/planetaryinfo.css"
@@ -16,12 +18,14 @@ function Tools({
     handlePlanetScalingChange,
     handleMoonOrbitalPathScalingChange,
     showPerf,
-    setShowPerf
+    setShowPerf,
+    selectedBody
     }) {
-  
+
   const hideTools = () => {
     setIsVisible(false);
   }
+
 
   return (
     <div className={`tools-container ${isVisible ? 'visible' : ''}`}>
@@ -37,7 +41,7 @@ function Tools({
             <hr/>
             <p className="disclaimer">Note: Changing these settings may cause instability and visual artifacts</p>
             <div className="setting-container">
-                <EditableSetting title="Planet Scaling" value={planetScaling} onChange={handlePlanetScalingChange}/>
+                <EditableSetting unit={"x"}title="Planet Scaling" value={planetScaling} onChange={handlePlanetScalingChange}/>
                 <input 
                  className="slider"
                  id="planet-scaling-slider"
@@ -48,7 +52,7 @@ function Tools({
                  value={planetScaling} 
                  onChange={(e) => handlePlanetScalingChange(Number(e.target.value))}
                 />
-                <EditableSetting title="Moon Orbital Path Scaling" value={moonOrbitalPathScaling} onChange={handleMoonOrbitalPathScalingChange}/>
+                <EditableSetting unit={"x"}title="Moon Orbital Path Scaling" value={moonOrbitalPathScaling} onChange={handleMoonOrbitalPathScalingChange}/>
                 <input 
                  className="slider"
                  id="planet-scaling-slider"
@@ -60,6 +64,91 @@ function Tools({
                  onChange={(e) => handleMoonOrbitalPathScalingChange(Number(e.target.value))}
                 />
                 <hr></hr>
+                <div className="selectedBody-container"><h3 className="selected">Selected Body: </h3>{selectedBody ? <h3 className='selected'>{selectedBody.name}</h3> : <h3 className='selected'>No Object Selected</h3>}</div>
+                {selectedBody != null && selectedBody.name != "Sun" && (
+                  <div>
+
+                    <EditableSetting multiplier={149.6e6} unit=" AU"title="Semi Major Axis (A)" value={(selectedBody?.userData.A / 149.6e6).toFixed(4)} onChange={selectedBody?.userData.setSemiMajorAxis}/>
+                {selectedBody?.userData?.moon ? (
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="1" 
+                 max="39999999" 
+                 step="1"
+                 value={selectedBody?.userData.A} 
+                 onChange={(e) => selectedBody?.userData.setSemiMajorAxis(Number(e.target.value))}
+                />
+                ) : (
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="1" 
+                 max="3999999996" 
+                 step="1"
+                 value={selectedBody?.userData.A} 
+                 onChange={(e) => selectedBody?.userData.setSemiMajorAxis(Number(e.target.value))}
+                />
+                )}
+
+
+                <EditableSetting unit=""title="Eccentricity (EC)" value={(selectedBody?.userData.EC).toFixed(3)} onChange={selectedBody?.userData.setEccentricity}/>
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="0" 
+                 max="0.99" 
+                 step="0.001"
+                 value={selectedBody?.userData.EC} 
+                 onChange={(e) => selectedBody?.userData.setEccentricity(Number(e.target.value))}
+                />
+                <EditableSetting unit="°"title="Inclination (I)" value={(selectedBody?.userData.i).toFixed(2)} onChange={selectedBody?.userData.setInclination}/>
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="0" 
+                 max="180" 
+                 step="0.1"
+                 value={selectedBody?.userData.i} 
+                 onChange={(e) => selectedBody?.userData.setInclination(Number(e.target.value))}
+                />
+                <EditableSetting unit="°"title="Arg. of Periapsis (ω)" value={(selectedBody?.userData.omega).toFixed(2)} onChange={selectedBody?.userData.setomega}/>
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="0" 
+                 max="360" 
+                 step="0.1"
+                 value={selectedBody?.userData.omega} 
+                 onChange={(e) => selectedBody?.userData.setomega(Number(e.target.value))}
+                />
+                <EditableSetting unit="°"title="Lon. of Ascending Node (Ω)" value={(selectedBody?.userData.Omega).toFixed(2)} onChange={selectedBody?.userData.setOmega}/>
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="0" 
+                 max="360" 
+                 step="0.1"
+                 value={selectedBody?.userData.Omega} 
+                 onChange={(e) => selectedBody?.userData.setOmega(Number(e.target.value))}
+                />
+                <EditableSetting unit="deg/day"title="Mean Motion (n)" value={(selectedBody?.userData.meanMotion).toFixed(4)} onChange={selectedBody?.userData.setmeanMotion}/>
+                <input 
+                 className="slider"
+                 id="planet-scaling-slider"
+                 type="range" 
+                 min="0" 
+                 max="20" 
+                 step="0.01"
+                 value={selectedBody?.userData.meanMotion} 
+                 onChange={(e) => selectedBody?.userData.setmeanMotion(Number(e.target.value))}
+                /> </div>)}
                 <p>Show Performance Stats <input type="checkbox" checked={showPerf} onChange={(e) => setShowPerf(e.target.checked)}></input></p>
             </div>
 

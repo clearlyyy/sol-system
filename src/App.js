@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, createContext, useContext } from 'react';
 import * as THREE from 'three';
 import './App.css';
 import { Canvas, useThree } from '@react-three/fiber';
@@ -32,6 +32,17 @@ export var scalingFactor = 0.0495239195637494e7;
 export var planetScaling = 1;
 export var sunScaling = 1 // Sun gets a bit too big when planetScaling goes up, which engulfs close planets.
 export var moonOrbitalPathScaling = 1;
+
+export const SceneContext = createContext(null);
+
+function SceneProvider({ children }) {
+  const { scene } = useThree(); // Get the Three.js scene
+  return (
+    <SceneContext.Provider value={scene}>
+      {children}
+    </SceneContext.Provider>
+  );
+}
 
 
 function getDaysSinceJ2000(date) {
@@ -141,7 +152,8 @@ function App() {
       <Tools isVisible={isToolsVisible} setIsVisible={setIsToolsVisible} setPlanetScalingState={setPlanetScalingState}
              handlePlanetScalingChange={handlePlanetScalingChange}
              handleMoonOrbitalPathScalingChange={handleMoonOrbitalPathScalingChange}
-             showPerf={showPerf} setShowPerf={setShowPerf}/>
+             showPerf={showPerf} setShowPerf={setShowPerf}
+             selectedBody={selectedBody}/>
       
 
       <div style={{ 
@@ -157,7 +169,7 @@ function App() {
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
       >
         
-
+        <SceneProvider>
         {/* Post-Processing Effects */}
         <EffectComposer multisampling={0}>
           <ToneMapping mode={ToneMappingMode.CINEON}/>
@@ -197,7 +209,7 @@ function App() {
         selectedBody={selectedBody}
         setSelectedBody={setSelectedBody}/> }
 
-        
+      </SceneProvider>
       </Canvas>
       </div>
     

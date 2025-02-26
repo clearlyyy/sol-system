@@ -100,12 +100,12 @@ function Planet({
     color,
     atmosphereColor = new THREE.Color(0xaaaaaa), // Default color for atmosphere
     atmosphereSize,
-    A,
-    EC,
-    i,
-    omega,
-    Omega,
-    meanMotion,
+    initA,
+    initEC,
+    initi,
+    initomega,
+    initOmega,
+    initmeanMotion,
     j2000MeanAnomaly,
     j2000TrueAnomaly,
     j2000Rotation,
@@ -123,6 +123,13 @@ function Planet({
     meanTempDay,
     meanTempNight
 }) {
+
+    const [A, setA] = useState(initA);
+    const [EC, setEC] = useState(initEC);
+    const [i, seti] = useState(initi);
+    const [omega, setomega] = useState(initomega);
+    const [Omega, setOmega] = useState(initOmega);
+    const [meanMotion, setmeanMotion] = useState(initmeanMotion);
 
     const [meanAnomaly, setMeanAnomaly] = useState((j2000MeanAnomaly + (meanMotion * daysSinceJ2000)) % 360);
     const [trueAnomaly, setTrueAnomaly] = useState(calcTrueAnomaly(daysSinceJ2000, meanMotion, j2000MeanAnomaly, EC));
@@ -254,6 +261,12 @@ function Planet({
           siderealPeriod,
           meanTempDay,
           meanTempNight,
+          setSemiMajorAxis: setA,
+          setEccentricity: setEC,
+          setInclination: seti,
+          setomega, setomega,
+          setOmega, setOmega,
+          setmeanMotion, setmeanMotion
         };
       }
     }, [size, name, trueAnomaly, meanAnomaly]);
@@ -270,6 +283,11 @@ function Planet({
       }
     })
 
+    //Regenerate the Orbital path if any properties change.
+    useEffect(() => {
+      setPoints(generateOrbitalPath(A / scalingFactor, EC, i, omega, Omega));
+      console.log("Generating new Orbital Path for " + name);
+    }, [A, EC, i, omega, Omega, meanMotion])
     
     return (
       <>

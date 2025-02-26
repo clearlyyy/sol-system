@@ -9,6 +9,7 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
     const [showPlanets, setShowPlanets] = useState(false);// For Planets Container
     const [showMoons, setShowMoons] = useState(false);// For Moons Container
     const [selectedPlanet, setSelectedPlanet] = useState(null);
+    const [showFirst, setShowFirst] = useState(true);
 
     const moons = {
         Mercury: [],
@@ -37,6 +38,14 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
     setSelectedPlanet(selectedPlanet === planet  ? null : planet)
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowFirst(prev => !prev);
+    }, 10000); // Switch every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     
     <div className="nav-container">
@@ -44,7 +53,8 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
         {/* Top Portion of the Navbar */}
         <div className="nav-top">
             <div className="nav-top-left">
-                <p>Sol System 1.0</p>  
+                <p className={`fade ${showFirst ? '' : 'hidden'}`}>Sol System 1.1</p>
+                <p className={`fade ${!showFirst ? '' : 'hidden'}`}>Try out the new tools!</p>
             </div>
             <div className="nav-top-right">
                 <a href="https://github.com/clearlyyy/sol-system">

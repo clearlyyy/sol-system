@@ -30,6 +30,27 @@ body {
     border-color: #2e3440;
 }
 
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .fade {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .hidden {
+    opacity: 0;
+  }
+
 .fact-message-style {
     overflow: hidden;
     white-space: nowrap;
@@ -61,8 +82,16 @@ body {
     margin-left: 10px;
 }
 
+.nav-top-left {
+    display: flex;
+}
+
 .nav-top-left p {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
     margin: 0;
+    align-self: center;
     margin-left: 20px;
 }
 

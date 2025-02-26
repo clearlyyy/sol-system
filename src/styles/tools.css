@@ -20,6 +20,21 @@
     scrollbar-width: none;
 }
 
+.selectedBody-container {
+    display: flex;
+    justify-content: space-between;
+    color: #8d9fc4;
+    padding: 0;
+    margin: 0;
+}
+
+.selected {
+    margin: 0;
+    padding: 0;
+    flex-grow: 0;
+    align-self: center;
+}
+
 .tools-container::-webkit-scrollbar {
     display: none;
 }

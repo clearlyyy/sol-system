@@ -102,7 +102,6 @@ const UserControls = React.forwardRef(
       } catch {
         customData = object.userData || {};
       }
-
       console.log("Clicked object Mesh", object);
       console.log("Clicked Object Name", object.name);
       console.log("Clicked object data:", customData);
