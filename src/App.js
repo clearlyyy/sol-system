@@ -40,6 +40,8 @@ function getDaysSinceJ2000(date) {
   return diffInMs / (1000 * 60 * 60 * 24);
 }
 
+
+//App, Main Func.
 function App() {
   
   const sunRef = useRef();
