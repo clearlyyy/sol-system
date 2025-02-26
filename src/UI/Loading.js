@@ -1,3 +1,5 @@
+//Deprecated, dont use, just bloats the user view.
+
 import React, { useState, useEffect, useRef } from 'react';
 import {useThree} from "@react-three/fiber";
 import Marquee from "react-fast-marquee";
@@ -21,23 +23,6 @@ function Loading() {
   }, []);
 
   useEffect(() => {
-    const loadingContainer = containerRef.current;
-    if (!loadingContainer) return;
-    const handleAnimationEnd = (event) => {
-        if (event.animationName === "expand") {
-            setIsVisible(false);
-        }
-    };
-
-    loadingContainer.addEventListener('animationend', handleAnimationEnd);
-
-    return () => {
-        loadingContainer.removeEventListener('animationend', handleAnimationEnd);
-    };
-
-  }, [])
-
-  useEffect(() => {
     const loadingContainer = container2Ref.current;
     if (!loadingContainer) return;
     const handleAnimationEnd = (event) => {
@@ -56,12 +41,6 @@ function Loading() {
 
   return (
     <div>
-    { isVisible && 
-    <div className='loading-container' ref={containerRef}>
-        <img className={"SOL-ICON"} src={`${process.env.PUBLIC_URL}/SOL-icon.svg`} />
-        <img className={"SOL-TEXT"} src={`${process.env.PUBLIC_URL}/SOL-text.svg`} />
-    </div>
-    }
     { isVisible2 && 
     <div className='loading-text-container' ref={container2Ref}>
       <h3>{loadingStates[index]}</h3>
