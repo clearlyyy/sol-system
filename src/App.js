@@ -170,7 +170,7 @@ function App() {
         {showPerf && <Perf position='bottom-right' logsPerSecond={1}/>}
 
         {/* Star Field */}
-        <Stars ref={starsRef} layers={1} radius={10000} raycast={null} ignorePointer />
+        <Stars ref={starsRef} depth={10} layers={1} radius={10000} factor={200} speed={0.01} raycast={null} ignorePointer />
 
         
         <Sun emissive={true} emissiveColor={0xFFD700} emissiveIntensity={540} name="Sun" size={696340} type="Yellow Dwarf Star" mass={1.989e30} gravity={274} density={1.41} tilt={7.25} />
