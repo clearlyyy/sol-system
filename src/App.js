@@ -70,6 +70,7 @@ function App() {
 
   const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
   const [isToolsVisible, setIsToolsVisible] = useState(false);
+  const [isPlanetsVisible, setisPlanetsVisible] = useState(false); // For planet selection menu
   const [isToScale, setIsToScale] = useState(true);
 
   const [controlsLoaded, setControlsLoaded] = useState(false);
@@ -97,7 +98,7 @@ function App() {
       lastUpdateTime = now; // Update the last update time
       animationFrameId = requestAnimationFrame(updateDate); // Schedule the next update
     };
-  
+  ///
     // Start the animation loop
     animationFrameId = requestAnimationFrame(updateDate);
   

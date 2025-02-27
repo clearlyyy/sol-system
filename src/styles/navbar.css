@@ -15,7 +15,6 @@ body {
     height: 149px;
     background-color: #2e3440;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-   
 }
 
 .Planets h3 {
@@ -92,16 +91,17 @@ body {
     height: fit-content;
     margin: 0;
     align-self: center;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .nav-top {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    height: 62px;
     border-bottom: 2px solid #4c566a;
     align-items: center;
+    margin-top: 20px;
 }
 
 .nav-top-right {
@@ -165,7 +165,7 @@ body {
     padding: 10px;
 }
 
-.Planet-Button:hover {
+.Planet-Button:active {
     cursor: pointer;
     background: #5f7432;
 }
@@ -179,10 +179,6 @@ body {
     box-sizing: border-box;
     width: 100%; /* Ensure it takes up all available space */
     height: 100%; /* Ensure it takes up full height of the container */
-}
-
-.nav-middle-button-container:last-child .nav-middle-button {
-    border-bottom-right-radius: 30px;
 }
 
 
@@ -251,14 +247,14 @@ body {
     .nav-container {
         display: flex;
         flex-direction: column;
-        margin: 20px auto;
-        border-radius: 30px;
+        margin: 0px;
+        border-radius: 0px;
         border: 2px;
-        width: 92%;
+        width: 100%;
         height: 149px;
         background-color: #2e3440;
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-        height: 78px;
+        height: 100px;
         
     }
 

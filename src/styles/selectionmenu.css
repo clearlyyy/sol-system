@@ -1,0 +1,86 @@
+
+.selectionContainer {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #2e3440 60%, #2e3440bc 100%);
+    z-index: 20;
+    color: #a7a9ad;
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(-100%)
+}
+
+.selectionContainer.animate-off-screen {
+    transform: translateX(100%);
+}
+.selectionContainer.animate-on-screen {
+    transform: translateX(0%);
+}
+
+.Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.Title h2 {
+    margin: 5px 0px;
+}
+
+.Title i {
+    font-size: 25px;
+}
+
+.Title i:active {
+    font-size: 25px;
+    color: #93b54a;
+    transform: scale(105%);
+}
+
+.planet-select {
+    user-select: none;
+    margin-left: 5%;
+    padding: 0px 5px;
+    transition: transform 0.2s ease-in-out;
+    
+}
+
+.planet-select:active {
+    color: #93b54a;
+    transform: scale(105%);
+}
+.moon:active {
+    color: #93b54a;
+    transform: scale(105%);
+}
+
+.planet-select h4 {
+    color: #a7a9ad;
+}
+
+.planet-select i {
+    transition: transform 0.3s;
+}
+
+.planet-select .fa-chevron-up {
+    transform: rotate(360deg);
+}
+
+.planet-select p {
+    color: #a7a9ad;
+}
+
+
+
+.planet-select.planet-selected {
+    color: #93b54a;
+    transform: scale(105%);
+}
+
+.moons-list {
+
+}
+
+

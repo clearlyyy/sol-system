@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {useThree} from "@react-three/fiber";
 import Marquee from "react-fast-marquee";
 
 import "../styles/navbar.css"
+import PlanetsSelection from './PlanetsSelection';
+import MoonsSelection from './MoonsSelection';
 
 function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
 
@@ -10,33 +12,18 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
     const [showMoons, setShowMoons] = useState(false);// For Moons Container
     const [selectedPlanet, setSelectedPlanet] = useState(null);
     const [showFirst, setShowFirst] = useState(true);
+    const [showPlanetSelection, setShowPlanetSelection] = useState(false);
+    const [showMoonSelection, setShowMoonSelection] = useState(false);
 
-    const moons = {
-        Mercury: [],
-        Venus: [],
-        Earth: ["Luna (The Moon)"],
-        Mars: ["Phobos", "Deimos"],
-        Jupiter: ["Io", "Europa", "Ganymede", "Callisto"],
-        Saturn: ["Titan", "Enceladus", "Mimas", "Dione", "Rhea", "Tethys"],
-        Uranus: ["Titania", "Oberon", "Ariel", "Umbriel", "Miranda"],
-        Neptune: ["Triton"],
-        Pluto: []
-    };
+    const planetsRef = useRef(null); // Reference for the Planets dropdown
+    const moonsRef = useRef(null); // Reference for the Moons dropdown
 
-
-   
-  const handlePlanetsClick = (event) => {
-    setShowPlanets(false);
-    const planetName = event.target.textContent;
-    console.log("Moving to Planet: ", planetName);
-    const planet = userControlsRef.current.getPlanetByName(planetName);
-    userControlsRef.current.selectBody(planet);
-    //focusOnPlanet(planetName);
-  };
-
-  const handleMoonsClick = (planet) => {
-    setSelectedPlanet(selectedPlanet === planet  ? null : planet)
-  }
+    const togglePlanetVisibility = () => {
+        setShowPlanetSelection((prev) => !prev);
+    }
+    const toggleMoonVisibility = () => {
+        setShowMoonSelection((prev) => !prev);
+    }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,13 +34,13 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
   }, []);
 
   return (
-    
+    <div>
     <div className="nav-container">
 
         {/* Top Portion of the Navbar */}
         <div className="nav-top">
             <div className="nav-top-left">
-                <p className={`fade ${showFirst ? '' : 'hidden'}`}>Sol System 1.1</p>
+                <p className={`fade ${showFirst ? '' : 'hidden'}`}>Sol System Mobile 1.1</p>
                 <p className={`fade ${!showFirst ? '' : 'hidden'}`}>Try out the new tools!</p>
             </div>
             <div className="nav-top-right">
@@ -94,54 +81,18 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
 
             <nav className='mainmenu'>
             <div className="nav-middle-button-container"
-                onMouseEnter={() => setShowPlanets(true)} 
-                onMouseLeave={() => setShowPlanets(false)}>
-                <div className="nav-middle-button">
+                onClick={togglePlanetVisibility} 
+                >
+                <div className="nav-middle-button" >
                     <h3><i className="fa fa-earth"></i> Planets</h3>
-                    <div className="Planets" style={{ display: showPlanets ? 'block' : 'none' }}>
-                    {["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"].map((planet) => (
-                        <h4 key={planet} onClick={handlePlanetsClick} className='Planet-Button'>
-                            {planet}
-                        </h4>
-                    ))}
-                    </div>
                 </div>
             </div>
             <div className="nav-middle-button-container"
-            onMouseEnter={() => setShowMoons(true)} 
-            onMouseLeave={() => setShowMoons(false)}>
+            onClick={toggleMoonVisibility}>
             
             <div className="nav-middle-button">
                 <h3><i className="fa fa-moon"></i> Moons</h3>
 
-                <div className="Planets" style={{ display: showMoons ? 'block' : 'none' }}>
-                    <h3>Select a Host Planet: </h3>
-                    <hr></hr>
-
-                    {["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"].map((planet) => (
-                        <div key={planet}>
-                            <h4 onClick={() => handleMoonsClick(planet)} className='Planet-Button'>
-                                {planet}
-                            </h4>
-
-                            {selectedPlanet === planet && (
-                                <ul className="Moons-List">
-                                    {moons[planet].length > 0 ? (
-                                        moons[planet].map((moon) => (
-                                            <div className="Moon" onClick={handlePlanetsClick}>
-                                                <li className="Moon-Text" key={moon}>{moon}</li>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="Moon">
-                                            <li className="Moon-Text">No Major Moons</li>
-                                        </div>
-                                    )}
-                                </ul>
-                            )}
-                        </div>
-                    ))}    
-                </div>
             </div>
         </div>
 
@@ -154,6 +105,9 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
         </div>
         
 
+    </div>
+    <PlanetsSelection setShowSelection={setShowPlanetSelection} showSelection={showPlanetSelection} userControlsRef={userControlsRef}/>
+    <MoonsSelection setShowSelection={setShowMoonSelection} showSelection={showMoonSelection} userControlsRef={userControlsRef}/>
     </div>
   );
 }
