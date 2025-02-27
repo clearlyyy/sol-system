@@ -110,6 +110,24 @@
     padding-left: 10px;
 }
 
+.hideInfo {
+    user-select: none;
+}
+
+.mainCanvas {
+    bottom: 0%;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.mainCanvas.move-up {
+    bottom: 15%;
+}
+
+.hideInfo:active {
+    color: #93b54a;
+    transform: scale(120%);
+}
+
 
 .dropdown-button.fa-chevron-down {
     transform: rotate(0deg); /* Downward arrow */
@@ -120,16 +138,31 @@
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 1500px) {
     .planetaryinfo-container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
         z-index: 10;
-        left: -200%;
-        width: 90%;
-        background-color: #2e3440c4;
-        top: 50%;
+        margin: 0px;
+        left: 0;
+        width: 100%;
+        padding: 0px;
+        border-radius: 0px;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        transform: translateY(100%);
+        background-color: #2e3440;
+        border: 2px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        transition: transform 0.5s ease-in-out;
+        max-height: 50%;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     .planetaryinfo-container.visible {
-        left: 0px;
+        transform: translateY(0%);
     }
 
     .mobile-margin {

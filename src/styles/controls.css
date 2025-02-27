@@ -239,7 +239,7 @@ body {
 
 @media (max-width: 700px) {
     .controls-container {
-        bottom: 10vh;
+        bottom: 4px;
         width: 100%;
     }
 
@@ -261,7 +261,8 @@ body {
         justify-content: center;
         color: #a7a9ad;
         position: absolute;
-        top: 85%;
+        top: 94%;
+        bottom: 10%;
         left: 2%;
         background-color: #2e3440;
         height: 40px;

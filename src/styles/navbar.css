@@ -101,7 +101,7 @@ body {
     height: 62px;
     border-bottom: 2px solid #4c566a;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .nav-top-right {
@@ -243,7 +243,7 @@ body {
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
     .nav-container {
         display: flex;
         flex-direction: column;
@@ -256,6 +256,15 @@ body {
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
         height: 100px;
         
+    }
+    .nav-top {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 62px;
+        border-bottom: 2px solid #4c566a;
+        align-items: center;
+        margin-top: 20px;
     }
 
     .Planets {

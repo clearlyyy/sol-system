@@ -26,11 +26,12 @@
   }
   
   .text-above {
+    font-family: "Nunito", serif;
     position: absolute; /* Position text relative to the circle */
     top: -50px; /* Move text above the circle */
     transform: translateX(-50%); /* Offset by 50% to truly center the text */
     font-size: 16px; /* Text size */
-    color: white; /* Text color */
+    color: #a7a9ad; /* Text color */
     text-align: center; /* Center the text horizontally */
     transition: opacity 0.5s ease;
     width: 200px;

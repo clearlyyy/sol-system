@@ -26,6 +26,16 @@ function Tools({
     setIsVisible(false);
   }
 
+  function resetDefaultSettings() {
+    handlePlanetScalingChange(1);
+    handleMoonOrbitalPathScalingChange(1);
+    selectedBody.userData.setSemiMajorAxis(selectedBody.userData.initA);
+    selectedBody.userData.setEccentricity(selectedBody.userData.initEC);
+    selectedBody.userData.setInclination(selectedBody.userData.initi);
+    selectedBody.userData.setomega(selectedBody.userData.initomega);
+    selectedBody.userData.setOmega(selectedBody.userData.initOmega);
+    selectedBody.userData.setmeanMotion(selectedBody.userData.initmeanMotion);
+  }
 
   return (
     <div className={`tools-container ${isVisible ? 'visible' : ''}`}>
@@ -33,7 +43,7 @@ function Tools({
         <div className="title-container">
             <div className="title">
                   <h1 className="title">Tools</h1>
-                  <i onClick={hideTools} class="fa fa-angle-double-right"></i>
+                  <i onClick={hideTools} class="fa fa-angle-double-down hideInfo"></i>
             </div>
             <p>Alter your view on the solar system.</p>
         </div>
@@ -41,6 +51,10 @@ function Tools({
             <hr/>
             <p className="disclaimer">Note: Changing these settings may cause instability and visual artifacts</p>
             <div className="setting-container">
+              {selectedBody?.userData.name && <h4 onClick={() => resetDefaultSettings()}
+                className={`reset-text`}>
+                 Reset {selectedBody?.userData.name} to Default Settings
+              </h4> }
                 <EditableSetting unit={"x"}title="Planet Scaling" value={planetScaling} onChange={handlePlanetScalingChange}/>
                 <input 
                  className="slider"
@@ -149,9 +163,18 @@ function Tools({
                  value={selectedBody?.userData.meanMotion} 
                  onChange={(e) => selectedBody?.userData.setmeanMotion(Number(e.target.value))}
                 /> </div>)}
-                <p>Show Performance Stats <input type="checkbox" checked={showPerf} onChange={(e) => setShowPerf(e.target.checked)}></input></p>
             </div>
-
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
         </div>
       </div>
     </div>

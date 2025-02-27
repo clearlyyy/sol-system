@@ -18,7 +18,7 @@ function PlanetaryInfo({tableData, isVisible, setIsVisible, selectedObject}) {
         <div className="title-container">
           <div className="title">
             <h1 className="title">{selectedObject?.name}</h1>
-            <i onClick={hidePlanetaryInfo} class="fa fa-angle-double-left"></i>
+            <i onClick={hidePlanetaryInfo} class="fa fa-angle-double-down hideInfo"></i>
             </div>
             <p>{selectedObject?.userData.type}</p>
         </div>

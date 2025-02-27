@@ -71,7 +71,6 @@ function App() {
   const [isPlanetaryInfoVisible, setIsPlanetaryInfoVisible] = useState(false);
   const [isToolsVisible, setIsToolsVisible] = useState(false);
   const [isPlanetsVisible, setisPlanetsVisible] = useState(false); // For planet selection menu
-  const [isToScale, setIsToScale] = useState(true);
 
   const [controlsLoaded, setControlsLoaded] = useState(false);
 
@@ -114,14 +113,6 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  //Check if scene is to proper scale;
-  useEffect(() => {
-    if (planetScaling == 1 && moonOrbitalPathScaling == 1 && sunScaling == 1 ) {
-      setIsToScale(true);
-    } else {
-    setIsToScale(false);
-    }
-  }, [planetScaling, moonOrbitalPathScaling, sunScaling, scalingFactor])
 
 
   const handleTimeMultiplier = (e) => {
@@ -145,7 +136,7 @@ function App() {
   }
 
   return (
-    <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
+    <div style={{ position: "fixed", width: "100vw", height: "100vh", backgroundColor: "#2e3440" }}>
       <Loading/>
       {/* Navbar */}
       <Navbar userControlsRef={userControlsRef} isToolsVisible={isToolsVisible} setisToolsVisible={setIsToolsVisible}/>
@@ -165,6 +156,7 @@ function App() {
           height: "100vh", 
           zIndex: -1 }}>
       <Canvas ref={canvasRef}
+        className={`mainCanvas ${isPlanetaryInfoVisible || isToolsVisible ? "move-up" : ""}`}
         camera={{ position: [0, 400, 700], fov: 70, near: 0.00001, far: 100000 }}
         onCreated={state => state.gl.setClearColor("#2e3440")} 
         gl={{logarithmicDepthBuffer: true, powerPreference: "high-performance"}}
@@ -224,8 +216,6 @@ function App() {
          timeMultiplier={timeMultiplier}
          onChangeTimeMultiplier={handleTimeMultiplier}
          selectedBody={selectedBody}
-         notToScale={!isToScale}
-         setToScale={setToScale}
          />
 
       

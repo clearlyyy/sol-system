@@ -16,21 +16,9 @@ function EditableSetting({ title, value, onChange, unit, multiplier = 1}) {
         onClick={() => setIsEditing(true)}
         style={{ cursor: "pointer" }}
       >
-        {isEditing ? (
-          <input
-            type="number"
-            value={value}
-            onChange={(e) => onChange(Number(e.target.value) * multiplier)}
-            onBlur={() => setIsEditing(false)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") setIsEditing(false);
-            }}
-            autoFocus
-            className="setting-input-box"
-          />
-        ) : (
+    
           <h4 className="value">{value}{unit}</h4>
-        )}
+        
       </div>
     </div>
   );
