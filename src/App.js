@@ -7,6 +7,8 @@ import { EffectComposer, Bloom, ToneMapping, Noise, Vignette, SSAO, FXAA, Chroma
 import { BlendFunction } from "postprocessing";
 import { ToneMappingMode, Resizer, KernelSize, Effect, Resolution } from 'postprocessing';
 import { Perf } from 'r3f-perf'
+import { StatusBar, Style } from '@capacitor/status-bar'
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 
 import Loading from './UI/Loading.js';
 
@@ -76,6 +78,18 @@ function App() {
 
   //Table Data for PlanetaryInfo 
   const [tableData, setTableData] = useState([]);
+
+  //Update the status bar
+  useEffect(() => {
+    const setupStatusBar = async () => {
+      await StatusBar.setOverlaysWebView({overlay: true});
+      await StatusBar.setStyle({style: Style.Dark});
+      await StatusBar.setBackgroundColor({color: "transparent"});
+    };
+
+    NavigationBar.setNavigationBarColor({color: "#2e3440"});
+    setupStatusBar();
+  },[])
 
   //Update the date every second based on timeMultiplier.
   useEffect(() => {
@@ -218,8 +232,7 @@ function App() {
          selectedBody={selectedBody}
          />
 
-      
-
+    
     </div>
   );
 }

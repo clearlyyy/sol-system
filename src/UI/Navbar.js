@@ -40,7 +40,7 @@ function Navbar({userControlsRef, isToolsVisible, setisToolsVisible}) {
         {/* Top Portion of the Navbar */}
         <div className="nav-top">
             <div className="nav-top-left">
-                <p className={`fade ${showFirst ? '' : 'hidden'}`}>Sol System Mobile 1.1</p>
+                <p className={`fade ${showFirst ? '' : 'hidden'}`}>Sol Mobile 1.0</p>
                 <p className={`fade ${!showFirst ? '' : 'hidden'}`}>Try out the new tools!</p>
             </div>
             <div className="nav-top-right">

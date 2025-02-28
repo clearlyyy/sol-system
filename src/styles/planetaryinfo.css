@@ -112,6 +112,7 @@
 
 .hideInfo {
     user-select: none;
+    transition: transform 0.3s;
 }
 
 .mainCanvas {
@@ -126,6 +127,11 @@
 .hideInfo:active {
     color: #93b54a;
     transform: scale(120%);
+    transform: rotate(180deg);
+}
+
+.hideInfo {
+    transform: rotate(360deg);
 }
 
 
